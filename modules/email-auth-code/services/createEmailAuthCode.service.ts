@@ -48,6 +48,7 @@ export async function createEmailAuthCode(input: CreateEmailAuthCodeInput): Prom
             }`
         );
         throw ErrorManager.create({
+            statusCode: 500,
             code: 'EMAIL_AUTH_CODE_CREATION_FAILED',
             message: "Échec de la création du code d'authentification",
         });

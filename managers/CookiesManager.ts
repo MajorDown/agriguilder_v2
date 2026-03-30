@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 class CookiesManager {
     private static readonly ACCESS_TOKEN = "accessToken";
-    private static readonly REFRESH_TOKEN = "refreshToken";
+    private static readonly SESSION_TOKEN = "sessionToken";
     private static readonly DEVICE_ID = "deviceId";
 
     /**
@@ -67,25 +67,25 @@ class CookiesManager {
      * @param response - NextResponse
      * @param token - JWT de rafraîchissement
      */
-    static setRefreshToken(response: NextResponse, token: string): void {
-        response.cookies.set(this.REFRESH_TOKEN, token, this.options);
+    static setSessionToken(response: NextResponse, token: string): void {
+        response.cookies.set(this.SESSION_TOKEN, token, this.options);
     }
 
     /**
-     * @description Supprime le cookie refreshToken
+     * @description Supprime le cookie sessionToken
      * @param response - NextResponse
      */
-    static deleteRefreshToken(response: NextResponse): void {
-        response.cookies.delete(this.REFRESH_TOKEN);
+    static deleteSessionToken(response: NextResponse): void {
+        response.cookies.delete(this.SESSION_TOKEN);
     }
 
     /**
-     * @description Récupère le refreshToken depuis la requête
+     * @description Récupère le sessionToken depuis la requête
      * @param req - NextRequest
      * @returns string | null
      */
-    static getRefreshToken(req: NextRequest): string | null {
-        const cookie = req.cookies.get(this.REFRESH_TOKEN);
+    static getSessionToken(req: NextRequest): string | null {
+        const cookie = req.cookies.get(this.SESSION_TOKEN);
         return cookie?.value ?? null;
     }
 
@@ -118,12 +118,12 @@ class CookiesManager {
 
     /**
      * @description Supprime tous les cookies liés à l'authentification
-     * (accessToken + refreshToken)
+     * (accessToken + sessionToken)
      * @param response - NextResponse
      */
     static clearAuthCookies(response: NextResponse): void {
         this.deleteAccessToken(response);
-        this.deleteRefreshToken(response);
+        this.deleteSessionToken(response);
     }
 }
 

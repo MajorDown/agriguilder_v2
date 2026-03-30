@@ -25,15 +25,16 @@ model EmailAuthCode {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  society    String?
-  firstname  String
-  lastname   String
-  phone      String
-  password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id            String    @id @default(uuid())
+  email         String    @unique
+  society       String?
+  firstname     String
+  lastname      String
+  phone         String
+  password_hash String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  revoked_at    DateTime?
 
   sessions    Session[]
   memberships Member[]
@@ -42,13 +43,16 @@ model User {
 }
 
 model Session {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   user_id    String
-  token      String   @unique
+  token_hash String    @unique
   ip_mask    String
   user_agent String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  expires_at DateTime
+  ended_at   DateTime?
+  revoked_at DateTime?
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 

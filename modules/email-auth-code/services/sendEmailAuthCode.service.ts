@@ -30,6 +30,7 @@ export async function sendEmailAuthCode(email: string, code: string): Promise<vo
         LogManager.error(`Echec de l'envoi du code d'authentification à : 
             ${email} - ${error instanceof Error ? error.message : String(error)}`);
         throw ErrorManager.create({
+            statusCode: 500,
             code: "EMAIL_AUTH_CODE_SEND_FAILED",
             message: "Echec de l'envoi du code d'authentification",
         });

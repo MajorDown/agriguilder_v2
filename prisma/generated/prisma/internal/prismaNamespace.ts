@@ -1512,9 +1512,10 @@ export const UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   phone: 'phone',
-  password: 'password',
+  password_hash: 'password_hash',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  revoked_at: 'revoked_at'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1523,11 +1524,14 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const SessionScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  token: 'token',
+  token_hash: 'token_hash',
   ip_mask: 'ip_mask',
   user_agent: 'user_agent',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  expires_at: 'expires_at',
+  ended_at: 'ended_at',
+  revoked_at: 'revoked_at'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]

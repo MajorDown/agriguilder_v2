@@ -25,6 +25,7 @@ export async function checkEmailAuthCode(input: CheckEmailAuthCodeInput): Promis
     if (!emailAuthCode) {
         LogManager.error(`Aucun code d'authentification trouvé pour : ${input.email}`);
         throw ErrorManager.create({
+            statusCode: 404,
             code: 'EMAIL_AUTH_CODE_NOT_FOUND',
             message: "Aucun code d'authentification trouvé",
         });
@@ -32,6 +33,7 @@ export async function checkEmailAuthCode(input: CheckEmailAuthCodeInput): Promis
     if (emailAuthCode.errors >= 5) {
         LogManager.error(`Code d'authentification verrouillé pour : ${input.email}`);
         throw ErrorManager.create({
+            statusCode: 423,
             code: 'EMAIL_AUTH_CODE_LOCKED',
             message: "Le code d'authentification est verrouillé",
         });
@@ -52,6 +54,7 @@ export async function checkEmailAuthCode(input: CheckEmailAuthCodeInput): Promis
             LogManager.error(`Code d'authentification verrouillé après trop d'erreurs pour : ${input.email}`);
 
             throw ErrorManager.create({
+                statusCode: 423,
                 code: 'EMAIL_AUTH_CODE_LOCKED',
                 message: "Le code d'authentification est verrouillé",
             });
@@ -60,6 +63,7 @@ export async function checkEmailAuthCode(input: CheckEmailAuthCodeInput): Promis
             `Code d'authentification invalide pour : ${input.email} | tentative ${updatedEmailAuthCode.errors}/5`
         );
         throw ErrorManager.create({
+            statusCode: 400,
             code: 'EMAIL_AUTH_CODE_INVALID',
             message: "Code d'authentification invalide",
         });
