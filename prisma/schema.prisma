@@ -1,0 +1,302 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EmailAuthCodeContext {
+  INSCRIPTION
+  MAJ_EMAIL
+}
+
+model EmailAuthCode {
+  id           String               @id @default(uuid())
+  email        String
+  code_hash    String
+  errors       Int                  @default(0)
+  validated_at DateTime?
+  context      EmailAuthCodeContext
+  created_at   DateTime             @default(now())
+
+  @@index([email])
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  society    String?
+  firstname  String
+  lastname   String
+  phone      String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  sessions    Session[]
+  memberships Member[]
+  adminships  Admin[]
+  employments Employee[]
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  user_id    String
+  token      String   @unique
+  ip_mask    String
+  user_agent String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Guild {
+  id                     String   @id @default(uuid())
+  name                   String
+  latitude               Float?
+  longitude              Float?
+  city                   String
+  department             String
+  point_euro_value       Float
+  human_hour_point_value Float
+  validation_delay       Int?
+  created_at             DateTime @default(now())
+  updated_at             DateTime @updatedAt
+
+  reinitializations Reinitialization[]
+  members           Member[]
+  admins            Admin[]
+  employees         Employee[]
+  rules             Rule[]
+  tools             Tool[]
+  adjustments       Adjustment[]
+  interventions     Intervention[]
+  contestations     Contestation[]
+  requests          Request[]
+}
+
+model Member {
+  id             String    @id @default(uuid())
+  guild_id       String
+  user_id        String
+  points_balance Float     @default(0)
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  revoked_at     DateTime?
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  adjustments             Adjustment[]
+  interventions_as_worker Intervention[] @relation("WorkerInterventions")
+  interventions_as_payer  Intervention[] @relation("PayerInterventions")
+  contestations           Contestation[] @relation("MemberContestations")
+  created_requests        Request[]      @relation("RequestRequester")
+  volunteer_for_requests  Request[]      @relation("RequestVolunteers")
+
+  @@unique([guild_id, user_id])
+  @@unique([id, guild_id])
+  @@index([guild_id])
+  @@index([user_id])
+}
+
+model Admin {
+  id         String    @id @default(uuid())
+  guild_id   String
+  user_id    String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  revoked_at DateTime?
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  adjustments       Adjustment[]
+  reinitializations Reinitialization[]
+  written_rules     Rule[]
+  written_tools     Tool[]
+
+  @@unique([guild_id, user_id])
+  @@unique([id, guild_id])
+  @@index([guild_id])
+  @@index([user_id])
+}
+
+model Employee {
+  id         String    @id @default(uuid())
+  guild_id   String
+  user_id    String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  revoked_at DateTime?
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([guild_id, user_id])
+  @@unique([id, guild_id])
+  @@index([guild_id])
+  @@index([user_id])
+}
+
+model Reinitialization {
+  id         String   @id @default(uuid())
+  guild_id   String
+  admin_id   String
+  created_at DateTime @default(now())
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  admin Admin @relation(fields: [admin_id, guild_id], references: [id, guild_id], onDelete: Cascade)
+
+  @@index([guild_id])
+  @@index([admin_id])
+}
+
+model Rule {
+  id         String   @id @default(uuid())
+  guild_id   String
+  admin_id   String
+  content    String
+  created_at DateTime @default(now())
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  admin Admin @relation(fields: [admin_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  @@index([guild_id])
+  @@index([admin_id])
+}
+
+model Tool {
+  id         String    @id @default(uuid())
+  guild_id   String
+  admin_id   String
+  name       String
+  coef       Float
+  version    Int       @default(1)
+  is_active  Boolean   @default(true)
+  created_at DateTime  @default(now())
+  revoked_at DateTime?
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  admin Admin @relation(fields: [admin_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  interventions Intervention[]
+
+  @@unique([guild_id, name, version])
+  @@unique([id, guild_id])
+  @@index([guild_id])
+  @@index([admin_id])
+}
+
+enum AdjustmentType {
+  INITIALISATION
+  CORRECTION
+}
+
+model Adjustment {
+  id         String         @id @default(uuid())
+  guild_id   String
+  admin_id   String
+  member_id  String
+  type       AdjustmentType
+  amount     Float
+  reason     String?
+  created_at DateTime       @default(now())
+
+  guild  Guild  @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  admin  Admin  @relation(fields: [admin_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+  member Member @relation(fields: [member_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  @@index([guild_id])
+  @@index([member_id])
+}
+
+enum InterventionStatus {
+  DECLARE
+  VALIDEE
+  CONTESTEE
+  ANNULEE
+}
+
+model Intervention {
+  id         String             @id @default(uuid())
+  guild_id   String
+  worker_id  String
+  payer_id   String
+  day        DateTime
+  duration   Float
+  status     InterventionStatus
+  created_at DateTime           @default(now())
+  updated_at DateTime           @updatedAt
+
+  guild  Guild  @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  worker Member @relation("WorkerInterventions", fields: [worker_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+  payer  Member @relation("PayerInterventions", fields: [payer_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  used_tools    Tool[]
+  contestations Contestation[]
+
+  @@index([guild_id])
+  @@index([worker_id])
+  @@index([payer_id])
+  @@index([guild_id, status])
+  @@index([guild_id, day])
+}
+
+enum ContestationStatus {
+  EN_ATTENTE
+  ACCEPTEE
+  REFUSEE
+}
+
+model Contestation {
+  id              String             @id @default(uuid())
+  guild_id        String
+  intervention_id String
+  contester_id    String
+  reason          String
+  status          ContestationStatus
+  created_at      DateTime           @default(now())
+  updated_at      DateTime           @updatedAt
+
+  guild        Guild        @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  intervention Intervention @relation(fields: [intervention_id], references: [id], onDelete: Cascade)
+  contester    Member       @relation("MemberContestations", fields: [contester_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  @@index([guild_id])
+  @@index([intervention_id])
+  @@index([guild_id, status])
+}
+
+enum RequestStatus {
+  OUVERT
+  EXPIRE
+  RESERVE
+  ANNULE
+}
+
+model Request {
+  id                String        @id @default(uuid())
+  guild_id          String
+  requester_id      String
+  planned_day       DateTime?
+  expected_duration Float?
+  description       String
+  status            RequestStatus @default(OUVERT)
+  created_at        DateTime      @default(now())
+  updated_at        DateTime      @updatedAt
+
+  guild     Guild  @relation(fields: [guild_id], references: [id], onDelete: Cascade)
+  requester Member @relation("RequestRequester", fields: [requester_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+
+  volunteers Member[] @relation("RequestVolunteers")
+
+  @@index([guild_id])
+  @@index([guild_id, status])
+  @@index([guild_id, planned_day])
+}
