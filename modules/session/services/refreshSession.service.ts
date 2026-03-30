@@ -10,7 +10,6 @@ import { SessionOutput } from '../session.types';
  * @throws Une erreur si le rafraîchissement de la session échoue.
  */
 export async function refreshSession(sessionId: string): Promise<SessionOutput> {
-    const maxSessionDuration: number  = 24 * 60 * 60 * 1000 * Number(process.env.SESSION_TOKEN_TTL_DAYS); // 30 jours en ms
     try {
         const { sessionToken, hashedSessionToken } = TokenManager.generateSessionToken();
         const updatedSession = await prisma.session.update({

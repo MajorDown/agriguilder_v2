@@ -10,7 +10,7 @@ class CookiesManager {
      */
     private static devOptions = {
         httpOnly: true,
-        secure: false, // HTTP autorisé en local
+        secure: false,
         sameSite: "lax" as const,
         path: "/",
     };
@@ -20,7 +20,7 @@ class CookiesManager {
      */
     private static prodOptions = {
         httpOnly: true,
-        secure: true, // HTTPS obligatoire
+        secure: true,
         sameSite: "none" as const,
         path: "/",
     };
@@ -63,9 +63,9 @@ class CookiesManager {
     }
 
     /**
-     * @description Définit le cookie refreshToken
+     * @description Définit le cookie sessionToken
      * @param response - NextResponse
-     * @param token - JWT de rafraîchissement
+     * @param token - JWT de session
      */
     static setSessionToken(response: NextResponse, token: string): void {
         response.cookies.set(this.SESSION_TOKEN, token, this.options);
@@ -114,6 +114,27 @@ class CookiesManager {
     static getDeviceId(req: NextRequest): string | null {
         const cookie = req.cookies.get(this.DEVICE_ID);
         return cookie?.value ?? null;
+    }
+
+    /**
+     * @description Définit les cookies d'authentification
+     * @param response - NextResponse
+     * @param tokens - tokens à définir
+     */
+    static setAuthCookies(
+        response: NextResponse,
+        tokens: {
+            accessToken?: string;
+            sessionToken?: string;
+        }
+    ): void {
+        if (tokens.accessToken) {
+            this.setAccessToken(response, tokens.accessToken);
+        }
+
+        if (tokens.sessionToken) {
+            this.setSessionToken(response, tokens.sessionToken);
+        }
     }
 
     /**

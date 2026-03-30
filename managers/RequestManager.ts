@@ -9,22 +9,49 @@ type RequestTokens = {
     device_id: string | null;
 };
 
-type RequestExtractWithDtoResult<T> = RequestTokens & {
-    dto: T;
-    param: string | null;
+type RequestClient = {
+    ip: string;
+    user_agent: string;
 };
 
-type RequestExtractWithoutDtoResult = RequestTokens & {
-    dto: null;
-    param: string | null;
-};
+type RequestExtractWithDtoResult<T> = RequestTokens &
+    RequestClient & {
+        dto: T;
+        param: string | null;
+    };
+
+type RequestExtractWithoutDtoResult = RequestTokens &
+    RequestClient & {
+        dto: null;
+        param: string | null;
+    };
 
 class RequestManager {
     private static getTokensFromCookies(request: NextRequest): RequestTokens {
         return {
             access_token: CookiesManager.getAccessToken(request),
-            refresh_token: CookiesManager.getRefreshToken(request),
+            refresh_token: CookiesManager.getSessionToken(request),
             device_id: CookiesManager.getDeviceId(request),
+        };
+    }
+
+    private static getClientInfo(request: NextRequest): RequestClient {
+        const xForwardedFor = request.headers.get("x-forwarded-for");
+        const xRealIp = request.headers.get("x-real-ip");
+
+        let ip = "unknown";
+
+        if (xForwardedFor) {
+            ip = xForwardedFor.split(",")[0].trim();
+        } else if (xRealIp) {
+            ip = xRealIp.trim();
+        }
+
+        const userAgent = request.headers.get("user-agent")?.trim() || "unknown";
+
+        return {
+            ip,
+            user_agent: userAgent,
         };
     }
 
@@ -110,13 +137,17 @@ class RequestManager {
         routeParams?: Record<string, string>
     ) {
         const tokens = this.getTokensFromCookies(request);
+        const client = this.getClientInfo(request);
+
         const dto = DtoClass
             ? await this.getRequestDto(request, DtoClass)
             : null;
+
         const param = this.getParamFromRequest(request, paramKey, routeParams);
 
         return {
             ...tokens,
+            ...client,
             dto,
             param,
         };
