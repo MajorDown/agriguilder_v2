@@ -1,0 +1,12 @@
+#guildSelect {
+    background-color: var(--color-light);
+    border: 1px solid var(--color-dark);
+    border-radius: 5px;
+    color: var(--color-dark);
+    font-weight: 500;
+}
+
+#guildSelect option {
+    font-weight: 500;
+    color: var(--color-dark);
+}

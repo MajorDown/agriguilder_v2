@@ -5,7 +5,7 @@ import { DTO } from "./DtoManager";
 
 type RequestTokens = {
     access_token: string | null;
-    refresh_token: string | null;
+    session_token: string | null;
     device_id: string | null;
 };
 
@@ -30,7 +30,7 @@ class RequestManager {
     private static getTokensFromCookies(request: NextRequest): RequestTokens {
         return {
             access_token: CookiesManager.getAccessToken(request),
-            refresh_token: CookiesManager.getSessionToken(request),
+            session_token: CookiesManager.getSessionToken(request),
             device_id: CookiesManager.getDeviceId(request),
         };
     }
