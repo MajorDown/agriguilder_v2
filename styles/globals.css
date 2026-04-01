@@ -111,6 +111,14 @@ p {
     font-weight: 500;
 }
 
+p.success {
+    color: var(--color-ok);
+}
+
+p.error {
+    color: var(--color-error);
+}
+
 a {
     text-decoration: none;
     border: none;

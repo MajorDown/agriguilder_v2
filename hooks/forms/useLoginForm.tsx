@@ -1,7 +1,11 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import useUserContext from "@/contexts/userContext/useUserContext";
 
 export function useLoginForm() {
+    const { refreshUser } = useUserContext();
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +15,8 @@ export function useLoginForm() {
         setError(null);
         setIsLoading(true);
         try {
-            const response = await fetch("/api/auth/login", {
+            console.log(`Tentative : email : ${email}, password : ${password}`);
+            const response = await fetch("/api/session/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -26,7 +31,8 @@ export function useLoginForm() {
                 setError(data?.message || "Connexion impossible");
                 return;
             }
-            window.location.href = "/";
+            await refreshUser();
+            router.push("/");
         } catch {
             setError("Une erreur est survenue lors de la connexion");
         } finally {

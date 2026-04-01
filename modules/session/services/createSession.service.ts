@@ -12,6 +12,7 @@ import { checkUserPassword } from "@/modules/user/services/checkUserPassword.ser
  */
 export async function createSession(input: CreateSessionInput): Promise<SessionOutput> {
     try {
+        console.log("Tentative de création de session pour l'email :", input.email);
         // ON VERIFIE QUE LE USER EXISTE
         const user = await getUserByEmail(input.email);
         if (!user) {

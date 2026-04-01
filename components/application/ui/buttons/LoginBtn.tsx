@@ -6,7 +6,7 @@ import styles from "@/styles/components/application/ui/buttons/authBtn.module.cs
  * @description lien vers la page login
  */
 export default function LoginBtn() {
-    return (<Link href={"/login"} id={styles.authBtn}>
+    return (<Link href={"/connexion"} id={styles.authBtn}>
         <Image src={"/images/icons/login-white-on-dark.svg"} alt={"login icon"} width={40} height={40} />
         <p>Se connecter</p>
     </Link>);

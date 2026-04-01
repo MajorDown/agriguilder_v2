@@ -91,7 +91,7 @@ class RequestManager {
             });
         }
 
-        return new DtoClass(body);
+        return Object.assign(new DtoClass(body), body);
     }
 
     private static getParamFromRequest(

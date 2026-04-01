@@ -25,4 +25,6 @@ export type UserContext = {
 
     selectedGuild: string | null;
     setSelectedGuild: (guildId: string | null) => void;
+
+    refreshUser: () => Promise<void>;
 }

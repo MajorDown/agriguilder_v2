@@ -3,7 +3,7 @@ import styles from '@/styles/components/application/ui/appPage.module.css';
 
 export type AppPageProps = PropsWithChildren<{
     title: string;
-    requiredRole?: ('admin' | 'member' | 'employee')[];
+    requiredRole?: ('admin' | 'member' | 'employee' | 'visitor')[];
 }>
 
 export default function AppPage(props: AppPageProps) {
