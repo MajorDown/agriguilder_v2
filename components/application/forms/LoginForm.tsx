@@ -38,7 +38,7 @@ export default function LoginForm() {
                 type="submit"
                 color="light"
             />
-            <Link href="/auth/forgot-password">Mot de passe oublié ?</Link>
+            <Link href="/forgot-password">Mot de passe oublié ?</Link>
         </form>
     );
 }

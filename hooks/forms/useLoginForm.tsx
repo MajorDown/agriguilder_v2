@@ -32,7 +32,7 @@ export function useLoginForm() {
                 return;
             }
             await refreshUser();
-            router.push("/");
+            router.push("/dashboard");
         } catch {
             setError("Une erreur est survenue lors de la connexion");
         } finally {

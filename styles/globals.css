@@ -55,6 +55,18 @@ header {
     border: none;
 }
 
+@keyframes slideInTop {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 #welcomer {
     flex: 1;
     display: flex;
@@ -63,6 +75,7 @@ header {
     justify-content: center;
     align-items: flex-end;
     gap: 5px;
+    animation: slideInTop 0.5s ease;
 }
 
 main {
@@ -108,7 +121,7 @@ h2 {
 }
 
 p {
-    font-weight: 500;
+    font-weight: 550;
 }
 
 p.success {
