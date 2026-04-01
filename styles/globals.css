@@ -2,7 +2,7 @@
 
 :root {
     --color-white: #ffffff;
-    --color-dark: #3B564D;
+    --color-dark: #3b574d;
     --color-light: #BAC7B5;
     --color-green: #748678;
     --color-form: #D3D4CC;
@@ -66,9 +66,19 @@ header {
 }
 
 main {
+    width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 footer {

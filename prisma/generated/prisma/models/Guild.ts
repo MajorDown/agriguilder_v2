@@ -31,7 +31,8 @@ export type GuildAvgAggregateOutputType = {
   longitude: number | null
   point_euro_value: number | null
   human_hour_point_value: number | null
-  validation_delay: number | null
+  max_declaration_delay: number | null
+  max_validation_delay: number | null
 }
 
 export type GuildSumAggregateOutputType = {
@@ -39,7 +40,8 @@ export type GuildSumAggregateOutputType = {
   longitude: number | null
   point_euro_value: number | null
   human_hour_point_value: number | null
-  validation_delay: number | null
+  max_declaration_delay: number | null
+  max_validation_delay: number | null
 }
 
 export type GuildMinAggregateOutputType = {
@@ -51,7 +53,8 @@ export type GuildMinAggregateOutputType = {
   department: string | null
   point_euro_value: number | null
   human_hour_point_value: number | null
-  validation_delay: number | null
+  max_declaration_delay: number | null
+  max_validation_delay: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -65,7 +68,8 @@ export type GuildMaxAggregateOutputType = {
   department: string | null
   point_euro_value: number | null
   human_hour_point_value: number | null
-  validation_delay: number | null
+  max_declaration_delay: number | null
+  max_validation_delay: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -79,7 +83,8 @@ export type GuildCountAggregateOutputType = {
   department: number
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay: number
+  max_declaration_delay: number
+  max_validation_delay: number
   created_at: number
   updated_at: number
   _all: number
@@ -91,7 +96,8 @@ export type GuildAvgAggregateInputType = {
   longitude?: true
   point_euro_value?: true
   human_hour_point_value?: true
-  validation_delay?: true
+  max_declaration_delay?: true
+  max_validation_delay?: true
 }
 
 export type GuildSumAggregateInputType = {
@@ -99,7 +105,8 @@ export type GuildSumAggregateInputType = {
   longitude?: true
   point_euro_value?: true
   human_hour_point_value?: true
-  validation_delay?: true
+  max_declaration_delay?: true
+  max_validation_delay?: true
 }
 
 export type GuildMinAggregateInputType = {
@@ -111,7 +118,8 @@ export type GuildMinAggregateInputType = {
   department?: true
   point_euro_value?: true
   human_hour_point_value?: true
-  validation_delay?: true
+  max_declaration_delay?: true
+  max_validation_delay?: true
   created_at?: true
   updated_at?: true
 }
@@ -125,7 +133,8 @@ export type GuildMaxAggregateInputType = {
   department?: true
   point_euro_value?: true
   human_hour_point_value?: true
-  validation_delay?: true
+  max_declaration_delay?: true
+  max_validation_delay?: true
   created_at?: true
   updated_at?: true
 }
@@ -139,7 +148,8 @@ export type GuildCountAggregateInputType = {
   department?: true
   point_euro_value?: true
   human_hour_point_value?: true
-  validation_delay?: true
+  max_declaration_delay?: true
+  max_validation_delay?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -240,7 +250,8 @@ export type GuildGroupByOutputType = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay: number | null
+  max_declaration_delay: number
+  max_validation_delay: number
   created_at: Date
   updated_at: Date
   _count: GuildCountAggregateOutputType | null
@@ -277,7 +288,8 @@ export type GuildWhereInput = {
   department?: Prisma.StringFilter<"Guild"> | string
   point_euro_value?: Prisma.FloatFilter<"Guild"> | number
   human_hour_point_value?: Prisma.FloatFilter<"Guild"> | number
-  validation_delay?: Prisma.IntNullableFilter<"Guild"> | number | null
+  max_declaration_delay?: Prisma.IntFilter<"Guild"> | number
+  max_validation_delay?: Prisma.IntFilter<"Guild"> | number
   created_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   reinitializations?: Prisma.ReinitializationListRelationFilter
@@ -301,7 +313,8 @@ export type GuildOrderByWithRelationInput = {
   department?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrderInput | Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   reinitializations?: Prisma.ReinitializationOrderByRelationAggregateInput
@@ -328,7 +341,8 @@ export type GuildWhereUniqueInput = Prisma.AtLeast<{
   department?: Prisma.StringFilter<"Guild"> | string
   point_euro_value?: Prisma.FloatFilter<"Guild"> | number
   human_hour_point_value?: Prisma.FloatFilter<"Guild"> | number
-  validation_delay?: Prisma.IntNullableFilter<"Guild"> | number | null
+  max_declaration_delay?: Prisma.IntFilter<"Guild"> | number
+  max_validation_delay?: Prisma.IntFilter<"Guild"> | number
   created_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   reinitializations?: Prisma.ReinitializationListRelationFilter
@@ -352,7 +366,8 @@ export type GuildOrderByWithAggregationInput = {
   department?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrderInput | Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.GuildCountOrderByAggregateInput
@@ -374,7 +389,8 @@ export type GuildScalarWhereWithAggregatesInput = {
   department?: Prisma.StringWithAggregatesFilter<"Guild"> | string
   point_euro_value?: Prisma.FloatWithAggregatesFilter<"Guild"> | number
   human_hour_point_value?: Prisma.FloatWithAggregatesFilter<"Guild"> | number
-  validation_delay?: Prisma.IntNullableWithAggregatesFilter<"Guild"> | number | null
+  max_declaration_delay?: Prisma.IntWithAggregatesFilter<"Guild"> | number
+  max_validation_delay?: Prisma.IntWithAggregatesFilter<"Guild"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Guild"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Guild"> | Date | string
 }
@@ -388,7 +404,8 @@ export type GuildCreateInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -412,7 +429,8 @@ export type GuildUncheckedCreateInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -436,7 +454,8 @@ export type GuildUpdateInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -460,7 +479,8 @@ export type GuildUncheckedUpdateInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -484,7 +504,8 @@ export type GuildCreateManyInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -498,7 +519,8 @@ export type GuildUpdateManyMutationInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -512,7 +534,8 @@ export type GuildUncheckedUpdateManyInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -526,7 +549,8 @@ export type GuildCountOrderByAggregateInput = {
   department?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -536,7 +560,8 @@ export type GuildAvgOrderByAggregateInput = {
   longitude?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
 }
 
 export type GuildMaxOrderByAggregateInput = {
@@ -548,7 +573,8 @@ export type GuildMaxOrderByAggregateInput = {
   department?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -562,7 +588,8 @@ export type GuildMinOrderByAggregateInput = {
   department?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -572,7 +599,8 @@ export type GuildSumOrderByAggregateInput = {
   longitude?: Prisma.SortOrder
   point_euro_value?: Prisma.SortOrder
   human_hour_point_value?: Prisma.SortOrder
-  validation_delay?: Prisma.SortOrder
+  max_declaration_delay?: Prisma.SortOrder
+  max_validation_delay?: Prisma.SortOrder
 }
 
 export type GuildScalarRelationFilter = {
@@ -590,14 +618,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
 
 export type FloatFieldUpdateOperationsInput = {
   set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -753,7 +773,8 @@ export type GuildCreateWithoutMembersInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -776,7 +797,8 @@ export type GuildUncheckedCreateWithoutMembersInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -815,7 +837,8 @@ export type GuildUpdateWithoutMembersInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -838,7 +861,8 @@ export type GuildUncheckedUpdateWithoutMembersInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -861,7 +885,8 @@ export type GuildCreateWithoutAdminsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -884,7 +909,8 @@ export type GuildUncheckedCreateWithoutAdminsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -923,7 +949,8 @@ export type GuildUpdateWithoutAdminsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -946,7 +973,8 @@ export type GuildUncheckedUpdateWithoutAdminsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -969,7 +997,8 @@ export type GuildCreateWithoutEmployeesInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -992,7 +1021,8 @@ export type GuildUncheckedCreateWithoutEmployeesInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1031,7 +1061,8 @@ export type GuildUpdateWithoutEmployeesInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1054,7 +1085,8 @@ export type GuildUncheckedUpdateWithoutEmployeesInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1077,7 +1109,8 @@ export type GuildCreateWithoutReinitializationsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
@@ -1100,7 +1133,8 @@ export type GuildUncheckedCreateWithoutReinitializationsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
@@ -1139,7 +1173,8 @@ export type GuildUpdateWithoutReinitializationsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
@@ -1162,7 +1197,8 @@ export type GuildUncheckedUpdateWithoutReinitializationsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
@@ -1185,7 +1221,8 @@ export type GuildCreateWithoutRulesInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1208,7 +1245,8 @@ export type GuildUncheckedCreateWithoutRulesInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1247,7 +1285,8 @@ export type GuildUpdateWithoutRulesInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1270,7 +1309,8 @@ export type GuildUncheckedUpdateWithoutRulesInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1293,7 +1333,8 @@ export type GuildCreateWithoutToolsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1316,7 +1357,8 @@ export type GuildUncheckedCreateWithoutToolsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1355,7 +1397,8 @@ export type GuildUpdateWithoutToolsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1378,7 +1421,8 @@ export type GuildUncheckedUpdateWithoutToolsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1401,7 +1445,8 @@ export type GuildCreateWithoutAdjustmentsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1424,7 +1469,8 @@ export type GuildUncheckedCreateWithoutAdjustmentsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1463,7 +1509,8 @@ export type GuildUpdateWithoutAdjustmentsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1486,7 +1533,8 @@ export type GuildUncheckedUpdateWithoutAdjustmentsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1509,7 +1557,8 @@ export type GuildCreateWithoutInterventionsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1532,7 +1581,8 @@ export type GuildUncheckedCreateWithoutInterventionsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1571,7 +1621,8 @@ export type GuildUpdateWithoutInterventionsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1594,7 +1645,8 @@ export type GuildUncheckedUpdateWithoutInterventionsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1617,7 +1669,8 @@ export type GuildCreateWithoutContestationsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1640,7 +1693,8 @@ export type GuildUncheckedCreateWithoutContestationsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1679,7 +1733,8 @@ export type GuildUpdateWithoutContestationsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1702,7 +1757,8 @@ export type GuildUncheckedUpdateWithoutContestationsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1725,7 +1781,8 @@ export type GuildCreateWithoutRequestsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
@@ -1748,7 +1805,8 @@ export type GuildUncheckedCreateWithoutRequestsInput = {
   department: string
   point_euro_value: number
   human_hour_point_value: number
-  validation_delay?: number | null
+  max_declaration_delay?: number
+  max_validation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
@@ -1787,7 +1845,8 @@ export type GuildUpdateWithoutRequestsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
@@ -1810,7 +1869,8 @@ export type GuildUncheckedUpdateWithoutRequestsInput = {
   department?: Prisma.StringFieldUpdateOperationsInput | string
   point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
-  validation_delay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
@@ -1945,7 +2005,8 @@ export type GuildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   department?: boolean
   point_euro_value?: boolean
   human_hour_point_value?: boolean
-  validation_delay?: boolean
+  max_declaration_delay?: boolean
+  max_validation_delay?: boolean
   created_at?: boolean
   updated_at?: boolean
   reinitializations?: boolean | Prisma.Guild$reinitializationsArgs<ExtArgs>
@@ -1970,7 +2031,8 @@ export type GuildSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   department?: boolean
   point_euro_value?: boolean
   human_hour_point_value?: boolean
-  validation_delay?: boolean
+  max_declaration_delay?: boolean
+  max_validation_delay?: boolean
   created_at?: boolean
   updated_at?: boolean
 }, ExtArgs["result"]["guild"]>
@@ -1984,7 +2046,8 @@ export type GuildSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   department?: boolean
   point_euro_value?: boolean
   human_hour_point_value?: boolean
-  validation_delay?: boolean
+  max_declaration_delay?: boolean
+  max_validation_delay?: boolean
   created_at?: boolean
   updated_at?: boolean
 }, ExtArgs["result"]["guild"]>
@@ -1998,12 +2061,13 @@ export type GuildSelectScalar = {
   department?: boolean
   point_euro_value?: boolean
   human_hour_point_value?: boolean
-  validation_delay?: boolean
+  max_declaration_delay?: boolean
+  max_validation_delay?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "city" | "department" | "point_euro_value" | "human_hour_point_value" | "validation_delay" | "created_at" | "updated_at", ExtArgs["result"]["guild"]>
+export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "city" | "department" | "point_euro_value" | "human_hour_point_value" | "max_declaration_delay" | "max_validation_delay" | "created_at" | "updated_at", ExtArgs["result"]["guild"]>
 export type GuildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reinitializations?: boolean | Prisma.Guild$reinitializationsArgs<ExtArgs>
   members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
@@ -2043,7 +2107,8 @@ export type $GuildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     department: string
     point_euro_value: number
     human_hour_point_value: number
-    validation_delay: number | null
+    max_declaration_delay: number
+    max_validation_delay: number
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["guild"]>
@@ -2487,7 +2552,8 @@ export interface GuildFieldRefs {
   readonly department: Prisma.FieldRef<"Guild", 'String'>
   readonly point_euro_value: Prisma.FieldRef<"Guild", 'Float'>
   readonly human_hour_point_value: Prisma.FieldRef<"Guild", 'Float'>
-  readonly validation_delay: Prisma.FieldRef<"Guild", 'Int'>
+  readonly max_declaration_delay: Prisma.FieldRef<"Guild", 'Int'>
+  readonly max_validation_delay: Prisma.FieldRef<"Guild", 'Int'>
   readonly created_at: Prisma.FieldRef<"Guild", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Guild", 'DateTime'>
 }

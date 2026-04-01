@@ -68,7 +68,8 @@ model Guild {
   department             String
   point_euro_value       Float
   human_hour_point_value Float
-  validation_delay       Int?
+  max_declaration_delay  Int      @default(7)
+  max_validation_delay   Int      @default(2)
   created_at             DateTime @default(now())
   updated_at             DateTime @updatedAt
 

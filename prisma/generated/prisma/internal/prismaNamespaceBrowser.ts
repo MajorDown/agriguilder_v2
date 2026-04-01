@@ -137,7 +137,8 @@ export const GuildScalarFieldEnum = {
   department: 'department',
   point_euro_value: 'point_euro_value',
   human_hour_point_value: 'human_hour_point_value',
-  validation_delay: 'validation_delay',
+  max_declaration_delay: 'max_declaration_delay',
+  max_validation_delay: 'max_validation_delay',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const

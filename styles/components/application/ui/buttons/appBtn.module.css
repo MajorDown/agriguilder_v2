@@ -1,0 +1,37 @@
+.appBtn {
+    padding: 10px 20px;
+    border: none;
+}
+
+.appBtn:hover {
+    cursor: pointer;
+}
+
+.appBtn:hover p {
+    text-decoration: underline;
+}
+
+.dark {
+    background-color: var(--color-dark);
+}
+
+.dark p {
+    color: var(--color-white);
+}
+
+.light {
+    background-color: var(--color-light);
+}
+
+.light p {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+.green {
+    background-color: var(--color-green);
+}
+
+.green p {
+    color: var(--color-white);
+}
