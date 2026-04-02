@@ -11,7 +11,7 @@ export default function Header() {
     const { user } = useUserContext();
 
     const dataForGuildSelect = user?.relations?.map((relation) => ({
-        value: relation.guildId,
+        value: relation.guildName,
         label: relation.guildName,
     })).filter((guild, index, self) =>
         index === self.findIndex((g) => g.value === guild.value)
@@ -35,6 +35,6 @@ export default function Header() {
             <p>votre rôle : <RoleSelect roles={dataForRoleSelect} /></p>
         </div>}
         {user?.id? <LogoutBtn /> : <LoginBtn />}
-        {/* <LogoutBtn /> */}
+        <LogoutBtn />
     </header>);
 }

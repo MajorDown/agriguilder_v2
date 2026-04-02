@@ -46,9 +46,9 @@ export default function AppPage(props: AppPageProps) {
         );
     }
 
-    return (
+    return (<>
+        {user?.id && <NavBar />}
         <article className={styles.appPage}>
-            <NavBar />
             {isAuthorized ? (
                 <>
                     {props.title && <h2>{props.title}</h2>}
@@ -62,5 +62,5 @@ export default function AppPage(props: AppPageProps) {
                 </div>
             )}
         </article>
-    );
+    </>);
 }

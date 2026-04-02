@@ -1,13 +1,13 @@
 'use client';
+import AdminDashboard from "@/components/application/sections/admin/AdminDashboard";
 import AppPage from "@/components/application/ui/AppPage";
+import useUserContext from "@/contexts/userContext/useUserContext";
 
 export default function DashboardPage() {
+    const { selectedRole } = useUserContext();
+
     return (<AppPage title="Tableau de bord" requiredRole={['membre', 'admin', 'employé']}>
-        <section>
-            <p>Bienvenue sur votre tableau de bord.</p>
-            <p>Vous pouvez gérer vos informations et accéder aux fonctionnalités disponibles en fonction de votre rôle.</p>
-            <p>Assurez-vous de respecter les règles et les directives de votre organisation lors de l'utilisation de cette plateforme.</p>
-        </section>
+        {selectedRole === 'admin' && <AdminDashboard />}
     </AppPage>);
 }
 

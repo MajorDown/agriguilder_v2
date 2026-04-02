@@ -27,8 +27,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0px;
     gap: 20px;
-    padding: 20px;
-    margin: 10px;
+
 }
