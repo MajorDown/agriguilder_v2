@@ -21,6 +21,7 @@
 * {
     font-family: var(--font-Montserrat);
     font-size: var(--size-font);
+    font-weight: 600;
     color: var(--color-white);
     margin: 0;
     padding: 0;
@@ -40,9 +41,11 @@ body {
 
 header {
     width: 100vw;
+    background: linear-gradient(to left, rgba(59, 87, 77, 0.6), transparent);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 #appTitle {
@@ -121,7 +124,7 @@ h2 {
 }
 
 p {
-    font-weight: 550;
+    font-weight: 500;
 }
 
 p.success {

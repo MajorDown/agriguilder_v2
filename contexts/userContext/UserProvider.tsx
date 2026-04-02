@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import UserContext from "./UserContext";
-import { UserAppData } from "./userContext.types";
+import { GuildRole, UserAppData } from "./userContext.types";
 import FetchManager from "@/managers/FetchManager";
 
 type UserProviderProps = {
@@ -18,47 +18,28 @@ export default function UserProvider({ children }: UserProviderProps) {
     const [user, setUser] = useState<UserAppData>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [selectedGuild, setSelectedGuild] = useState<string | null>(null);
+    const [selectedRole, setSelectedRole] = useState<GuildRole | null>(null);
 
     const refreshUser = useCallback(async () => {
         setIsLoading(true);
-
         try {
             const response = await FetchManager.fetch("/api/user/get-context", {
                 method: "GET",
             });
-
             if (!response.ok) {
                 setUser(null);
                 setSelectedGuild(null);
+                setSelectedRole(null);
                 return;
             }
-
             const responseBody: ApiSuccessResponse<UserAppData> = await response.json();
             const userData = responseBody.data ?? null;
-
             setUser(userData);
-
-            setSelectedGuild((currentSelectedGuild) => {
-                if (!userData?.relations?.length) {
-                    return null;
-                }
-
-                const selectedGuildStillExists = currentSelectedGuild
-                    ? userData.relations.some(
-                          (relation) => relation.guildId === currentSelectedGuild
-                      )
-                    : false;
-
-                if (selectedGuildStillExists) {
-                    return currentSelectedGuild;
-                }
-
-                return userData.relations[0].guildId;
-            });
         } catch (error) {
             console.error("Erreur lors du chargement du contexte utilisateur :", error);
             setUser(null);
             setSelectedGuild(null);
+            setSelectedRole(null);
         } finally {
             setIsLoading(false);
         }
@@ -76,9 +57,11 @@ export default function UserProvider({ children }: UserProviderProps) {
             setIsLoading,
             selectedGuild,
             setSelectedGuild,
+            selectedRole,
+            setSelectedRole,
             refreshUser,
         }),
-        [user, isLoading, selectedGuild, refreshUser]
+        [user, isLoading, selectedGuild, selectedRole, refreshUser]
     );
 
     return (

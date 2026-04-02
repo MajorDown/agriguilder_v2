@@ -1,11 +1,11 @@
-#guildSelect {
+#roleSelect {
     background-color: var(--color-light);
     border: 1px solid var(--color-dark);
     color: var(--color-dark);
     font-weight: 500;
 }
 
-#guildSelect option {
+#roleSelect option {
     font-weight: 500;
     color: var(--color-dark);
 }

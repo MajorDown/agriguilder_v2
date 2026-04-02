@@ -1,6 +1,6 @@
 'use client';
-import { useState } from "react";
 import styles from "@/styles/components/application/ui/inputs/guildSelect.module.css";
+import useUserContext from "@/contexts/userContext/useUserContext";
 
 export type DataForGuildSelect = {
     label: string;
@@ -16,14 +16,15 @@ type GuildSelectProps = {
  * @param props.guilds : liste des guildes de l'utilisateur
  */
 export default function GuildSelect(props: GuildSelectProps) {
-    const [selectedGuild, setSelectedGuild] = useState<string>("");
+    const { selectedGuild, setSelectedGuild } = useUserContext();
 
     return (<select 
         name="guildSelect" 
         id={styles.guildSelect} 
-        value={selectedGuild} 
+        value={selectedGuild ?? ""} 
         onChange={(e) => setSelectedGuild(e.target.value)}
     >
+        <option value="" disabled>Choisissez une guilde</option>
         {props.guilds.map((guild, index) => (
             <option key={index} value={guild.value}>{guild.label}</option>
         ))}

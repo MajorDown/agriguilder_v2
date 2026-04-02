@@ -26,5 +26,8 @@ export type UserContext = {
     selectedGuild: string | null;
     setSelectedGuild: (guildId: string | null) => void;
 
+    selectedRole: GuildRole | null;
+    setSelectedRole: (role: GuildRole | null) => void;
+
     refreshUser: () => Promise<void>;
 }

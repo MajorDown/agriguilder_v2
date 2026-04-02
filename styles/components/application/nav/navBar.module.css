@@ -1,0 +1,37 @@
+#navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#navBar select {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    border: none;
+}
+
+#navBar option {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+}
+
+.navLink {
+    background-color: var(--color-dark);
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.navLink.selected {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
+.navLink.selected p {
+    color: var(--color-dark);
+    cursor: pointer;
+}

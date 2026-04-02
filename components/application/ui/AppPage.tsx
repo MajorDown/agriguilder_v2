@@ -1,6 +1,6 @@
 'use client';
-
 import { PropsWithChildren, useEffect } from 'react';
+import NavBar from '../nav/NavBar';
 import styles from '@/styles/components/application/ui/appPage.module.css';
 import useUserContext from '@/contexts/userContext/useUserContext';
 import { useRouter } from 'next/navigation';
@@ -48,6 +48,7 @@ export default function AppPage(props: AppPageProps) {
 
     return (
         <article className={styles.appPage}>
+            <NavBar />
             {isAuthorized ? (
                 <>
                     {props.title && <h2>{props.title}</h2>}
