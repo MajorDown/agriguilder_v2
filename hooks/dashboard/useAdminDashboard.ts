@@ -1,12 +1,8 @@
 'use client';
+
 import { useCallback, useEffect, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import { AdminDashBoardData } from "@/modules/dashboard/dashboard.types";
-
-type ApiSuccessResponse<T> = {
-    success: true;
-    data: T;
-};
 
 type UseAdminDashboardReturn = {
     data: AdminDashBoardData | null;
@@ -27,22 +23,26 @@ export default function useAdminDashboard(selectedGuild: string | null): UseAdmi
             setIsLoading(false);
             return;
         }
+
         setIsLoading(true);
         setError(null);
+
         try {
-            const response = await FetchManager.fetch(`/api/dashboard/admin?guildId=${selectedGuild}`, {
-                method: "GET",
-                cache: "no-store",
-            });
+            const response = await FetchManager.fetch(
+                `/api/dashboard/admin/${encodeURIComponent(selectedGuild)}`,
+                {
+                    method: "GET",
+                    cache: "no-store",
+                }
+            );
             if (!response.ok) {
                 setData(null);
                 setError("Impossible de charger les données du tableau de bord.");
                 return;
             }
-            const body: ApiSuccessResponse<AdminDashBoardData> = await response.json();
-            setData(body.data);
+            const body = await response.json();
+            setData(body.data.data);
         } catch (err) {
-            console.error("Erreur lors du chargement du dashboard admin :", err);
             setData(null);
             setError("Une erreur est survenue lors du chargement du tableau de bord.");
         } finally {

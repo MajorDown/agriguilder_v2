@@ -15,7 +15,6 @@ export function useLoginForm() {
         setError(null);
         setIsLoading(true);
         try {
-            console.log(`Tentative : email : ${email}, password : ${password}`);
             const response = await fetch("/api/session/login", {
                 method: "POST",
                 headers: {
