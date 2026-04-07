@@ -6,6 +6,31 @@
     padding: 2vw;
 }
 
+#toolTableHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#toolTableHeader label {
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#toolTableHeader select {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+#toolTableHeader select option {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
 #toolTable p {
     text-align: center;
 }

@@ -23,7 +23,6 @@ export async function getUserByEmail(email: string): Promise<PublicUser | null> 
             society: user.society || '',
             phone: user.phone,
         };
-
     }
     catch (error) {
         throw ErrorManager.create({
