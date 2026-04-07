@@ -2,6 +2,7 @@
 import styles from "@/styles/components/application/ui/inputs/roleSelect.module.css";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import { GuildRole } from "@/contexts/userContext/userContext.types";
+import { useRouter } from "next/navigation";
 
 export type DataForRoleSelect = {
     label: GuildRole;
@@ -17,13 +18,19 @@ type RoleSelectProps = {
  * @param props.roles : liste des rôles de l'utilisateur
  */
 export default function RoleSelect(props: RoleSelectProps) {
+    const router = useRouter();
     const { selectedRole, setSelectedRole } = useUserContext();
+
+    const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRole(e.target.value as GuildRole);
+        router.push(`/dashboard`);
+    }
 
     return (<select 
         name="roleSelect" 
         id={styles.roleSelect} 
         value={selectedRole ?? ""} 
-        onChange={(e) => setSelectedRole(e.target.value as GuildRole)}
+        onChange={(event) => handleRoleChange(event)}
     >
         <option value="" disabled>Choisissez un rôle</option>
         {props.roles.map((role, index) => (

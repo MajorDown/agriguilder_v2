@@ -1,0 +1,76 @@
+#toolTable {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2vw;
+}
+
+#toolTable p {
+    text-align: center;
+}
+
+#indexLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 5vw;
+}
+
+#indexLine :nth-child(1) {
+    margin-left: 12%;
+    width: 20%;
+}
+
+#indexLine :nth-child(2) {
+    width: 20%;
+}
+
+#indexLine :nth-child(3) {
+    width: 10%;
+}
+
+#indexLine :nth-child(4) {
+    width: 15%;
+}
+
+.toolLine {
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5vw;
+}
+
+.toolLine button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.toolLine p {
+    color: var(--color-dark);
+    font-size: 1.2vw;
+    font-weight: 700;
+    text-align: center;
+}
+
+.toolLine :nth-child(2) {
+    width: 20%;
+}
+
+.toolLine :nth-child(3) {
+    width: 10%;
+}
+
+.toolLine :nth-child(4) {
+    width: 10%;
+}
+
+.toolLine :nth-child(5) {
+    width: 5%;
+}
