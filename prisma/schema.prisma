@@ -192,7 +192,6 @@ model Tool {
 
   interventions Intervention[]
 
-  @@unique([guild_id, name, version])
   @@unique([id, guild_id])
   @@index([guild_id])
   @@index([admin_id])

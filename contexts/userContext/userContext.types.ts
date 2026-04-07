@@ -5,7 +5,6 @@ export type GuildRelation = {
     guildName: string;
     sinceAt: string;
     role: GuildRole;
-    roleId: string;
 }
 
 export type UserAppData = {

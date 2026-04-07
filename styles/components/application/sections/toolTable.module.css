@@ -99,3 +99,11 @@
 .toolLine :nth-child(5) {
     width: 5%;
 }
+
+#deleteToolModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}

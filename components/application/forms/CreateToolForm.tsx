@@ -2,6 +2,7 @@
 import AppBtn from "../ui/buttons/AppBtn";
 import AppInput from "../ui/inputs/AppInput";
 import useCreateTool from "@/hooks/tools/useCreateTool";
+import styles from '@/styles/components/application/forms/createToolForm.module.css';
 
 export type CreateToolFormProps = {
     guildName: string;
@@ -24,7 +25,7 @@ export default function CreateToolForm(props: CreateToolFormProps) {
     });
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id={styles.createToolForm}>
             <AppInput
                 label="Nom de l'outil"
                 name="toolName"

@@ -94,7 +94,7 @@ export default function ToolTable(props: ToolTableProps) {
         </div>
 
         {sortedTools.map((tool: PublicTool) => (
-            <ToolLine key={tool.id} tool={tool} />
+            <ToolLine key={tool.id} tool={tool} guildName={props.guildName} onDeleteSuccess={refreshTools} />
         ))}
     </section>);
 }

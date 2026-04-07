@@ -2,13 +2,13 @@ import { NextRequest } from "next/server";
 import RequestManager from "@/managers/RequestManager";
 import ResponseManager from "@/managers/ResponseManager";
 import TokenManager from "@/managers/TokenManager";
-import { CreateToolDto } from "@/modules/tool/dto/createTool.dto";
-import { createTool } from "@/modules/tool/services/createTool.service";
 import { verifyAdminAuth } from "@/modules/admin/services/verifyAdminAuth.service";
+import { deleteTool } from "@/modules/tool/services/deleteTool.service";
+import { DeleteToolDto } from "@/modules/tool/dto/deleteTool.dto";
 
 export async function POST(request: NextRequest) {
     try {
-        const { access_token, dto } = await RequestManager.extract(request, CreateToolDto);
+        const { access_token, dto } = await RequestManager.extract(request, DeleteToolDto);
         if (!access_token) {
             return ResponseManager.error({
                 status: 401,
@@ -17,27 +17,15 @@ export async function POST(request: NextRequest) {
             });
         }
         const payload = TokenManager.verifyAccessToken(access_token);
-        const adminId = await verifyAdminAuth({
+        await verifyAdminAuth({
             userId: payload.accountId,
             guildName: dto.guildName,
         });
-        console.log("inputs", {
-                name: dto.name,
-                coef: dto.coef,
-                guildName: dto.guildName,
-                adminId: adminId,
+        await deleteTool(dto.id);
+        return ResponseManager.success({
+            deleted: true,
         });
-        const tools = await createTool(
-            {
-                name: dto.name,
-                coef: dto.coef,
-                guildName: dto.guildName,
-                adminId: adminId,
-            }
-        );
-        return ResponseManager.success(tools);
     } catch (error) {
-        console.error("Error creating tool:", error);
         return ResponseManager.error(error);
     }
 }

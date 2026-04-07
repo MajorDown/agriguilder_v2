@@ -62,7 +62,6 @@ export async function getUserAppData(): Promise<UserAppData> {
         prisma.member.findMany({
             where: { user_id: accountId },
             select: {
-                id: true,
                 guild: { select: { id: true, name: true } },
                 created_at: true,
             }
@@ -70,7 +69,6 @@ export async function getUserAppData(): Promise<UserAppData> {
         prisma.admin.findMany({
             where: { user_id: accountId },
             select: {
-                id: true,
                 guild: { select: { id: true, name: true } },
                 created_at: true,
             }
@@ -78,7 +76,6 @@ export async function getUserAppData(): Promise<UserAppData> {
         prisma.employee.findMany({
             where: { user_id: accountId },
             select: {
-                id: true,
                 guild: { select: { id: true, name: true } },
                 created_at: true,
             }
@@ -91,21 +88,18 @@ export async function getUserAppData(): Promise<UserAppData> {
             guildName: member.guild.name,
             sinceAt: member.created_at.toISOString(),
             role: "membre" as const,
-            roleId: member.id,
         })),
         ...admins.map(admin => ({
             guildId: admin.guild.id,
             guildName: admin.guild.name,
             sinceAt: admin.created_at.toISOString(),
             role: "admin" as const,
-            roleId: admin.id,
         })),
         ...employees.map(employee => ({
             guildId: employee.guild.id,
             guildName: employee.guild.name,
             sinceAt: employee.created_at.toISOString(),
             role: "employé" as const,
-            roleId: employee.id,
         })),
     ];
 

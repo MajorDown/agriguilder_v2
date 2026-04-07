@@ -12,8 +12,4 @@ export class CreateToolDto extends DTO {
     @isRequired()
     @isString()
     guildName!: string;
-
-    @isRequired()
-    @isString()
-    adminId!: string;
 }

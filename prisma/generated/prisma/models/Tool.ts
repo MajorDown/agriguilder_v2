@@ -274,7 +274,6 @@ export type ToolOrderByWithRelationInput = {
 
 export type ToolWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  guild_id_name_version?: Prisma.ToolGuild_idNameVersionCompoundUniqueInput
   id_guild_id?: Prisma.ToolIdGuild_idCompoundUniqueInput
   AND?: Prisma.ToolWhereInput | Prisma.ToolWhereInput[]
   OR?: Prisma.ToolWhereInput[]
@@ -290,7 +289,7 @@ export type ToolWhereUniqueInput = Prisma.AtLeast<{
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
   admin?: Prisma.XOR<Prisma.AdminScalarRelationFilter, Prisma.AdminWhereInput>
   interventions?: Prisma.InterventionListRelationFilter
-}, "id" | "guild_id_name_version" | "id_guild_id">
+}, "id" | "id_guild_id">
 
 export type ToolOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -418,12 +417,6 @@ export type ToolListRelationFilter = {
 
 export type ToolOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ToolGuild_idNameVersionCompoundUniqueInput = {
-  guild_id: string
-  name: string
-  version: number
 }
 
 export type ToolIdGuild_idCompoundUniqueInput = {
