@@ -1,22 +1,14 @@
 import  { prisma } from '@/prisma/prisma';
 import ErrorManager from '@/managers/ErrorManager';
 import { PublicTool } from '../tool.types';
+import { getGuildByName } from '@/modules/guild/services/getGuildByName.service';
 
 /**
  * @description Récupère les dernières version des outils d'une guilde
  */
 export async function getToolsByGuild(guildName: string): Promise<PublicTool[]> {
     try {
-        const guild = await prisma.guild.findFirst({
-            where: { name: guildName }
-        });
-        if (!guild) {
-            throw ErrorManager.create({
-                statusCode: 404,
-                code: "GUILD_NOT_FOUND",
-                message: "Guilde introuvable",
-            });
-        }
+        const guild = await getGuildByName(guildName);
         const guildTools = await prisma.tool.findMany({
             where: { 
                 guild_id: guild.id,

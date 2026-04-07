@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import Header from "@/components/application/sections/Header";
 import Footer from "@/components/application/sections/Footer";
 import UserProvider from "@/contexts/userContext/UserProvider";
+import ModalProvider from "@/contexts/modalContext/ModalProvider";
 
 const montserrat = Montserrat({
     weight: "400",
@@ -27,9 +28,11 @@ export default function RootLayout({
         <html lang="fr">
             <body className={montserrat.variable}>
                 <UserProvider>
-                    <Header />
-                    <main>{children}</main>
-                    <Footer />
+                    <ModalProvider>
+                        <Header />
+                        <main>{children}</main>
+                        <Footer />
+                    </ModalProvider>
                 </UserProvider>
             </body>
         </html>

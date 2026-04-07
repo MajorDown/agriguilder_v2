@@ -5,7 +5,9 @@ import ToolLine from "./ToolLine";
 import styles from "@/styles/components/application/sections/toolTable.module.css";
 import useToolTable from "@/hooks/tools/useToolTable";
 import { PublicTool } from "@/modules/tool/tool.types";
-import AppBtn from "../../ui/buttons/AppBtn";
+import AppBtn from "@/components/application/ui/buttons/AppBtn";
+import useModal from "@/contexts/modalContext/useModal";
+import CreateToolForm from '@/components/application/forms/CreateToolForm';
 
 export type ToolTableProps = {
     guildName: string;
@@ -14,7 +16,8 @@ export type ToolTableProps = {
 type ToolSortOption = "alphabetical" | "status";
 
 export default function ToolTable(props: ToolTableProps) {
-    const { tools, isLoading, errorMessage } = useToolTable(props.guildName);
+    const { openModal, closeModal } = useModal();
+    const { tools, isLoading, errorMessage, refreshTools } = useToolTable(props.guildName);
     const [sortBy, setSortBy] = useState<ToolSortOption>("alphabetical");
 
     const sortedTools = useMemo(() => {
@@ -30,9 +33,21 @@ export default function ToolTable(props: ToolTableProps) {
                 return a.is_active ? -1 : 1;
             });
         }
-
         return toolsCopy;
     }, [tools, sortBy]);
+
+    const handleOpenModal = () => {
+        openModal({
+            title: "Créer un nouvel outil",
+            content: (<CreateToolForm 
+                guildName={props.guildName} 
+                onSuccess={async () => {
+                    await refreshTools();
+                    closeModal();
+                }}
+            />)
+        });
+    }
 
     if (isLoading) {
         return (<section id={styles.toolTable}>
@@ -64,7 +79,11 @@ export default function ToolTable(props: ToolTableProps) {
                     <option value="status">Actifs / inactifs</option>
                 </select>
             </label>
-            <AppBtn onClick={() => { } } color="light" label="Créer un nouvel outil" />
+            <AppBtn 
+                onClick={handleOpenModal} 
+                color="light" 
+                label="Créer un nouvel outil" 
+            />
         </div>
 
         <div id={styles.indexLine}>

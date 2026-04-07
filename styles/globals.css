@@ -2,7 +2,7 @@
 
 :root {
     --color-white: #ffffff;
-    --color-dark: #3b574d;
+    --color-dark: rgb(59, 87, 77);
     --color-light: #BAC7B5;
     --color-green: #748678;
     --color-form: #D3D4CC;
@@ -28,6 +28,7 @@
 }
 
 body {
+    position: relative;
     min-height: 100vh;
     background-image: url(/images/backgrounds/background-accueil.jpg);
     background-size: cover;
