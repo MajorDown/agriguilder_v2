@@ -1,5 +1,4 @@
 'use client';
-
 import { useMemo, useState } from "react";
 import ToolLine from "./ToolLine";
 import styles from "@/styles/components/application/sections/toolTable.module.css";

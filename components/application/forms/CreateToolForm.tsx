@@ -34,7 +34,6 @@ export default function CreateToolForm(props: CreateToolFormProps) {
                 value={toolName}
                 onChange={handleToolNameChange}
             />
-
             <AppInput
                 label="Coefficient de l'outil"
                 name="toolCoef"
@@ -43,10 +42,8 @@ export default function CreateToolForm(props: CreateToolFormProps) {
                 value={toolCoef}
                 onChange={handleToolCoefChange}
             />
-
             {errorMessage && <p>{errorMessage}</p>}
             {successMessage && <p>{successMessage}</p>}
-
             <AppBtn
                 label={isSubmitting ? "Création..." : "Créer l'outil"}
                 color="dark"

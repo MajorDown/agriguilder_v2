@@ -1,0 +1,68 @@
+#memberTable {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2vw;
+}
+
+#memberTableHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#memberTableHeader label {
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#memberTableHeader select {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+#memberTableHeader select option {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+#memberTable p {
+    text-align: center;
+}
+
+#indexLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 5vw;
+}
+
+.memberLine {
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5vw;
+}
+
+.memberLine button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.memberLine p {
+    color: var(--color-dark);
+    font-size: 1.2vw;
+    font-weight: 700;
+    text-align: center;
+}
