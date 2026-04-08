@@ -69,7 +69,10 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
     ).length;
     // récupérer les outils
     const tools = await prisma.tool.findMany({
-        where: { guild_id: guildId },
+        where: { 
+            guild_id: guildId,
+            revoked_at: null,
+        },
         select: {
             id: true,
             created_at: true,

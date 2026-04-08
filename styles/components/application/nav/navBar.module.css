@@ -1,22 +1,9 @@
-@keyframes slideInLeft {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
 #navBar {
     width: 95%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    animation: slideInLeft 0.5s ease;
 }
 
 #navBar select {

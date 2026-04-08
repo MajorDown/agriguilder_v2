@@ -2,13 +2,13 @@ import { NextRequest } from "next/server";
 import RequestManager from "@/managers/RequestManager";
 import ResponseManager from "@/managers/ResponseManager";
 import TokenManager from "@/managers/TokenManager";
-import { CreateToolDto } from "@/modules/tool/dto/createTool.dto";
-import { createTool } from "@/modules/tool/services/createTool.service";
+import { UpdateToolDto } from "@/modules/tool/dto/updateTool.dto";
 import { verifyAdminAuth } from "@/modules/admin/services/verifyAdminAuth.service";
+import { updateTool } from "@/modules/tool/services/updateTool.service";
 
-export async function POST(request: NextRequest) {
+export async function PUT(request: NextRequest) {
     try {
-        const { access_token, dto } = await RequestManager.extract(request, CreateToolDto);
+        const { access_token, dto } = await RequestManager.extract(request, UpdateToolDto);
         if (!access_token) {
             return ResponseManager.error({
                 status: 401,
@@ -17,21 +17,13 @@ export async function POST(request: NextRequest) {
             });
         }
         const payload = TokenManager.verifyAccessToken(access_token);
-        const adminId = await verifyAdminAuth({
+        await verifyAdminAuth({
             userId: payload.accountId,
             guildName: dto.guildName,
         });
-        const newTool = await createTool(
-            {
-                name: dto.name,
-                coef: dto.coef,
-                guildName: dto.guildName,
-                adminId: adminId,
-            }
-        );
-        return ResponseManager.success(newTool);
+        const updatedTool = await updateTool(dto);
+        return ResponseManager.success(updatedTool);
     } catch (error) {
-        console.error("Error creating tool:", error);
         return ResponseManager.error(error);
     }
 }

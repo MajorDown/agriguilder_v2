@@ -5,6 +5,7 @@ const VALIDATION_KEY = Symbol("validation");
 export type ValidationRule =
     | "required"
     | "email"
+    | "boolean"
     | "number"
     | "string"
     | { type: "minLength"; length: number }
@@ -21,6 +22,10 @@ function pushRule(target: any, propertyKey: string | symbol, rule: ValidationRul
 
 export function isRequired(): PropertyDecorator {
     return (target, key) => pushRule(target, key, "required");
+}
+
+export function isBoolean(): PropertyDecorator {
+    return (target, key) => pushRule(target, key, "boolean");
 }
 
 export function isEmail(): PropertyDecorator {

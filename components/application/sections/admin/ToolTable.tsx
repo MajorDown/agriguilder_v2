@@ -74,7 +74,7 @@ export default function ToolTable(props: ToolTableProps) {
                     id="tool-sort"
                     value={sortBy}
                     onChange={(event) => setSortBy(event.target.value as ToolSortOption)}
-                    >
+                >
                     <option value="alphabetical">Ordre alphabétique</option>
                     <option value="status">Actifs / inactifs</option>
                 </select>
@@ -94,7 +94,12 @@ export default function ToolTable(props: ToolTableProps) {
         </div>
 
         {sortedTools.map((tool: PublicTool) => (
-            <ToolLine key={tool.id} tool={tool} guildName={props.guildName} onDeleteSuccess={refreshTools} />
+            <ToolLine 
+                key={tool.id} 
+                tool={tool} 
+                guildName={props.guildName} 
+                onToolChanged={refreshTools} 
+            />
         ))}
     </section>);
 }

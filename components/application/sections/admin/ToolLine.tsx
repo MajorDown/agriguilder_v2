@@ -1,35 +1,52 @@
 'use client';
-
-import { useState } from "react";
 import Image from "next/image";
 import styles from "@/styles/components/application/sections/toolTable.module.css";
 import { PublicTool } from "@/modules/tool/tool.types";
 import useDeleteTool from "@/hooks/tools/useDeleteTool";
+import useUpdateTool from "@/hooks/tools/useUpdateTool";
 import useModal from "@/contexts/modalContext/useModal";
 import AppBtn from "@/components/application/ui/buttons/AppBtn";
+import AppInput from "../../ui/inputs/AppInput";
+import ToolSwitch from "./ToolCheckBox";
 
 export type ToolLineProps = {
     tool: PublicTool;
     guildName: string;
-    onDeleteSuccess: () => void | Promise<void>;
+    onToolChanged: () => void | Promise<void>;
 };
 
+/**
+ * @description ligne représentant un Tool dans ToolTable
+ */
 export default function ToolLine(props: ToolLineProps) {
-    const [isEditing, setIsEditing] = useState<boolean>(false);
     const { openModal, closeModal } = useModal();
-
     const {
         deleteTool,
-        isSubmitting,
-        errorMessage,
+        isSubmitting: isDeleting,
+        errorMessage: deleteErrorMessage,
     } = useDeleteTool({
         guildName: props.guildName,
         onSuccess: async () => {
-            await props.onDeleteSuccess();
+            await props.onToolChanged();
             closeModal();
         },
     });
-
+    const {
+        isEditing,
+        name,
+        coef,
+        isSubmitting: isUpdating,
+        errorMessage: updateErrorMessage,
+        startEditing,
+        cancelEditing,
+        handleNameChange,
+        handleCoefChange,
+        submitUpdate,
+    } = useUpdateTool({
+        tool: props.tool,
+        guildName: props.guildName,
+        onSuccess: props.onToolChanged,
+    });
     const handleDeleteClick = () => {
         openModal({
             title: "Supprimer l'outil",
@@ -37,18 +54,16 @@ export default function ToolLine(props: ToolLineProps) {
             content: (
                 <div id={styles.deleteToolModal}>
                     <p>
-                        Voulez-vous vraiment supprimer l'outil
-                        {" "}
-                        <strong>{props.tool.name}</strong>
-                        {" "}?
+                        Voulez-vous vraiment supprimer l'outil{" "}
+                        <strong>{props.tool.name}</strong> ?
                     </p>
-                    {errorMessage && (
-                        <p className={styles.formErrorMessage}>{errorMessage}</p>
+                    {deleteErrorMessage && (
+                        <p className={styles.formErrorMessage}>{deleteErrorMessage}</p>
                     )}
                     <div>
                         <AppBtn
                             color="dark"
-                            label={isSubmitting ? "Suppression..." : "Confirmer"}
+                            label={isDeleting ? "Suppression..." : "Confirmer"}
                             onClick={async () => {
                                 await deleteTool({ id: props.tool.id });
                             }}
@@ -59,10 +74,18 @@ export default function ToolLine(props: ToolLineProps) {
         });
     };
 
+    const handleEditClick = async () => {
+        if (!isEditing) {
+            startEditing();
+            return;
+        }
+        await submitUpdate();
+    };
+
     return (
         <div className={styles.toolLine}>
             {!isEditing && (
-                <button type="button" onClick={() => setIsEditing(true)}>
+                <button type="button" onClick={handleEditClick}>
                     <Image
                         src="/images/icons/edit-dark-on-green.svg"
                         alt="edit"
@@ -71,9 +94,8 @@ export default function ToolLine(props: ToolLineProps) {
                     />
                 </button>
             )}
-
             {isEditing && (
-                <button type="button" onClick={() => setIsEditing(false)}>
+                <button type="button" onClick={handleEditClick}>
                     <Image
                         src="/images/icons/check-dark-on-green.svg"
                         alt="confirm"
@@ -82,20 +104,54 @@ export default function ToolLine(props: ToolLineProps) {
                     />
                 </button>
             )}
-
-            <p>{props.tool.name}</p>
-            <p>{props.tool.coef}</p>
-            <p>{props.tool.is_active ? "Actif" : "Inactif"}</p>
-            <p>v{props.tool.version}</p>
-
-            <button type="button" onClick={handleDeleteClick}>
-                <Image
-                    src="/images/icons/trash-dark-on-green.svg"
-                    alt="delete"
-                    width={30}
-                    height={30}
+            {isEditing ? (
+                <AppInput
+                    value={name}
+                    onChange={handleNameChange}
+                    label=""
+                    name="toolName"
+                    type="text"
                 />
-            </button>
+            ) : (
+                <p>{props.tool.name}</p>
+            )}
+            {isEditing ? (
+                <AppInput
+                    value={coef}
+                    onChange={handleCoefChange}
+                    label=""
+                    name="toolCoef"
+                    type="number"
+                />
+            ) : (
+                <p>{props.tool.coef}</p>
+            )}
+            <ToolSwitch 
+                toolId={props.tool.id} 
+                guildName={props.guildName} 
+                initialIsActive={props.tool.is_active} 
+            />
+            <p>v{props.tool.version}</p>
+            {isEditing ? (
+                <button type="button" onClick={cancelEditing}>
+                    Annuler
+                </button>
+            ) : (
+                <button type="button" onClick={handleDeleteClick}>
+                    <Image
+                        src="/images/icons/trash-dark-on-green.svg"
+                        alt="delete"
+                        width={30}
+                        height={30}
+                    />
+                </button>
+            )}
+            {updateErrorMessage && (
+                <p className={styles.formErrorMessage}>{updateErrorMessage}</p>
+            )}
+            {isUpdating && (
+                <p>Enregistrement...</p>
+            )}
         </div>
     );
 }

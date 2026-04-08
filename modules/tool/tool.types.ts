@@ -9,3 +9,14 @@ export type CreateToolInput = {
     guildName: string;
 }
 
+export type UpdateToolInput = {
+    id: string;
+    name?: string;
+    coef?: number;
+    guildName: string;
+}
+
+export type ToggleToolInput = {
+    id: string;
+    isActive: boolean;
+}
