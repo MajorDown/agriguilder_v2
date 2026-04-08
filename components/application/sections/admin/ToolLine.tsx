@@ -7,7 +7,7 @@ import useUpdateTool from "@/hooks/tools/useUpdateTool";
 import useModal from "@/contexts/modalContext/useModal";
 import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import AppInput from "../../ui/inputs/AppInput";
-import ToolSwitch from "./ToolCheckBox";
+import ToolSwitch from "./ToolSwitch";
 
 export type ToolLineProps = {
     tool: PublicTool;

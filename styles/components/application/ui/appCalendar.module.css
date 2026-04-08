@@ -1,0 +1,86 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.navButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+}
+
+.weekHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5vw;
+}
+
+.weekDay {
+    text-align: center;
+    font-weight: 600;
+    padding: 0 0.5vw;
+    min-width: 4vw;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5vw;
+}
+
+.cell {
+    position: relative;
+    min-width: 4vw;
+    min-height: 4vw;
+    padding: 0.5vw;
+    background-color: var(--color-light);
+    cursor: pointer;
+}
+
+.emptyCell {
+    border: none;
+    background: transparent;
+}
+
+.cell img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3vw;
+    height: 3vw;
+}
+
+.dayNumber {
+    position: relative;
+    z-index: 1;
+    font-size: 1vw;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.today {
+    background-color: var(--color-green);
+}
+
+.today .dayNumber {
+    color: var(--color-light);
+}
