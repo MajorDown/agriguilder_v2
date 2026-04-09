@@ -20,14 +20,25 @@ export type ReinitializationModel = runtime.Types.Result.DefaultSelection<Prisma
 
 export type AggregateReinitialization = {
   _count: ReinitializationCountAggregateOutputType | null
+  _avg: ReinitializationAvgAggregateOutputType | null
+  _sum: ReinitializationSumAggregateOutputType | null
   _min: ReinitializationMinAggregateOutputType | null
   _max: ReinitializationMaxAggregateOutputType | null
+}
+
+export type ReinitializationAvgAggregateOutputType = {
+  point_euro_value: number | null
+}
+
+export type ReinitializationSumAggregateOutputType = {
+  point_euro_value: number | null
 }
 
 export type ReinitializationMinAggregateOutputType = {
   id: string | null
   guild_id: string | null
   admin_id: string | null
+  point_euro_value: number | null
   created_at: Date | null
 }
 
@@ -35,6 +46,7 @@ export type ReinitializationMaxAggregateOutputType = {
   id: string | null
   guild_id: string | null
   admin_id: string | null
+  point_euro_value: number | null
   created_at: Date | null
 }
 
@@ -42,15 +54,25 @@ export type ReinitializationCountAggregateOutputType = {
   id: number
   guild_id: number
   admin_id: number
+  point_euro_value: number
   created_at: number
   _all: number
 }
 
 
+export type ReinitializationAvgAggregateInputType = {
+  point_euro_value?: true
+}
+
+export type ReinitializationSumAggregateInputType = {
+  point_euro_value?: true
+}
+
 export type ReinitializationMinAggregateInputType = {
   id?: true
   guild_id?: true
   admin_id?: true
+  point_euro_value?: true
   created_at?: true
 }
 
@@ -58,6 +80,7 @@ export type ReinitializationMaxAggregateInputType = {
   id?: true
   guild_id?: true
   admin_id?: true
+  point_euro_value?: true
   created_at?: true
 }
 
@@ -65,6 +88,7 @@ export type ReinitializationCountAggregateInputType = {
   id?: true
   guild_id?: true
   admin_id?: true
+  point_euro_value?: true
   created_at?: true
   _all?: true
 }
@@ -107,6 +131,18 @@ export type ReinitializationAggregateArgs<ExtArgs extends runtime.Types.Extensio
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ReinitializationAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ReinitializationSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ReinitializationMinAggregateInputType
@@ -137,6 +173,8 @@ export type ReinitializationGroupByArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   _count?: ReinitializationCountAggregateInputType | true
+  _avg?: ReinitializationAvgAggregateInputType
+  _sum?: ReinitializationSumAggregateInputType
   _min?: ReinitializationMinAggregateInputType
   _max?: ReinitializationMaxAggregateInputType
 }
@@ -145,8 +183,11 @@ export type ReinitializationGroupByOutputType = {
   id: string
   guild_id: string
   admin_id: string
+  point_euro_value: number
   created_at: Date
   _count: ReinitializationCountAggregateOutputType | null
+  _avg: ReinitializationAvgAggregateOutputType | null
+  _sum: ReinitializationSumAggregateOutputType | null
   _min: ReinitializationMinAggregateOutputType | null
   _max: ReinitializationMaxAggregateOutputType | null
 }
@@ -173,6 +214,7 @@ export type ReinitializationWhereInput = {
   id?: Prisma.StringFilter<"Reinitialization"> | string
   guild_id?: Prisma.StringFilter<"Reinitialization"> | string
   admin_id?: Prisma.StringFilter<"Reinitialization"> | string
+  point_euro_value?: Prisma.FloatFilter<"Reinitialization"> | number
   created_at?: Prisma.DateTimeFilter<"Reinitialization"> | Date | string
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
   admin?: Prisma.XOR<Prisma.AdminScalarRelationFilter, Prisma.AdminWhereInput>
@@ -182,6 +224,7 @@ export type ReinitializationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
+  point_euro_value?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   guild?: Prisma.GuildOrderByWithRelationInput
   admin?: Prisma.AdminOrderByWithRelationInput
@@ -194,6 +237,7 @@ export type ReinitializationWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ReinitializationWhereInput | Prisma.ReinitializationWhereInput[]
   guild_id?: Prisma.StringFilter<"Reinitialization"> | string
   admin_id?: Prisma.StringFilter<"Reinitialization"> | string
+  point_euro_value?: Prisma.FloatFilter<"Reinitialization"> | number
   created_at?: Prisma.DateTimeFilter<"Reinitialization"> | Date | string
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
   admin?: Prisma.XOR<Prisma.AdminScalarRelationFilter, Prisma.AdminWhereInput>
@@ -203,10 +247,13 @@ export type ReinitializationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
+  point_euro_value?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.ReinitializationCountOrderByAggregateInput
+  _avg?: Prisma.ReinitializationAvgOrderByAggregateInput
   _max?: Prisma.ReinitializationMaxOrderByAggregateInput
   _min?: Prisma.ReinitializationMinOrderByAggregateInput
+  _sum?: Prisma.ReinitializationSumOrderByAggregateInput
 }
 
 export type ReinitializationScalarWhereWithAggregatesInput = {
@@ -216,11 +263,13 @@ export type ReinitializationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Reinitialization"> | string
   guild_id?: Prisma.StringWithAggregatesFilter<"Reinitialization"> | string
   admin_id?: Prisma.StringWithAggregatesFilter<"Reinitialization"> | string
+  point_euro_value?: Prisma.FloatWithAggregatesFilter<"Reinitialization"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Reinitialization"> | Date | string
 }
 
 export type ReinitializationCreateInput = {
   id?: string
+  point_euro_value: number
   created_at?: Date | string
   guild: Prisma.GuildCreateNestedOneWithoutReinitializationsInput
   admin: Prisma.AdminCreateNestedOneWithoutReinitializationsInput
@@ -230,11 +279,13 @@ export type ReinitializationUncheckedCreateInput = {
   id?: string
   guild_id: string
   admin_id: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
 export type ReinitializationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guild?: Prisma.GuildUpdateOneRequiredWithoutReinitializationsNestedInput
   admin?: Prisma.AdminUpdateOneRequiredWithoutReinitializationsNestedInput
@@ -244,6 +295,7 @@ export type ReinitializationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -251,11 +303,13 @@ export type ReinitializationCreateManyInput = {
   id?: string
   guild_id: string
   admin_id: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
 export type ReinitializationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -263,6 +317,7 @@ export type ReinitializationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -280,13 +335,19 @@ export type ReinitializationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
+  point_euro_value?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+}
+
+export type ReinitializationAvgOrderByAggregateInput = {
+  point_euro_value?: Prisma.SortOrder
 }
 
 export type ReinitializationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
+  point_euro_value?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -294,7 +355,12 @@ export type ReinitializationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
+  point_euro_value?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+}
+
+export type ReinitializationSumOrderByAggregateInput = {
+  point_euro_value?: Prisma.SortOrder
 }
 
 export type ReinitializationCreateNestedManyWithoutGuildInput = {
@@ -383,6 +449,7 @@ export type ReinitializationUncheckedUpdateManyWithoutAdminNestedInput = {
 
 export type ReinitializationCreateWithoutGuildInput = {
   id?: string
+  point_euro_value: number
   created_at?: Date | string
   admin: Prisma.AdminCreateNestedOneWithoutReinitializationsInput
 }
@@ -390,6 +457,7 @@ export type ReinitializationCreateWithoutGuildInput = {
 export type ReinitializationUncheckedCreateWithoutGuildInput = {
   id?: string
   admin_id: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
@@ -426,17 +494,20 @@ export type ReinitializationScalarWhereInput = {
   id?: Prisma.StringFilter<"Reinitialization"> | string
   guild_id?: Prisma.StringFilter<"Reinitialization"> | string
   admin_id?: Prisma.StringFilter<"Reinitialization"> | string
+  point_euro_value?: Prisma.FloatFilter<"Reinitialization"> | number
   created_at?: Prisma.DateTimeFilter<"Reinitialization"> | Date | string
 }
 
 export type ReinitializationCreateWithoutAdminInput = {
   id?: string
+  point_euro_value: number
   created_at?: Date | string
   guild: Prisma.GuildCreateNestedOneWithoutReinitializationsInput
 }
 
 export type ReinitializationUncheckedCreateWithoutAdminInput = {
   id?: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
@@ -469,11 +540,13 @@ export type ReinitializationUpdateManyWithWhereWithoutAdminInput = {
 export type ReinitializationCreateManyGuildInput = {
   id?: string
   admin_id: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
 export type ReinitializationUpdateWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   admin?: Prisma.AdminUpdateOneRequiredWithoutReinitializationsNestedInput
 }
@@ -481,33 +554,39 @@ export type ReinitializationUpdateWithoutGuildInput = {
 export type ReinitializationUncheckedUpdateWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReinitializationUncheckedUpdateManyWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReinitializationCreateManyAdminInput = {
   id?: string
+  point_euro_value: number
   created_at?: Date | string
 }
 
 export type ReinitializationUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guild?: Prisma.GuildUpdateOneRequiredWithoutReinitializationsNestedInput
 }
 
 export type ReinitializationUncheckedUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReinitializationUncheckedUpdateManyWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  point_euro_value?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -517,6 +596,7 @@ export type ReinitializationSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   guild_id?: boolean
   admin_id?: boolean
+  point_euro_value?: boolean
   created_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
@@ -526,6 +606,7 @@ export type ReinitializationSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   guild_id?: boolean
   admin_id?: boolean
+  point_euro_value?: boolean
   created_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
@@ -535,6 +616,7 @@ export type ReinitializationSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   guild_id?: boolean
   admin_id?: boolean
+  point_euro_value?: boolean
   created_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
@@ -544,10 +626,11 @@ export type ReinitializationSelectScalar = {
   id?: boolean
   guild_id?: boolean
   admin_id?: boolean
+  point_euro_value?: boolean
   created_at?: boolean
 }
 
-export type ReinitializationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "admin_id" | "created_at", ExtArgs["result"]["reinitialization"]>
+export type ReinitializationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "admin_id" | "point_euro_value" | "created_at", ExtArgs["result"]["reinitialization"]>
 export type ReinitializationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
@@ -571,6 +654,7 @@ export type $ReinitializationPayload<ExtArgs extends runtime.Types.Extensions.In
     id: string
     guild_id: string
     admin_id: string
+    point_euro_value: number
     created_at: Date
   }, ExtArgs["result"]["reinitialization"]>
   composites: {}
@@ -1000,6 +1084,7 @@ export interface ReinitializationFieldRefs {
   readonly id: Prisma.FieldRef<"Reinitialization", 'String'>
   readonly guild_id: Prisma.FieldRef<"Reinitialization", 'String'>
   readonly admin_id: Prisma.FieldRef<"Reinitialization", 'String'>
+  readonly point_euro_value: Prisma.FieldRef<"Reinitialization", 'Float'>
   readonly created_at: Prisma.FieldRef<"Reinitialization", 'DateTime'>
 }
     

@@ -9,7 +9,7 @@ import { Guild } from '@/prisma/generated/prisma/client';
  */
 export async function getGuildByName(guildName: string): Promise<Guild> {
     try {
-        const guild = await prisma.guild.findFirst({
+        const guild = await prisma.guild.findUnique({
             where: { name: guildName }
         });
         if (!guild) {

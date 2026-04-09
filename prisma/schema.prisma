@@ -61,15 +61,15 @@ model Session {
 
 model Guild {
   id                     String   @id @default(uuid())
-  name                   String
+  name                   String   @unique
   latitude               Float?
   longitude              Float?
   city                   String
   department             String
-  point_euro_value       Float
-  human_hour_point_value Float
+  human_hour_point_value Float    @default(1)
   max_declaration_delay  Int      @default(7)
-  max_validation_delay   Int      @default(2)
+  max_validation_delay   Int      @default(0)
+  max_contestation_delay Int      @default(7)
   created_at             DateTime @default(now())
   updated_at             DateTime @updatedAt
 
@@ -150,10 +150,11 @@ model Employee {
 }
 
 model Reinitialization {
-  id         String   @id @default(uuid())
-  guild_id   String
-  admin_id   String
-  created_at DateTime @default(now())
+  id               String   @id @default(uuid())
+  guild_id         String
+  admin_id         String
+  point_euro_value Float
+  created_at       DateTime @default(now())
 
   guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
   admin Admin @relation(fields: [admin_id, guild_id], references: [id, guild_id], onDelete: Cascade)

@@ -1544,10 +1544,10 @@ export const GuildScalarFieldEnum = {
   longitude: 'longitude',
   city: 'city',
   department: 'department',
-  point_euro_value: 'point_euro_value',
   human_hour_point_value: 'human_hour_point_value',
   max_declaration_delay: 'max_declaration_delay',
   max_validation_delay: 'max_validation_delay',
+  max_contestation_delay: 'max_contestation_delay',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -1596,6 +1596,7 @@ export const ReinitializationScalarFieldEnum = {
   id: 'id',
   guild_id: 'guild_id',
   admin_id: 'admin_id',
+  point_euro_value: 'point_euro_value',
   created_at: 'created_at'
 } as const
 

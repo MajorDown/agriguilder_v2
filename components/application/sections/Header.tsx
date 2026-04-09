@@ -35,6 +35,5 @@ export default function Header() {
             <p>votre rôle : <RoleSelect roles={dataForRoleSelect} /></p>
         </div>}
         {user?.id? <LogoutBtn /> : <LoginBtn />}
-        <LogoutBtn />
     </header>);
 }
