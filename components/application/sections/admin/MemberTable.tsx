@@ -131,6 +131,7 @@ export default function MembersTable(props: MembersTableProps) {
                     member={member}
                     guildName={props.guildName}
                     viewMode="admin"
+                    onMemberDeleted={refreshMembers}
                 />
             ))}
         </section>

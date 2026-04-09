@@ -4,11 +4,13 @@ import styles from "@/styles/components/application/sections/membersTable.module
 import useModal from "@/contexts/modalContext/useModal";
 import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import { PublicMember } from "@/modules/member/member.types";
+import DeleteMemberModal from "@/components/application/sections/admin/DeleteMemberModal";
 
 export type MemberLineProps = {
     member: PublicMember;
     guildName: string;
     viewMode: "admin" | "member";
+    onMemberDeleted?: () => void | Promise<void>;
 };
 
 /**
@@ -17,7 +19,21 @@ export type MemberLineProps = {
 export default function MemberLine(props: MemberLineProps) {
     const { openModal, closeModal } = useModal();
 
-    const handleDeleteClick = () => {};
+    const handleDeleteClick = () => {
+        const memberName =
+            props.member.society ||
+            `${props.member.firstname} ${props.member.lastname}`;
+        openModal({
+            title: "Supprimer le membre",
+            content: <DeleteMemberModal 
+                memberId={props.member.id}
+                memberFirstName={props.member.firstname}
+                guildName={props.guildName}
+                onDeleted={props.onMemberDeleted} 
+            />,
+        });
+    };
+
 
     return (<div className={styles.memberLine}>
         <div className={styles.identity}>

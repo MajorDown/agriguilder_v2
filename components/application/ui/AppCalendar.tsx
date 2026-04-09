@@ -31,7 +31,6 @@ export default function AppCalendar(props: AppCalendarProps) {
 
     const todayKey = useMemo(() => {
         const today = new Date();
-
         return buildDateKey(
             today.getFullYear(),
             today.getMonth(),
@@ -44,7 +43,6 @@ export default function AppCalendar(props: AppCalendarProps) {
             month: 'long',
             year: 'numeric',
         });
-
         return capitalize(
             formatter.format(new Date(currentYear, currentMonth, 1))
         );
@@ -52,7 +50,6 @@ export default function AppCalendar(props: AppCalendarProps) {
 
     const interventionDaysSet = useMemo(() => {
         const result = new Set<string>();
-
         for (const intervention of props.interventions) {
             const date = new Date(intervention.day);
 
@@ -61,24 +58,19 @@ export default function AppCalendar(props: AppCalendarProps) {
                 date.getMonth(),
                 date.getDate()
             );
-
             result.add(key);
         }
-
         return result;
     }, [props.interventions]);
 
     const cells = useMemo((): CalendarCell[] => {
         const result: CalendarCell[] = [];
-
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
         // JS : dimanche = 0, lundi = 1, ..., samedi = 6
         // On veut : lundi = 0, ..., dimanche = 6
         const jsDay = firstDayOfMonth.getDay();
         const firstDayIndex = jsDay === 0 ? 6 : jsDay - 1;
-
         for (let i = 0; i < firstDayIndex; i++) {
             result.push({
                 key: `empty-${currentYear}-${currentMonth}-${i}`,
@@ -87,10 +79,8 @@ export default function AppCalendar(props: AppCalendarProps) {
                 isToday: false,
             });
         }
-
         for (let day = 1; day <= daysInMonth; day++) {
             const key = buildDateKey(currentYear, currentMonth, day);
-
             result.push({
                 key,
                 dayNumber: day,
@@ -99,7 +89,6 @@ export default function AppCalendar(props: AppCalendarProps) {
                 isToday: key === todayKey,
             });
         }
-
         return result;
     }, [currentMonth, currentYear, interventionDaysSet, todayKey]);
 
@@ -109,7 +98,6 @@ export default function AppCalendar(props: AppCalendarProps) {
             setCurrentYear((prev) => prev - 1);
             return;
         }
-
         setCurrentMonth((prev) => prev - 1);
     }
 
@@ -119,7 +107,6 @@ export default function AppCalendar(props: AppCalendarProps) {
             setCurrentYear((prev) => prev + 1);
             return;
         }
-
         setCurrentMonth((prev) => prev + 1);
     }
 
@@ -134,9 +121,7 @@ export default function AppCalendar(props: AppCalendarProps) {
                 >
                     ←
                 </button>
-
                 <p className={styles.title}>{monthLabel}</p>
-
                 <button
                     type="button"
                     className={styles.navButton}
@@ -146,7 +131,6 @@ export default function AppCalendar(props: AppCalendarProps) {
                     →
                 </button>
             </div>
-
             <div className={styles.weekHeader}>
                 {WEEK_DAYS.map((weekDay) => (
                     <div key={weekDay} className={styles.weekDay}>
@@ -154,7 +138,6 @@ export default function AppCalendar(props: AppCalendarProps) {
                     </div>
                 ))}
             </div>
-
             <div className={styles.grid}>
                 {cells.map((cell) => {
                     if (cell.isEmpty) {
@@ -166,7 +149,6 @@ export default function AppCalendar(props: AppCalendarProps) {
                             />
                         );
                     }
-
                     const className = [
                         styles.cell,
                         cell.isToday ? styles.today : '',
@@ -174,7 +156,6 @@ export default function AppCalendar(props: AppCalendarProps) {
                     ]
                         .filter(Boolean)
                         .join(' ');
-
                     return (
                         <div
                             key={cell.key}
@@ -201,7 +182,6 @@ export default function AppCalendar(props: AppCalendarProps) {
 function buildDateKey(year: number, month: number, day: number): string {
     const safeMonth = String(month + 1).padStart(2, '0');
     const safeDay = String(day).padStart(2, '0');
-
     return `${year}-${safeMonth}-${safeDay}`;
 }
 
@@ -209,6 +189,5 @@ function capitalize(value: string): string {
     if (!value) {
         return value;
     }
-
     return value.charAt(0).toUpperCase() + value.slice(1);
 }

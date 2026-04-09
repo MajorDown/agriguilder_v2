@@ -30,7 +30,6 @@ export async function GET(request: NextRequest, context: RouteContext) {
         }
         TokenManager.verifyAccessToken(access_token);
         const members = await getMembersByGuild(guildName);
-        console.log("Membres récupérés :", members);
         return ResponseManager.success(members);
     } catch (error) {
         return ResponseManager.error(error);
