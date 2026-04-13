@@ -66,10 +66,10 @@ export default function NavBar() {
                 selected={pathname === "/soldes"} 
             />
             <NavLink 
-                href={"/reglement"} 
-                label={"Règlement"} 
+                href={"/guilde"} 
+                label={"Guilde"} 
                 image={"rules"} 
-                selected={pathname === "/reglement"} 
+                selected={pathname === "/guilde"} 
             />
         </>}
         <NavLink 

@@ -1,0 +1,73 @@
+#rulesList {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+}
+
+.line {
+    width: 80%;
+    background-color: var(--color-light);
+    padding: 0.5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5vw;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.line p {
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+.ruleLine {
+    width: 80%;
+    background-color: var(--color-light);
+    padding: 0.5vw;
+    display: flex;
+    gap: 1vw;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ruleLine p {
+    color: var(--color-dark);
+    flex: 1;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ruleLine button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.ruleLine textarea {
+    flex: 1;
+    height: 5vw;
+    padding: 0.5vw;
+    font-size: 1vw;
+    color: var(--color-dark);
+}
+
+#createRuleForm {
+    gap: 1vw;
+}
+
+#createRuleForm textarea {
+    width: 100%;
+    padding: 0.5vw;
+    font-size: 1vw;
+    color: var(--color-dark);
+}

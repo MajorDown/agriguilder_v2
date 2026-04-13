@@ -1,6 +1,5 @@
 'use client';
 import { PropsWithChildren, useEffect } from "react";
-import Image from "next/image";
 import styles from "@/styles/components/application/ui/appModal.module.css";
 import AppBtn from "./buttons/AppBtn";
 
