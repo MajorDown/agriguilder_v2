@@ -47,6 +47,7 @@ export async function getUserAppData(): Promise<UserAppData> {
             lastname: true,
             email: true,
             phone: true,
+            society: true,
         }
     });
 
@@ -107,6 +108,7 @@ export async function getUserAppData(): Promise<UserAppData> {
         id: user.id,
         firstname: user.firstname,
         lastname: user.lastname,
+        society: user.society || '',
         email: user.email,
         phone: user.phone,
         relations,

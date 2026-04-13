@@ -6,7 +6,7 @@ import useUserContext from "@/contexts/userContext/useUserContext";
 export default function DashboardPage() {
     const { selectedRole } = useUserContext();
 
-    return (<AppPage title="Tableau de bord" requiredRole={['membre', 'admin', 'employé']}>
+    return (<AppPage title="Tableau de bord" requiredRole={['admin', 'membre', 'employé']}>
         {selectedRole === 'admin' && <AdminDashboard />}
     </AppPage>);
 }

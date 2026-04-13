@@ -1,4 +1,5 @@
 'use client';
+
 import { PropsWithChildren, useEffect } from 'react';
 import NavBar from '../nav/NavBar';
 import styles from '@/styles/components/application/ui/appPage.module.css';
@@ -6,7 +7,7 @@ import useUserContext from '@/contexts/userContext/useUserContext';
 import { useRouter } from 'next/navigation';
 
 type Role = 'membre' | 'admin' | 'employé';
-type AccessRequirement = Role | 'visiteur';
+type AccessRequirement = Role | 'visiteur' | 'user';
 
 export type AppPageProps = PropsWithChildren<{
     title?: string;
@@ -17,16 +18,24 @@ export default function AppPage(props: AppPageProps) {
     const router = useRouter();
     const { user, isLoading } = useUserContext();
 
+    const isConnected = !!user?.id;
+
     const userRoles: Role[] =
         user?.relations?.map((relation) => relation.role as Role) || [];
 
     const isAuthorized = !props.requiredRole
         ? true
-        : props.requiredRole.includes('visiteur')
-            ? !user
-            : props.requiredRole.some((role) =>
-                  role !== 'visiteur' && userRoles.includes(role)
-            );
+        : props.requiredRole.some((required) => {
+              if (required === 'visiteur') {
+                  return !isConnected;
+              }
+
+              if (required === 'user') {
+                  return isConnected;
+              }
+
+              return userRoles.includes(required);
+          });
 
     useEffect(() => {
         if (!isLoading && !isAuthorized) {
@@ -46,21 +55,23 @@ export default function AppPage(props: AppPageProps) {
         );
     }
 
-    return (<>
-        {user?.id && <NavBar />}
-        <article className={styles.appPage}>
-            {isAuthorized ? (
-                <>
-                    {props.title && <h2>{props.title}</h2>}
-                    {props.children}
-                </>
-            ) : (
-                <div className={styles.notAuthorized}>
-                    <h2>Accès refusé</h2>
-                    <p>Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>
-                    <p>Redirection en cours...</p>
-                </div>
-            )}
-        </article>
-    </>);
+    return (
+        <>
+            {isConnected && <NavBar />}
+            <article className={styles.appPage}>
+                {isAuthorized ? (
+                    <>
+                        {props.title && <h2>{props.title}</h2>}
+                        {props.children}
+                    </>
+                ) : (
+                    <div className={styles.notAuthorized}>
+                        <h2>Accès refusé</h2>
+                        <p>Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>
+                        <p>Redirection en cours...</p>
+                    </div>
+                )}
+            </article>
+        </>
+    );
 }

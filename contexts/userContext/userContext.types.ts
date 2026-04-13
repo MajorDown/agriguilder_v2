@@ -11,6 +11,7 @@ export type UserAppData = {
         id: string;
         firstname: string;
         lastname: string;
+        society?: string;
         email: string;
         phone: string | null;
         relations: GuildRelation[];

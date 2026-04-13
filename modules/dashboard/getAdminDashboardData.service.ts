@@ -6,7 +6,10 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
     // récupérer l'id de la guilde à partir de son nom
     const guild = await prisma.guild.findFirst({
         where: { name: guildName },
-        select: { id: true },
+        select: { 
+            id: true,
+            created_at: true, 
+        },
     });
     if (!guild) {
         throw ErrorManager.create({
@@ -23,11 +26,15 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
     });
     // récupérer le nombre total de membres de la guilde
     const totalmembers = await prisma.member.count({
-        where: { guild_id: guildId },
+        where: { 
+            guild_id: guildId,
+            revoked_at: null, 
+        },
     });
     const membersCreatedThisMonth = await prisma.member.count({
         where: {
             guild_id: guildId,
+            revoked_at: null,
             created_at: {
                 gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
                 lt: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1),
@@ -36,7 +43,9 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
     });
     // récupérer le nombre d'interventions
     const interventions = await prisma.intervention.findMany({
-        where: { guild_id: guildId },
+        where: { 
+            guild_id: guildId, 
+        },
         select: { 
             guild_id: true,
             worker_id: true,
@@ -58,7 +67,9 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
         .length;
     // récupérer les contestation concernant la guilde
     const contestations = await prisma.contestation.findMany({
-        where: { guild_id: guildId },
+        where: { 
+            guild_id: guildId,
+        },
         select: {
             status: true,
             created_at: true
@@ -88,7 +99,7 @@ export async function getAdminDashboardData(guildName: string): Promise<AdminDas
     const toolsCreatedThisMonthCount = tools.filter(tool => 
         tool.created_at >= new Date(new Date().getFullYear(), new Date().getMonth(), 1)).length;
     return {
-        lastInit: lastReinitialization ? lastReinitialization.created_at.toISOString() : "",
+        lastInit: lastReinitialization ? lastReinitialization.created_at.toISOString() : guild.created_at.toISOString(),
         members: {
             total: totalmembers,
             actives: concernedMembers,
