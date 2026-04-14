@@ -40,3 +40,7 @@ export type CreateMemberInput = {
     society?: string;
 }
 
+export type VerifyMemberAuthInput = {
+    userId: string;
+    guildName: string;
+};
