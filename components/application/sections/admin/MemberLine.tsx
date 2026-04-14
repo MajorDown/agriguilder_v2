@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "@/styles/components/application/sections/membersTable.module.css";
 import useModal from "@/contexts/modalContext/useModal";
-import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import { PublicMember } from "@/modules/member/member.types";
 import DeleteMemberModal from "@/components/application/sections/admin/DeleteMemberModal";
 
@@ -45,7 +44,7 @@ export default function MemberLine(props: MemberLineProps) {
             <p>{props.member.email}</p>
             <p>{props.member.phone}</p>
         </div>
-        <p>{props.member.points_balance} points</p>
+        <p>{props.member.points_balance}⋈</p>
         <div className={styles.historic}>
             <p>membre depuis le</p>
             <p>{new Date(props.member.created_at).toLocaleDateString()}</p>

@@ -3,12 +3,12 @@ import MembersTable from "@/components/application/sections/admin/MemberTable";
 import AppPage from "@/components/application/ui/AppPage";
 import useUserContext from "@/contexts/userContext/useUserContext";
 
-export default function MembersPage() {
+export default function SoldesPage() {
     const { selectedGuild } = useUserContext();
 
     return (
-        <AppPage title="Les Membres de la guilde" requiredRole={["admin"]}>
-            <MembersTable guildName={selectedGuild ?? ""} isAdminView={true} />
+        <AppPage title="Consulter les soldes" requiredRole={["membre"]}>
+            <MembersTable guildName={selectedGuild ?? ""} isAdminView={false} />
         </AppPage>
     );
 }

@@ -7,9 +7,11 @@ import { useMemo, useState } from "react";
 import useModal from "@/contexts/modalContext/useModal";
 import CreateMemberForm from "../../forms/CreateMemberForm";
 import useMemberTable from "@/hooks/members/useMemberTable";
+import AppSpinner from "../../ui/AppSpinner";
 
 export type MembersTableProps = {
     guildName: string;
+    isAdminView?: boolean;
 };
 
 type MemberSortOption = "society" | "lastname" | "solde";
@@ -56,6 +58,7 @@ export default function MembersTable(props: MembersTableProps) {
         return (
             <section id={styles.memberTable}>
                 <p>Chargement des membres...</p>
+                <AppSpinner />
             </section>
         );
     }
@@ -112,7 +115,6 @@ export default function MembersTable(props: MembersTableProps) {
                         <option value="solde">Solde</option>
                     </select>
                 </label>
-
                 <AppBtn
                     onClick={handleOpenModal}
                     color="light"
@@ -130,7 +132,7 @@ export default function MembersTable(props: MembersTableProps) {
                     key={member.id}
                     member={member}
                     guildName={props.guildName}
-                    viewMode="admin"
+                    viewMode={props.isAdminView ? "admin" : "member"}
                     onMemberDeleted={refreshMembers}
                 />
             ))}

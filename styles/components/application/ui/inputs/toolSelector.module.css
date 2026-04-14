@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.toolsList {
+    max-width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.toolsList button {
+    border: none;
+    border-radius: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5vw;
+    gap: 0.5vw;
+    font-size: 1vw;
+    font-weight: 500;
+    color: var(--color-white);
+}
+
+.tool {
+    background-color: var(--color-dark);
+
+}
+
+.checkedTool {
+    background-color: var(--color-green);
+}

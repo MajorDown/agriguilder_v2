@@ -1,0 +1,7 @@
+#form {}
+
+#form p,
+#form label {
+    color: var(--color-dark);
+    font-weight: 700;
+}

@@ -3,6 +3,7 @@
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useAdminDashboard from "@/hooks/dashboard/useAdminDashboard";
 import styles from "@/styles/components/application/sections/adminDashboard.module.css";
+import AppSpinner from "../../ui/AppSpinner";
 
 export default function AdminDashboard() {
     const { selectedGuild } = useUserContext();
@@ -23,6 +24,7 @@ export default function AdminDashboard() {
                 <div className={styles.header}>
                     <h3>Vous administrez actuellement la guilde {selectedGuild ?? "non sélectionnée"}</h3>
                     <p>Chargement des données...</p>
+                    <AppSpinner />
                 </div>
             </section>
         );

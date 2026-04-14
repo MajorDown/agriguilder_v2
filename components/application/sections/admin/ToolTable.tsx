@@ -7,6 +7,7 @@ import { PublicTool } from "@/modules/tool/tool.types";
 import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import useModal from "@/contexts/modalContext/useModal";
 import CreateToolForm from '@/components/application/forms/CreateToolForm';
+import AppSpinner from "../../ui/AppSpinner";
 
 export type ToolTableProps = {
     guildName: string;
@@ -51,6 +52,7 @@ export default function ToolTable(props: ToolTableProps) {
     if (isLoading) {
         return (<section id={styles.toolTable}>
             <p>Chargement des outils...</p>
+            <AppSpinner />
         </section>);
     }
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import AppBtn from "../ui/buttons/AppBtn";
 import AppInput from "../ui/inputs/AppInput";
 import { useLoginForm } from "@/hooks/forms/useLoginForm";
+import styles from "@/styles/components/application/forms/loginForm.module.css";
 
 export default function LoginForm() {
     const {
@@ -16,7 +17,7 @@ export default function LoginForm() {
     } = useLoginForm();
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.loginForm}>
             <p>Veuillez renseigner vos identifiants</p>
             <AppInput
                 label="Email"

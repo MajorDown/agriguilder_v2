@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5vw;
+}
+
+.container label {
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+.container input {
+    width: 100%;
+    color: var(--color-dark)
+}

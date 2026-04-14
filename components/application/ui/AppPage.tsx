@@ -5,6 +5,7 @@ import NavBar from '../nav/NavBar';
 import styles from '@/styles/components/application/ui/appPage.module.css';
 import useUserContext from '@/contexts/userContext/useUserContext';
 import { useRouter } from 'next/navigation';
+import AppSpinner from './AppSpinner';
 
 type Role = 'membre' | 'admin' | 'employé';
 type AccessRequirement = Role | 'visiteur' | 'user';
@@ -51,6 +52,7 @@ export default function AppPage(props: AppPageProps) {
         return (
             <article className={styles.appPage}>
                 <p>Chargement...</p>
+                <AppSpinner />
             </article>
         );
     }

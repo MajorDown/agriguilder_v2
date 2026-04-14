@@ -1,6 +1,7 @@
 import AppBtn from "../ui/buttons/AppBtn";
 import AppInput from "../ui/inputs/AppInput";
 import useCreateMemberForm from "@/hooks/members/useCreateMemberForm";
+import styles from "@/styles/components/application/sections/membersTable.module.css";
 
 export type CreateMemberFormProps = {
     guildName: string;
@@ -24,12 +25,11 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
     });
 
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form id={styles.form} onSubmit={(e) => e.preventDefault()}>
             {step === "email" && (
                 <>
                     <p>Dans un premier temps, renseignez l’email du nouveau membre.</p>
                     <p>Celui-ci existe peut-être déjà dans notre base de données.</p>
-
                     <AppInput
                         type="email"
                         label="Son email :"
@@ -38,9 +38,7 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.email}
                         onChange={(value) => setField("email", value)}
                     />
-
                     {error && <p>{error}</p>}
-
                     <AppBtn
                         label={checkLoading ? "Vérification..." : "Vérifier l'email"}
                         color="dark"
@@ -52,7 +50,6 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
             {step === "details" && (
                 <>
                     <p>Renseignez les informations du membre.</p>
-
                     <AppInput
                         type="text"
                         label="Prénom :"
@@ -61,7 +58,6 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.firstname}
                         onChange={(value) => setField("firstname", value)}
                     />
-
                     <AppInput
                         type="text"
                         label="Nom :"
@@ -70,7 +66,6 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.lastname}
                         onChange={(value) => setField("lastname", value)}
                     />
-
                     <AppInput
                         type="text"
                         label="Téléphone :"
@@ -79,7 +74,6 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.phone}
                         onChange={(value) => setField("phone", value)}
                     />
-
                     <AppInput
                         type="text"
                         label="Société :"
@@ -88,19 +82,11 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.society}
                         onChange={(value) => setField("society", value)}
                     />
-
                     {error && <p>{error}</p>}
-
                     <AppBtn
                         label={createLoading ? "Création..." : "Créer le membre"}
                         color="dark"
                         onClick={submit}
-                    />
-
-                    <AppBtn
-                        label="Retour"
-                        color="light"
-                        onClick={goBackToEmailStep}
                     />
                 </>
             )}

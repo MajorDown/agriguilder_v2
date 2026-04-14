@@ -2,6 +2,7 @@
 import GuildInformations from "@/components/application/sections/admin/GuildInformations";
 import RuleTable from "@/components/application/sections/admin/RuleTable";
 import AppPage from "@/components/application/ui/AppPage";
+import AppSpinner from "@/components/application/ui/AppSpinner";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useGuildWithRules from "@/hooks/guild/useGuildWithRules";
 
@@ -13,7 +14,10 @@ export default function GuildPage() {
 
     return (
         <AppPage title="Gestion de la guilde" requiredRole={["admin"]}>
-            {isLoading && <p>Chargement de la guilde...</p>}
+            {isLoading && <>
+                <p>Chargement de la guilde...</p>
+                <AppSpinner />
+            </>}
             {errorMessage && <p>{errorMessage}</p>}
             {!isLoading && !errorMessage && guild && (
                 <>

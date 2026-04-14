@@ -44,6 +44,22 @@
     gap: 5vw;
 }
 
+#indexLine :nth-child(1) {
+    width: 20%;
+}
+
+#indexLine :nth-child(2) {
+    width: 30%;
+}
+
+#indexLine :nth-child(3) {
+    width: 5%;
+}
+
+#indexLine :nth-child(4) {
+    width: 20%;
+}
+
 .memberLine {
     background-color: var(--color-light);
     display: flex;
@@ -65,4 +81,28 @@
     font-size: 1.2vw;
     font-weight: 700;
     text-align: center;
+}
+
+.identity {
+    width: 20%;
+}
+
+.contact {
+    width: 30%;
+}
+
+.points_balance {
+    width: 10%;
+}
+
+.historic {
+    width: 20%;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
 }

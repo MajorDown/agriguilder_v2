@@ -23,8 +23,8 @@ export default function GuildInformations(props: GuildInformationsProps) {
                 <p>{props.guild.city}, {props.guild.department}</p>
             </div>
             <div className={styles.column}>
-                <p>Valeur en point de l'heure humaine :</p>
-                <p> {props.guild.human_hour_point_value}pts</p>
+                <p>Valeur en Guilders (⋈) de l'heure humaine :</p>
+                <p> {props.guild.human_hour_point_value}⋈</p>
             </div>
         </div>
         <div className={styles.line}>
