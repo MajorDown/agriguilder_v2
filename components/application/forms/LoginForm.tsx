@@ -33,7 +33,7 @@ export default function LoginForm() {
                 onChange={setPassword}
                 showTogglePassword
             />
-            {error && <p>{error}</p>}
+            {error && <p className={"error"}>{error}</p>}
             <AppBtn
                 label={isLoading ? "Connexion..." : "Se connecter"}
                 type="submit"

@@ -54,7 +54,7 @@ export default function UpdateUserEmailForm(props: UpdateUserEmailFormProps) {
                 onChange={(value) => setCurrentPassword(value)}
             />
             {errorMessage && (
-                <p className={styles.errorMessage}>{errorMessage}</p>
+                <p className={"error"}>{errorMessage}</p>
             )}
 
             <div className={styles.actions}>

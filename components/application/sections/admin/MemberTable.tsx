@@ -88,11 +88,11 @@ export default function MembersTable(props: MembersTableProps) {
                         </select>
                     </label>
 
-                    <AppBtn
+                    {props.isAdminView && (<AppBtn
                         onClick={handleOpenModal}
                         color="light"
                         label="Créer un nouveau membre"
-                    />
+                    />)}
                 </div>
 
                 <p>Aucun membre trouvé pour cette guilde.</p>
@@ -115,11 +115,11 @@ export default function MembersTable(props: MembersTableProps) {
                         <option value="solde">Solde</option>
                     </select>
                 </label>
-                <AppBtn
+                {props.isAdminView && (<AppBtn
                     onClick={handleOpenModal}
                     color="light"
                     label="Créer un nouveau membre"
-                />
+                />)}
             </div>
             <div id={styles.indexLine}>
                 <p>identité</p>

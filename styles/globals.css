@@ -8,7 +8,7 @@
     --color-form: #D3D4CC;
     --color-grey: #D3D4CC;
     --color-smokey: rgba(7, 12, 18, 0.734);
-    --color-ok: #8bc58b;
+    --color-ok: #006900;
     --color-error: #cd8383;
     --size-font: 1vw;
     --size-font-mobile: 3vw;
@@ -130,6 +130,7 @@ p {
 
 p.success {
     color: var(--color-ok);
+    font-weight: 700;
 }
 
 p.error {
@@ -145,22 +146,17 @@ li {
     list-style: none;
 }
 
-.scrollable {
-    height: 100%;
-    overflow-y: auto;
-}
-
-.scrollable::-webkit-scrollbar {
+body::-webkit-scrollbar {
     width: 12px;
 }
 
-.scrollable::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
     background: var(--color-dark);
     border: solid 1px var(--color-light);
-    border-radius: 6px;
+    /* border-radius: 6px; */
 }
 
-.scrollable::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     background-color: var(--color-light);
-    border-radius: 6px;
+    /* border-radius: 6px; */
 }

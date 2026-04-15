@@ -1,6 +1,7 @@
 import { CreateInterventionInput } from "../intervention.types";
 import ErrorManager from "@/managers/ErrorManager";
 import { getGuildByName } from "@/modules/guild/services/getGuildByName.service";
+import { updateMemberPointsBalance } from "@/modules/member/services/updateMemberPointsBalance.service";
 import { prisma } from "@/prisma/prisma";
 
 export async function createIntervention(input: CreateInterventionInput) {
@@ -27,6 +28,8 @@ export async function createIntervention(input: CreateInterventionInput) {
                 description: input.description,
             }
         });
+        await updateMemberPointsBalance(input.workerId);
+        await updateMemberPointsBalance(input.payerId);
         return newIntervention;
     } catch (error) {
         throw ErrorManager.throwOrCreate(error, {

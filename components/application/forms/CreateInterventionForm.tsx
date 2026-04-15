@@ -72,7 +72,7 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                     <textarea
                         name="description"
                         id="description"
-                        placeholder="semis de blé dans la parcelle nord"
+                        placeholder="ex : semis de blé dans la parcelle nord"
                         value={description}
                         onChange={(event) => setDescription(event.target.value)}
                         rows={4}
@@ -82,11 +82,11 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                 </div>
 
                 {successMessage && (
-                    <p className={styles.successMessage}>{successMessage}</p>
+                    <p className={"success"}>{successMessage}</p>
                 )}
 
                 {errorMessage && (
-                    <p className={styles.errorMessage}>{errorMessage}</p>
+                    <p className={"error"}>{errorMessage}</p>
                 )}
 
                 <AppBtn

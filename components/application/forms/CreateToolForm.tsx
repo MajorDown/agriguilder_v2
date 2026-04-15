@@ -42,8 +42,8 @@ export default function CreateToolForm(props: CreateToolFormProps) {
                 value={toolCoef}
                 onChange={handleToolCoefChange}
             />
-            {errorMessage && <p>{errorMessage}</p>}
-            {successMessage && <p>{successMessage}</p>}
+            {errorMessage && <p className={"error"}>{errorMessage}</p>}
+            {successMessage && <p className={"success"}>{successMessage}</p>}
             <AppBtn
                 label={isSubmitting ? "Création..." : "Créer l'outil"}
                 color="dark"

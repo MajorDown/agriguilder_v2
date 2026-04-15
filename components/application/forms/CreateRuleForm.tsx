@@ -46,7 +46,7 @@ export default function CreateRuleForm(props: CreateRuleFormProps) {
             />
 
             {errorMessage && (
-                <p className={styles.errorMessage}>{errorMessage}</p>
+                <p className={"error"}>{errorMessage}</p>
             )}
                 <AppBtn
                     type="submit"

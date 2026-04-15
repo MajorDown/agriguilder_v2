@@ -67,7 +67,7 @@ export default function UpdateUserInfosForm(props: UpdateUserInfosFormProps) {
                 />
             </div>
             {errorMessage && (
-                <p className={styles.errorMessage}>{errorMessage}</p>
+                <p className={"error"}>{errorMessage}</p>
             )}
             <div className={styles.actions}>
                 <AppBtn

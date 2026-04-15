@@ -82,7 +82,7 @@ export default function CreateMemberForm(props: CreateMemberFormProps) {
                         value={values.society}
                         onChange={(value) => setField("society", value)}
                     />
-                    {error && <p>{error}</p>}
+                    {error && <p className={"error"}>{error}</p>}
                     <AppBtn
                         label={createLoading ? "Création..." : "Créer le membre"}
                         color="dark"
