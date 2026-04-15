@@ -13,3 +13,7 @@
     align-items: flex-start;
     gap: 0.5vw;
 }
+
+#description textarea {
+    color: var(--color-dark);
+}

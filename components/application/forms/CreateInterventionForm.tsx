@@ -29,6 +29,7 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
         setDescription,
         isLoading,
         errorMessage,
+        successMessage,
         submit,
     } = useCreateIntervention({
         onSuccess: props.onCreated,
@@ -79,6 +80,10 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                         disabled={isLoading}
                     />
                 </div>
+
+                {successMessage && (
+                    <p className={styles.successMessage}>{successMessage}</p>
+                )}
 
                 {errorMessage && (
                     <p className={styles.errorMessage}>{errorMessage}</p>

@@ -1650,6 +1650,7 @@ export const InterventionScalarFieldEnum = {
   payer_id: 'payer_id',
   day: 'day',
   duration: 'duration',
+  description: 'description',
   status: 'status',
   created_at: 'created_at',
   updated_at: 'updated_at'

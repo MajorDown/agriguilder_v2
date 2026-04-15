@@ -229,15 +229,16 @@ enum InterventionStatus {
 }
 
 model Intervention {
-  id         String             @id @default(uuid())
-  guild_id   String
-  worker_id  String
-  payer_id   String
-  day        DateTime
-  duration   Float
-  status     InterventionStatus
-  created_at DateTime           @default(now())
-  updated_at DateTime           @updatedAt
+  id          String             @id @default(uuid())
+  guild_id    String
+  worker_id   String
+  payer_id    String
+  day         DateTime
+  duration    Float
+  description String?
+  status      InterventionStatus
+  created_at  DateTime           @default(now())
+  updated_at  DateTime           @updatedAt
 
   guild  Guild  @relation(fields: [guild_id], references: [id], onDelete: Cascade)
   worker Member @relation("WorkerInterventions", fields: [worker_id, guild_id], references: [id, guild_id], onDelete: Restrict)

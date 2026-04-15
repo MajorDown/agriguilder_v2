@@ -9,7 +9,7 @@ export type UseCreateInterventionFormParams = {
 export default function useCreateInterventionForm(
     params?: UseCreateInterventionFormParams
 ) {
-    const { user,selectedGuild } = useUserContext();
+    const { selectedGuild } = useUserContext();
 
     const [selectedMemberId, setSelectedMemberId] = useState<string>("");
     const [selectedDate, setSelectedDate] = useState<string>("");
@@ -19,14 +19,24 @@ export default function useCreateInterventionForm(
 
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-    const reset = () => {
+    const resetForm = () => {
         setSelectedMemberId("");
         setSelectedDate("");
         setSelectedDuration(0);
         setSelectedTools([]);
         setDescription("");
+    };
+
+    const resetMessages = () => {
         setErrorMessage(null);
+        setSuccessMessage(null);
+    };
+
+    const reset = () => {
+        resetForm();
+        resetMessages();
     };
 
     const submit = async (
@@ -35,7 +45,8 @@ export default function useCreateInterventionForm(
         event?.preventDefault();
 
         try {
-            setErrorMessage(null);
+            setIsLoading(true);
+            resetMessages();
 
             if (!selectedGuild) {
                 setErrorMessage("Aucune guilde sélectionnée.");
@@ -57,13 +68,10 @@ export default function useCreateInterventionForm(
                 return false;
             }
 
-            setIsLoading(true);
-
             await FetchManager.fetch("/api/intervention/create", {
                 method: "POST",
                 body: JSON.stringify({
                     guildName: selectedGuild,
-                    workerId: user?.id,
                     payerId: selectedMemberId,
                     day: selectedDate,
                     duration: selectedDuration,
@@ -72,11 +80,13 @@ export default function useCreateInterventionForm(
                 }),
             });
 
-            reset();
+            resetForm();
+            setSuccessMessage("L'intervention a bien été déclarée.");
             params?.onSuccess?.();
 
             return true;
         } catch (error) {
+            setSuccessMessage(null);
             setErrorMessage(
                 error instanceof Error
                     ? error.message
@@ -103,8 +113,11 @@ export default function useCreateInterventionForm(
 
         isLoading,
         errorMessage,
+        successMessage,
 
         submit,
         reset,
+        resetForm,
+        resetMessages,
     };
 }
