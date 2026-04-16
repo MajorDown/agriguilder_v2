@@ -44,13 +44,13 @@ export default function MemberLine(props: MemberLineProps) {
             <p>{props.member.email}</p>
             <p>{props.member.phone}</p>
         </div>
-        <p 
-            className={
-                props.member.points_balance >= 0 ? styles.pointsBalance : styles.pointsBalanceNegative
-            }
-        >
-            {props.member.points_balance.toFixed(2)}⋈
-        </p>
+        {props.member.points_balance < 0 ? 
+            <p className={styles.pointsBalanceNegative}>
+                {props.member.points_balance.toFixed(2)}⋈
+            </p> : <p className={styles.pointsBalance}>
+                {props.member.points_balance.toFixed(2)}⋈
+            </p>
+        }
         <div className={styles.historic}>
             <p>membre depuis le</p>
             <p>{new Date(props.member.created_at).toLocaleDateString()}</p>

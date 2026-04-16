@@ -1,0 +1,31 @@
+#tableHeader {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+    padding: 0.5vw;
+}
+
+.interventionLine {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+    padding: 0.5vw;
+    background-color: var(--color-light);
+}
+
+.interventionLine p {
+    text-align: center;
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+.interventionLine button {
+    background-color: transparent;
+    border: none;
+}

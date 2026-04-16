@@ -91,11 +91,11 @@
     width: 30%;
 }
 
-.pointsBalance {
+.memberLine .pointsBalance {
     width: 10%;
 }
 
-.pointsBalanceNegative {
+.memberLine .pointsBalanceNegative {
     width: 10%;
     color: var(--color-error);
 }
