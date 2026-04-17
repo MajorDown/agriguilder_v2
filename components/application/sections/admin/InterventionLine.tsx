@@ -13,8 +13,6 @@ export type InterventionLineProps = {
 
 export default function InterventionLine(props: InterventionLineProps) {
     const { openModal } = useModal();
-    console.log("payer email:", props.intervention.payer.email);
-    console.log("actual user email:", props.actualUserEmail);
 
     const calculateInterventionValue = (intervention: PublicIntervention): string => {
         return intervention.tools

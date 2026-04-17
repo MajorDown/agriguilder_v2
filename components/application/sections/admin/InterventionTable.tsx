@@ -1,128 +1,62 @@
+'use client';
+
 import InterventionLine from "@/components/application/sections/admin/InterventionLine";
-import { PublicIntervention } from "@/modules/intervention/intervention.types";
 import styles from "@/styles/components/application/sections/interventionTable.module.css";
 import useUserContext from "@/contexts/userContext/useUserContext";
-
-const interventionsList: PublicIntervention[] = [
-    {
-        id: '1111111111',
-        guild_id: '3333333333',
-        worker_id: '1111111111',
-        payer_id: '2222222222',
-        day: new Date(),
-        created_at: new Date(),
-        updated_at: new Date(),
-        duration: 5,
-        description: null,
-        status: 'VALIDEE',
-        guildName: 'Your Guild Name',
-        worker: {
-            id: '1111111111',
-            firstname: 'Jean',
-            lastname: 'Dupont',
-            email: 'jeandupont@mail.fr',
-            phone: '0600000000',
-            created_at: new Date(),
-            points_balance: 0,
-            society: 'GAEC Dupont'
-        },
-        payer: {
-            id: '3333333333',
-            firstname: 'Romain',
-            lastname: 'Fouillaron',
-            email: 'romain.fouillaron@gmx.fr',
-            phone: '0600000000',
-            created_at: new Date(),
-            points_balance: 0,
-            society: 'GAEC Fouillaron'
-        },
-        tools: [
-            {
-                id: '4444444444',
-                name: 'Tracteur',
-                coef: 1,
-                version: 1,
-                is_active: true,
-            },
-            {
-                id: '5555555555',
-                name: 'Charrue',
-                coef: 0.5,
-                version: 1,
-                is_active: true,
-            }
-        ]
-    },
-        {
-        id: '2222222222',
-        guild_id: '3333333333',
-        worker_id: '1111111111',
-        payer_id: '2222222222',
-        day: new Date(),
-        created_at: new Date(),
-        updated_at: new Date(),
-        duration: 5,
-        description: null,
-        status: 'VALIDEE',
-        guildName: 'Your Guild Name',
-        worker: {
-            id: '3333333333',
-            firstname: 'Romain',
-            lastname: 'Fouillaron',
-            email: 'romain.fouillaron@gmx.fr',
-            phone: '0600000000',
-            created_at: new Date(),
-            points_balance: 0,
-            society: 'GAEC Fouillaron'
-        },
-        payer: {
-            id: '2222222222',
-            firstname: 'Paul',
-            lastname: 'Durand',
-            email: 'pauldurand@mail.fr',
-            phone: '0600000001',
-            created_at: new Date(),
-            points_balance: 0,
-            society: 'EARL Durand'
-        },
-        tools: [
-            {
-                id: '4444444444',
-                name: 'Tracteur',
-                coef: 1,
-                version: 1,
-                is_active: true,
-            },
-            {
-                id: '5555555555',
-                name: 'Charrue',
-                coef: 0.5,
-                version: 1,
-                is_active: true,
-            }
-        ]
-    }
-
-]
+import useMemberInterventions from "@/hooks/interventions/useGetInterventionsByMember";
 
 export default function InterventionTable() {
-    const { user, selectedRole } = useUserContext();
+    const { user, selectedGuild, selectedRole } = useUserContext();
 
-    return (<section>
-        <div id={styles.tableHeader}>
-            <p>date d'intervention</p>
-            <p>date de déclaration</p>
-            <p>intervenant</p>
-            <p>bénéficiaire</p>
-            <p>valeure</p>
-            <p>statut</p>
-        </div>
-        {interventionsList.map((intervention) => (
-            <InterventionLine 
-                key={intervention.id} 
-                intervention={intervention} 
-                actualUserEmail={selectedRole === "membre" ? user?.email : undefined} 
-            />
-        ))}
-    </section>)
+    const {
+        interventions,
+        isLoading,
+        errorMessage,
+        refreshInterventions,
+    } = useMemberInterventions(selectedGuild ?? undefined);
+
+    if (isLoading) {
+        return (
+            <section>
+                <p>Chargement des interventions...</p>
+            </section>
+        );
+    }
+
+    if (errorMessage) {
+        return (
+            <section>
+                <p>{errorMessage}</p>
+            </section>
+        );
+    }
+
+    if (interventions.length === 0) {
+        return (
+            <section>
+                <p>Aucune intervention trouvée.</p>
+            </section>
+        );
+    }
+
+    return (
+        <section>
+            <div id={styles.tableHeader}>
+                <p>date d'intervention</p>
+                <p>date de déclaration</p>
+                <p>intervenant</p>
+                <p>bénéficiaire</p>
+                <p>valeure</p>
+                <p>statut</p>
+            </div>
+
+            {interventions.map((intervention) => (
+                <InterventionLine
+                    key={intervention.id}
+                    intervention={intervention}
+                    actualUserEmail={selectedRole === "membre" ? user?.email : undefined}
+                />
+            ))}
+        </section>
+    );
 }

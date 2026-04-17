@@ -1665,9 +1665,10 @@ export const ContestationScalarFieldEnum = {
   intervention_id: 'intervention_id',
   contester_id: 'contester_id',
   reason: 'reason',
+  resolved_by_admin_id: 'resolved_by_admin_id',
   status: 'status',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  resolved_at: 'resolved_at'
 } as const
 
 export type ContestationScalarFieldEnum = (typeof ContestationScalarFieldEnum)[keyof typeof ContestationScalarFieldEnum]

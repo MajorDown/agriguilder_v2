@@ -2,7 +2,7 @@ import { Intervention, Tool } from "@/prisma/generated/prisma/client";
 import { PublicMember } from "../member/member.types";
 import { PublicTool } from "../tool/tool.types";
 
-export type PublicIntervention = Omit<Intervention, "workerId" | "payerId" | "guildId"> & {
+export type PublicIntervention = Omit<Intervention, "worker_id" | "payer_id" | "guild_id"> & {
     worker: PublicMember;
     payer: PublicMember;
     guildName: string;

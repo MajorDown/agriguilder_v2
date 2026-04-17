@@ -196,6 +196,7 @@ export type AdminWhereInput = {
   reinitializations?: Prisma.ReinitializationListRelationFilter
   written_rules?: Prisma.RuleListRelationFilter
   written_tools?: Prisma.ToolListRelationFilter
+  resolved_contestations?: Prisma.ContestationListRelationFilter
 }
 
 export type AdminOrderByWithRelationInput = {
@@ -211,6 +212,7 @@ export type AdminOrderByWithRelationInput = {
   reinitializations?: Prisma.ReinitializationOrderByRelationAggregateInput
   written_rules?: Prisma.RuleOrderByRelationAggregateInput
   written_tools?: Prisma.ToolOrderByRelationAggregateInput
+  resolved_contestations?: Prisma.ContestationOrderByRelationAggregateInput
 }
 
 export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +233,7 @@ export type AdminWhereUniqueInput = Prisma.AtLeast<{
   reinitializations?: Prisma.ReinitializationListRelationFilter
   written_rules?: Prisma.RuleListRelationFilter
   written_tools?: Prisma.ToolListRelationFilter
+  resolved_contestations?: Prisma.ContestationListRelationFilter
 }, "id" | "guild_id_user_id" | "id_guild_id">
 
 export type AdminOrderByWithAggregationInput = {
@@ -268,6 +271,7 @@ export type AdminCreateInput = {
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateInput = {
@@ -281,6 +285,7 @@ export type AdminUncheckedCreateInput = {
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUpdateInput = {
@@ -294,6 +299,7 @@ export type AdminUpdateInput = {
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateInput = {
@@ -307,6 +313,7 @@ export type AdminUncheckedUpdateInput = {
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminCreateManyInput = {
@@ -384,6 +391,11 @@ export type AdminMinOrderByAggregateInput = {
 export type AdminScalarRelationFilter = {
   is?: Prisma.AdminWhereInput
   isNot?: Prisma.AdminWhereInput
+}
+
+export type AdminNullableScalarRelationFilter = {
+  is?: Prisma.AdminWhereInput | null
+  isNot?: Prisma.AdminWhereInput | null
 }
 
 export type AdminCreateNestedManyWithoutUserInput = {
@@ -526,6 +538,22 @@ export type AdminUpdateOneRequiredWithoutAdjustmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutAdjustmentsInput, Prisma.AdminUpdateWithoutAdjustmentsInput>, Prisma.AdminUncheckedUpdateWithoutAdjustmentsInput>
 }
 
+export type AdminCreateNestedOneWithoutResolved_contestationsInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutResolved_contestationsInput, Prisma.AdminUncheckedCreateWithoutResolved_contestationsInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutResolved_contestationsInput
+  connect?: Prisma.AdminWhereUniqueInput
+}
+
+export type AdminUpdateOneWithoutResolved_contestationsNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutResolved_contestationsInput, Prisma.AdminUncheckedCreateWithoutResolved_contestationsInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutResolved_contestationsInput
+  upsert?: Prisma.AdminUpsertWithoutResolved_contestationsInput
+  disconnect?: Prisma.AdminWhereInput | boolean
+  delete?: Prisma.AdminWhereInput | boolean
+  connect?: Prisma.AdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutResolved_contestationsInput, Prisma.AdminUpdateWithoutResolved_contestationsInput>, Prisma.AdminUncheckedUpdateWithoutResolved_contestationsInput>
+}
+
 export type AdminCreateWithoutUserInput = {
   id?: string
   created_at?: Date | string
@@ -536,6 +564,7 @@ export type AdminCreateWithoutUserInput = {
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutUserInput = {
@@ -548,6 +577,7 @@ export type AdminUncheckedCreateWithoutUserInput = {
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutUserInput = {
@@ -598,6 +628,7 @@ export type AdminCreateWithoutGuildInput = {
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutGuildInput = {
@@ -610,6 +641,7 @@ export type AdminUncheckedCreateWithoutGuildInput = {
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutGuildInput = {
@@ -648,6 +680,7 @@ export type AdminCreateWithoutReinitializationsInput = {
   adjustments?: Prisma.AdjustmentCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutReinitializationsInput = {
@@ -660,6 +693,7 @@ export type AdminUncheckedCreateWithoutReinitializationsInput = {
   adjustments?: Prisma.AdjustmentUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutReinitializationsInput = {
@@ -688,6 +722,7 @@ export type AdminUpdateWithoutReinitializationsInput = {
   adjustments?: Prisma.AdjustmentUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutReinitializationsInput = {
@@ -700,6 +735,7 @@ export type AdminUncheckedUpdateWithoutReinitializationsInput = {
   adjustments?: Prisma.AdjustmentUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminCreateWithoutWritten_rulesInput = {
@@ -712,6 +748,7 @@ export type AdminCreateWithoutWritten_rulesInput = {
   adjustments?: Prisma.AdjustmentCreateNestedManyWithoutAdminInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutWritten_rulesInput = {
@@ -724,6 +761,7 @@ export type AdminUncheckedCreateWithoutWritten_rulesInput = {
   adjustments?: Prisma.AdjustmentUncheckedCreateNestedManyWithoutAdminInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutWritten_rulesInput = {
@@ -752,6 +790,7 @@ export type AdminUpdateWithoutWritten_rulesInput = {
   adjustments?: Prisma.AdjustmentUpdateManyWithoutAdminNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutWritten_rulesInput = {
@@ -764,6 +803,7 @@ export type AdminUncheckedUpdateWithoutWritten_rulesInput = {
   adjustments?: Prisma.AdjustmentUncheckedUpdateManyWithoutAdminNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminCreateWithoutWritten_toolsInput = {
@@ -776,6 +816,7 @@ export type AdminCreateWithoutWritten_toolsInput = {
   adjustments?: Prisma.AdjustmentCreateNestedManyWithoutAdminInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutWritten_toolsInput = {
@@ -788,6 +829,7 @@ export type AdminUncheckedCreateWithoutWritten_toolsInput = {
   adjustments?: Prisma.AdjustmentUncheckedCreateNestedManyWithoutAdminInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutWritten_toolsInput = {
@@ -816,6 +858,7 @@ export type AdminUpdateWithoutWritten_toolsInput = {
   adjustments?: Prisma.AdjustmentUpdateManyWithoutAdminNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutWritten_toolsInput = {
@@ -828,6 +871,7 @@ export type AdminUncheckedUpdateWithoutWritten_toolsInput = {
   adjustments?: Prisma.AdjustmentUncheckedUpdateManyWithoutAdminNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminCreateWithoutAdjustmentsInput = {
@@ -840,6 +884,7 @@ export type AdminCreateWithoutAdjustmentsInput = {
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminUncheckedCreateWithoutAdjustmentsInput = {
@@ -852,6 +897,7 @@ export type AdminUncheckedCreateWithoutAdjustmentsInput = {
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
   written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
   written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+  resolved_contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutResolved_byInput
 }
 
 export type AdminCreateOrConnectWithoutAdjustmentsInput = {
@@ -880,6 +926,7 @@ export type AdminUpdateWithoutAdjustmentsInput = {
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutAdjustmentsInput = {
@@ -889,6 +936,75 @@ export type AdminUncheckedUpdateWithoutAdjustmentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
+  written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
+  written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
+}
+
+export type AdminCreateWithoutResolved_contestationsInput = {
+  id?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  revoked_at?: Date | string | null
+  guild: Prisma.GuildCreateNestedOneWithoutAdminsInput
+  user: Prisma.UserCreateNestedOneWithoutAdminshipsInput
+  adjustments?: Prisma.AdjustmentCreateNestedManyWithoutAdminInput
+  reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutAdminInput
+  written_rules?: Prisma.RuleCreateNestedManyWithoutAdminInput
+  written_tools?: Prisma.ToolCreateNestedManyWithoutAdminInput
+}
+
+export type AdminUncheckedCreateWithoutResolved_contestationsInput = {
+  id?: string
+  guild_id: string
+  user_id: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  revoked_at?: Date | string | null
+  adjustments?: Prisma.AdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutAdminInput
+  written_rules?: Prisma.RuleUncheckedCreateNestedManyWithoutAdminInput
+  written_tools?: Prisma.ToolUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type AdminCreateOrConnectWithoutResolved_contestationsInput = {
+  where: Prisma.AdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminCreateWithoutResolved_contestationsInput, Prisma.AdminUncheckedCreateWithoutResolved_contestationsInput>
+}
+
+export type AdminUpsertWithoutResolved_contestationsInput = {
+  update: Prisma.XOR<Prisma.AdminUpdateWithoutResolved_contestationsInput, Prisma.AdminUncheckedUpdateWithoutResolved_contestationsInput>
+  create: Prisma.XOR<Prisma.AdminCreateWithoutResolved_contestationsInput, Prisma.AdminUncheckedCreateWithoutResolved_contestationsInput>
+  where?: Prisma.AdminWhereInput
+}
+
+export type AdminUpdateToOneWithWhereWithoutResolved_contestationsInput = {
+  where?: Prisma.AdminWhereInput
+  data: Prisma.XOR<Prisma.AdminUpdateWithoutResolved_contestationsInput, Prisma.AdminUncheckedUpdateWithoutResolved_contestationsInput>
+}
+
+export type AdminUpdateWithoutResolved_contestationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  guild?: Prisma.GuildUpdateOneRequiredWithoutAdminsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutAdminshipsNestedInput
+  adjustments?: Prisma.AdjustmentUpdateManyWithoutAdminNestedInput
+  reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
+  written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
+  written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+}
+
+export type AdminUncheckedUpdateWithoutResolved_contestationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  guild_id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  adjustments?: Prisma.AdjustmentUncheckedUpdateManyWithoutAdminNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
@@ -912,6 +1028,7 @@ export type AdminUpdateWithoutUserInput = {
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutUserInput = {
@@ -924,6 +1041,7 @@ export type AdminUncheckedUpdateWithoutUserInput = {
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateManyWithoutUserInput = {
@@ -952,6 +1070,7 @@ export type AdminUpdateWithoutGuildInput = {
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutGuildInput = {
@@ -964,6 +1083,7 @@ export type AdminUncheckedUpdateWithoutGuildInput = {
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutAdminNestedInput
   written_rules?: Prisma.RuleUncheckedUpdateManyWithoutAdminNestedInput
   written_tools?: Prisma.ToolUncheckedUpdateManyWithoutAdminNestedInput
+  resolved_contestations?: Prisma.ContestationUncheckedUpdateManyWithoutResolved_byNestedInput
 }
 
 export type AdminUncheckedUpdateManyWithoutGuildInput = {
@@ -984,6 +1104,7 @@ export type AdminCountOutputType = {
   reinitializations: number
   written_rules: number
   written_tools: number
+  resolved_contestations: number
 }
 
 export type AdminCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -991,6 +1112,7 @@ export type AdminCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   reinitializations?: boolean | AdminCountOutputTypeCountReinitializationsArgs
   written_rules?: boolean | AdminCountOutputTypeCountWritten_rulesArgs
   written_tools?: boolean | AdminCountOutputTypeCountWritten_toolsArgs
+  resolved_contestations?: boolean | AdminCountOutputTypeCountResolved_contestationsArgs
 }
 
 /**
@@ -1031,6 +1153,13 @@ export type AdminCountOutputTypeCountWritten_toolsArgs<ExtArgs extends runtime.T
   where?: Prisma.ToolWhereInput
 }
 
+/**
+ * AdminCountOutputType without action
+ */
+export type AdminCountOutputTypeCountResolved_contestationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContestationWhereInput
+}
+
 
 export type AdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1045,6 +1174,7 @@ export type AdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reinitializations?: boolean | Prisma.Admin$reinitializationsArgs<ExtArgs>
   written_rules?: boolean | Prisma.Admin$written_rulesArgs<ExtArgs>
   written_tools?: boolean | Prisma.Admin$written_toolsArgs<ExtArgs>
+  resolved_contestations?: boolean | Prisma.Admin$resolved_contestationsArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["admin"]>
 
@@ -1087,6 +1217,7 @@ export type AdminInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   reinitializations?: boolean | Prisma.Admin$reinitializationsArgs<ExtArgs>
   written_rules?: boolean | Prisma.Admin$written_rulesArgs<ExtArgs>
   written_tools?: boolean | Prisma.Admin$written_toolsArgs<ExtArgs>
+  resolved_contestations?: boolean | Prisma.Admin$resolved_contestationsArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1107,6 +1238,7 @@ export type $AdminPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     reinitializations: Prisma.$ReinitializationPayload<ExtArgs>[]
     written_rules: Prisma.$RulePayload<ExtArgs>[]
     written_tools: Prisma.$ToolPayload<ExtArgs>[]
+    resolved_contestations: Prisma.$ContestationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1515,6 +1647,7 @@ export interface Prisma__AdminClient<T, Null = never, ExtArgs extends runtime.Ty
   reinitializations<T extends Prisma.Admin$reinitializationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$reinitializationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReinitializationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   written_rules<T extends Prisma.Admin$written_rulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$written_rulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   written_tools<T extends Prisma.Admin$written_toolsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$written_toolsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolved_contestations<T extends Prisma.Admin$resolved_contestationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$resolved_contestationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContestationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2044,6 +2177,30 @@ export type Admin$written_toolsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ToolScalarFieldEnum | Prisma.ToolScalarFieldEnum[]
+}
+
+/**
+ * Admin.resolved_contestations
+ */
+export type Admin$resolved_contestationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contestation
+   */
+  select?: Prisma.ContestationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contestation
+   */
+  omit?: Prisma.ContestationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContestationInclude<ExtArgs> | null
+  where?: Prisma.ContestationWhereInput
+  orderBy?: Prisma.ContestationOrderByWithRelationInput | Prisma.ContestationOrderByWithRelationInput[]
+  cursor?: Prisma.ContestationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContestationScalarFieldEnum | Prisma.ContestationScalarFieldEnum[]
 }
 
 /**

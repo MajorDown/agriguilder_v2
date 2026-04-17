@@ -121,10 +121,11 @@ model Admin {
   guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
   user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  adjustments       Adjustment[]
-  reinitializations Reinitialization[]
-  written_rules     Rule[]
-  written_tools     Tool[]
+  adjustments            Adjustment[]
+  reinitializations      Reinitialization[]
+  written_rules          Rule[]
+  written_tools          Tool[]
+  resolved_contestations Contestation[]
 
   @@unique([guild_id, user_id])
   @@unique([id, guild_id])
@@ -261,18 +262,20 @@ enum ContestationStatus {
 }
 
 model Contestation {
-  id              String             @id @default(uuid())
-  guild_id        String
-  intervention_id String
-  contester_id    String
-  reason          String
-  status          ContestationStatus
-  created_at      DateTime           @default(now())
-  updated_at      DateTime           @updatedAt
+  id                   String             @id @default(uuid())
+  guild_id             String
+  intervention_id      String
+  contester_id         String
+  reason               String
+  resolved_by_admin_id String?
+  status               ContestationStatus @default(EN_ATTENTE)
+  created_at           DateTime           @default(now())
+  resolved_at          DateTime?
 
   guild        Guild        @relation(fields: [guild_id], references: [id], onDelete: Cascade)
   intervention Intervention @relation(fields: [intervention_id], references: [id], onDelete: Cascade)
   contester    Member       @relation("MemberContestations", fields: [contester_id, guild_id], references: [id, guild_id], onDelete: Restrict)
+  resolved_by  Admin?       @relation(fields: [resolved_by_admin_id, guild_id], references: [id, guild_id], onDelete: Restrict)
 
   @@index([guild_id])
   @@index([intervention_id])

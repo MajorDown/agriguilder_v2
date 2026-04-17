@@ -30,9 +30,10 @@ export type ContestationMinAggregateOutputType = {
   intervention_id: string | null
   contester_id: string | null
   reason: string | null
+  resolved_by_admin_id: string | null
   status: $Enums.ContestationStatus | null
   created_at: Date | null
-  updated_at: Date | null
+  resolved_at: Date | null
 }
 
 export type ContestationMaxAggregateOutputType = {
@@ -41,9 +42,10 @@ export type ContestationMaxAggregateOutputType = {
   intervention_id: string | null
   contester_id: string | null
   reason: string | null
+  resolved_by_admin_id: string | null
   status: $Enums.ContestationStatus | null
   created_at: Date | null
-  updated_at: Date | null
+  resolved_at: Date | null
 }
 
 export type ContestationCountAggregateOutputType = {
@@ -52,9 +54,10 @@ export type ContestationCountAggregateOutputType = {
   intervention_id: number
   contester_id: number
   reason: number
+  resolved_by_admin_id: number
   status: number
   created_at: number
-  updated_at: number
+  resolved_at: number
   _all: number
 }
 
@@ -65,9 +68,10 @@ export type ContestationMinAggregateInputType = {
   intervention_id?: true
   contester_id?: true
   reason?: true
+  resolved_by_admin_id?: true
   status?: true
   created_at?: true
-  updated_at?: true
+  resolved_at?: true
 }
 
 export type ContestationMaxAggregateInputType = {
@@ -76,9 +80,10 @@ export type ContestationMaxAggregateInputType = {
   intervention_id?: true
   contester_id?: true
   reason?: true
+  resolved_by_admin_id?: true
   status?: true
   created_at?: true
-  updated_at?: true
+  resolved_at?: true
 }
 
 export type ContestationCountAggregateInputType = {
@@ -87,9 +92,10 @@ export type ContestationCountAggregateInputType = {
   intervention_id?: true
   contester_id?: true
   reason?: true
+  resolved_by_admin_id?: true
   status?: true
   created_at?: true
-  updated_at?: true
+  resolved_at?: true
   _all?: true
 }
 
@@ -171,9 +177,10 @@ export type ContestationGroupByOutputType = {
   intervention_id: string
   contester_id: string
   reason: string
+  resolved_by_admin_id: string | null
   status: $Enums.ContestationStatus
   created_at: Date
-  updated_at: Date
+  resolved_at: Date | null
   _count: ContestationCountAggregateOutputType | null
   _min: ContestationMinAggregateOutputType | null
   _max: ContestationMaxAggregateOutputType | null
@@ -203,12 +210,14 @@ export type ContestationWhereInput = {
   intervention_id?: Prisma.StringFilter<"Contestation"> | string
   contester_id?: Prisma.StringFilter<"Contestation"> | string
   reason?: Prisma.StringFilter<"Contestation"> | string
+  resolved_by_admin_id?: Prisma.StringNullableFilter<"Contestation"> | string | null
   status?: Prisma.EnumContestationStatusFilter<"Contestation"> | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
+  resolved_at?: Prisma.DateTimeNullableFilter<"Contestation"> | Date | string | null
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
   intervention?: Prisma.XOR<Prisma.InterventionScalarRelationFilter, Prisma.InterventionWhereInput>
   contester?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  resolved_by?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.AdminWhereInput> | null
 }
 
 export type ContestationOrderByWithRelationInput = {
@@ -217,12 +226,14 @@ export type ContestationOrderByWithRelationInput = {
   intervention_id?: Prisma.SortOrder
   contester_id?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  resolved_by_admin_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  resolved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   guild?: Prisma.GuildOrderByWithRelationInput
   intervention?: Prisma.InterventionOrderByWithRelationInput
   contester?: Prisma.MemberOrderByWithRelationInput
+  resolved_by?: Prisma.AdminOrderByWithRelationInput
 }
 
 export type ContestationWhereUniqueInput = Prisma.AtLeast<{
@@ -234,12 +245,14 @@ export type ContestationWhereUniqueInput = Prisma.AtLeast<{
   intervention_id?: Prisma.StringFilter<"Contestation"> | string
   contester_id?: Prisma.StringFilter<"Contestation"> | string
   reason?: Prisma.StringFilter<"Contestation"> | string
+  resolved_by_admin_id?: Prisma.StringNullableFilter<"Contestation"> | string | null
   status?: Prisma.EnumContestationStatusFilter<"Contestation"> | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
+  resolved_at?: Prisma.DateTimeNullableFilter<"Contestation"> | Date | string | null
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
   intervention?: Prisma.XOR<Prisma.InterventionScalarRelationFilter, Prisma.InterventionWhereInput>
   contester?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  resolved_by?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.AdminWhereInput> | null
 }, "id">
 
 export type ContestationOrderByWithAggregationInput = {
@@ -248,9 +261,10 @@ export type ContestationOrderByWithAggregationInput = {
   intervention_id?: Prisma.SortOrder
   contester_id?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  resolved_by_admin_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  resolved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ContestationCountOrderByAggregateInput
   _max?: Prisma.ContestationMaxOrderByAggregateInput
   _min?: Prisma.ContestationMinOrderByAggregateInput
@@ -265,20 +279,22 @@ export type ContestationScalarWhereWithAggregatesInput = {
   intervention_id?: Prisma.StringWithAggregatesFilter<"Contestation"> | string
   contester_id?: Prisma.StringWithAggregatesFilter<"Contestation"> | string
   reason?: Prisma.StringWithAggregatesFilter<"Contestation"> | string
+  resolved_by_admin_id?: Prisma.StringNullableWithAggregatesFilter<"Contestation"> | string | null
   status?: Prisma.EnumContestationStatusWithAggregatesFilter<"Contestation"> | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Contestation"> | Date | string
-  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Contestation"> | Date | string
+  resolved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Contestation"> | Date | string | null
 }
 
 export type ContestationCreateInput = {
   id?: string
   reason: string
-  status: $Enums.ContestationStatus
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
   guild: Prisma.GuildCreateNestedOneWithoutContestationsInput
   intervention: Prisma.InterventionCreateNestedOneWithoutContestationsInput
   contester: Prisma.MemberCreateNestedOneWithoutContestationsInput
+  resolved_by?: Prisma.AdminCreateNestedOneWithoutResolved_contestationsInput
 }
 
 export type ContestationUncheckedCreateInput = {
@@ -287,9 +303,10 @@ export type ContestationUncheckedCreateInput = {
   intervention_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationUpdateInput = {
@@ -297,10 +314,11 @@ export type ContestationUpdateInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   guild?: Prisma.GuildUpdateOneRequiredWithoutContestationsNestedInput
   intervention?: Prisma.InterventionUpdateOneRequiredWithoutContestationsNestedInput
   contester?: Prisma.MemberUpdateOneRequiredWithoutContestationsNestedInput
+  resolved_by?: Prisma.AdminUpdateOneWithoutResolved_contestationsNestedInput
 }
 
 export type ContestationUncheckedUpdateInput = {
@@ -309,9 +327,10 @@ export type ContestationUncheckedUpdateInput = {
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationCreateManyInput = {
@@ -320,9 +339,10 @@ export type ContestationCreateManyInput = {
   intervention_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationUpdateManyMutationInput = {
@@ -330,7 +350,7 @@ export type ContestationUpdateManyMutationInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationUncheckedUpdateManyInput = {
@@ -339,9 +359,10 @@ export type ContestationUncheckedUpdateManyInput = {
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationListRelationFilter = {
@@ -360,9 +381,10 @@ export type ContestationCountOrderByAggregateInput = {
   intervention_id?: Prisma.SortOrder
   contester_id?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  resolved_by_admin_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  resolved_at?: Prisma.SortOrder
 }
 
 export type ContestationMaxOrderByAggregateInput = {
@@ -371,9 +393,10 @@ export type ContestationMaxOrderByAggregateInput = {
   intervention_id?: Prisma.SortOrder
   contester_id?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  resolved_by_admin_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  resolved_at?: Prisma.SortOrder
 }
 
 export type ContestationMinOrderByAggregateInput = {
@@ -382,9 +405,10 @@ export type ContestationMinOrderByAggregateInput = {
   intervention_id?: Prisma.SortOrder
   contester_id?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  resolved_by_admin_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  resolved_at?: Prisma.SortOrder
 }
 
 export type ContestationCreateNestedManyWithoutGuildInput = {
@@ -471,6 +495,48 @@ export type ContestationUncheckedUpdateManyWithoutContesterNestedInput = {
   deleteMany?: Prisma.ContestationScalarWhereInput | Prisma.ContestationScalarWhereInput[]
 }
 
+export type ContestationCreateNestedManyWithoutResolved_byInput = {
+  create?: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput> | Prisma.ContestationCreateWithoutResolved_byInput[] | Prisma.ContestationUncheckedCreateWithoutResolved_byInput[]
+  connectOrCreate?: Prisma.ContestationCreateOrConnectWithoutResolved_byInput | Prisma.ContestationCreateOrConnectWithoutResolved_byInput[]
+  createMany?: Prisma.ContestationCreateManyResolved_byInputEnvelope
+  connect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+}
+
+export type ContestationUncheckedCreateNestedManyWithoutResolved_byInput = {
+  create?: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput> | Prisma.ContestationCreateWithoutResolved_byInput[] | Prisma.ContestationUncheckedCreateWithoutResolved_byInput[]
+  connectOrCreate?: Prisma.ContestationCreateOrConnectWithoutResolved_byInput | Prisma.ContestationCreateOrConnectWithoutResolved_byInput[]
+  createMany?: Prisma.ContestationCreateManyResolved_byInputEnvelope
+  connect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+}
+
+export type ContestationUpdateManyWithoutResolved_byNestedInput = {
+  create?: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput> | Prisma.ContestationCreateWithoutResolved_byInput[] | Prisma.ContestationUncheckedCreateWithoutResolved_byInput[]
+  connectOrCreate?: Prisma.ContestationCreateOrConnectWithoutResolved_byInput | Prisma.ContestationCreateOrConnectWithoutResolved_byInput[]
+  upsert?: Prisma.ContestationUpsertWithWhereUniqueWithoutResolved_byInput | Prisma.ContestationUpsertWithWhereUniqueWithoutResolved_byInput[]
+  createMany?: Prisma.ContestationCreateManyResolved_byInputEnvelope
+  set?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  disconnect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  delete?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  connect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  update?: Prisma.ContestationUpdateWithWhereUniqueWithoutResolved_byInput | Prisma.ContestationUpdateWithWhereUniqueWithoutResolved_byInput[]
+  updateMany?: Prisma.ContestationUpdateManyWithWhereWithoutResolved_byInput | Prisma.ContestationUpdateManyWithWhereWithoutResolved_byInput[]
+  deleteMany?: Prisma.ContestationScalarWhereInput | Prisma.ContestationScalarWhereInput[]
+}
+
+export type ContestationUncheckedUpdateManyWithoutResolved_byNestedInput = {
+  create?: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput> | Prisma.ContestationCreateWithoutResolved_byInput[] | Prisma.ContestationUncheckedCreateWithoutResolved_byInput[]
+  connectOrCreate?: Prisma.ContestationCreateOrConnectWithoutResolved_byInput | Prisma.ContestationCreateOrConnectWithoutResolved_byInput[]
+  upsert?: Prisma.ContestationUpsertWithWhereUniqueWithoutResolved_byInput | Prisma.ContestationUpsertWithWhereUniqueWithoutResolved_byInput[]
+  createMany?: Prisma.ContestationCreateManyResolved_byInputEnvelope
+  set?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  disconnect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  delete?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  connect?: Prisma.ContestationWhereUniqueInput | Prisma.ContestationWhereUniqueInput[]
+  update?: Prisma.ContestationUpdateWithWhereUniqueWithoutResolved_byInput | Prisma.ContestationUpdateWithWhereUniqueWithoutResolved_byInput[]
+  updateMany?: Prisma.ContestationUpdateManyWithWhereWithoutResolved_byInput | Prisma.ContestationUpdateManyWithWhereWithoutResolved_byInput[]
+  deleteMany?: Prisma.ContestationScalarWhereInput | Prisma.ContestationScalarWhereInput[]
+}
+
 export type ContestationCreateNestedManyWithoutInterventionInput = {
   create?: Prisma.XOR<Prisma.ContestationCreateWithoutInterventionInput, Prisma.ContestationUncheckedCreateWithoutInterventionInput> | Prisma.ContestationCreateWithoutInterventionInput[] | Prisma.ContestationUncheckedCreateWithoutInterventionInput[]
   connectOrCreate?: Prisma.ContestationCreateOrConnectWithoutInterventionInput | Prisma.ContestationCreateOrConnectWithoutInterventionInput[]
@@ -520,11 +586,12 @@ export type EnumContestationStatusFieldUpdateOperationsInput = {
 export type ContestationCreateWithoutGuildInput = {
   id?: string
   reason: string
-  status: $Enums.ContestationStatus
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
   intervention: Prisma.InterventionCreateNestedOneWithoutContestationsInput
   contester: Prisma.MemberCreateNestedOneWithoutContestationsInput
+  resolved_by?: Prisma.AdminCreateNestedOneWithoutResolved_contestationsInput
 }
 
 export type ContestationUncheckedCreateWithoutGuildInput = {
@@ -532,9 +599,10 @@ export type ContestationUncheckedCreateWithoutGuildInput = {
   intervention_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationCreateOrConnectWithoutGuildInput = {
@@ -572,28 +640,31 @@ export type ContestationScalarWhereInput = {
   intervention_id?: Prisma.StringFilter<"Contestation"> | string
   contester_id?: Prisma.StringFilter<"Contestation"> | string
   reason?: Prisma.StringFilter<"Contestation"> | string
+  resolved_by_admin_id?: Prisma.StringNullableFilter<"Contestation"> | string | null
   status?: Prisma.EnumContestationStatusFilter<"Contestation"> | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Contestation"> | Date | string
+  resolved_at?: Prisma.DateTimeNullableFilter<"Contestation"> | Date | string | null
 }
 
 export type ContestationCreateWithoutContesterInput = {
   id?: string
   reason: string
-  status: $Enums.ContestationStatus
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
   guild: Prisma.GuildCreateNestedOneWithoutContestationsInput
   intervention: Prisma.InterventionCreateNestedOneWithoutContestationsInput
+  resolved_by?: Prisma.AdminCreateNestedOneWithoutResolved_contestationsInput
 }
 
 export type ContestationUncheckedCreateWithoutContesterInput = {
   id?: string
   intervention_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationCreateOrConnectWithoutContesterInput = {
@@ -622,14 +693,62 @@ export type ContestationUpdateManyWithWhereWithoutContesterInput = {
   data: Prisma.XOR<Prisma.ContestationUpdateManyMutationInput, Prisma.ContestationUncheckedUpdateManyWithoutContesterInput>
 }
 
+export type ContestationCreateWithoutResolved_byInput = {
+  id?: string
+  reason: string
+  status?: $Enums.ContestationStatus
+  created_at?: Date | string
+  resolved_at?: Date | string | null
+  guild: Prisma.GuildCreateNestedOneWithoutContestationsInput
+  intervention: Prisma.InterventionCreateNestedOneWithoutContestationsInput
+  contester: Prisma.MemberCreateNestedOneWithoutContestationsInput
+}
+
+export type ContestationUncheckedCreateWithoutResolved_byInput = {
+  id?: string
+  intervention_id: string
+  contester_id: string
+  reason: string
+  status?: $Enums.ContestationStatus
+  created_at?: Date | string
+  resolved_at?: Date | string | null
+}
+
+export type ContestationCreateOrConnectWithoutResolved_byInput = {
+  where: Prisma.ContestationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput>
+}
+
+export type ContestationCreateManyResolved_byInputEnvelope = {
+  data: Prisma.ContestationCreateManyResolved_byInput | Prisma.ContestationCreateManyResolved_byInput[]
+  skipDuplicates?: boolean
+}
+
+export type ContestationUpsertWithWhereUniqueWithoutResolved_byInput = {
+  where: Prisma.ContestationWhereUniqueInput
+  update: Prisma.XOR<Prisma.ContestationUpdateWithoutResolved_byInput, Prisma.ContestationUncheckedUpdateWithoutResolved_byInput>
+  create: Prisma.XOR<Prisma.ContestationCreateWithoutResolved_byInput, Prisma.ContestationUncheckedCreateWithoutResolved_byInput>
+}
+
+export type ContestationUpdateWithWhereUniqueWithoutResolved_byInput = {
+  where: Prisma.ContestationWhereUniqueInput
+  data: Prisma.XOR<Prisma.ContestationUpdateWithoutResolved_byInput, Prisma.ContestationUncheckedUpdateWithoutResolved_byInput>
+}
+
+export type ContestationUpdateManyWithWhereWithoutResolved_byInput = {
+  where: Prisma.ContestationScalarWhereInput
+  data: Prisma.XOR<Prisma.ContestationUpdateManyMutationInput, Prisma.ContestationUncheckedUpdateManyWithoutResolved_byInput>
+}
+
 export type ContestationCreateWithoutInterventionInput = {
   id?: string
   reason: string
-  status: $Enums.ContestationStatus
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
   guild: Prisma.GuildCreateNestedOneWithoutContestationsInput
   contester: Prisma.MemberCreateNestedOneWithoutContestationsInput
+  resolved_by?: Prisma.AdminCreateNestedOneWithoutResolved_contestationsInput
 }
 
 export type ContestationUncheckedCreateWithoutInterventionInput = {
@@ -637,9 +756,10 @@ export type ContestationUncheckedCreateWithoutInterventionInput = {
   guild_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationCreateOrConnectWithoutInterventionInput = {
@@ -673,9 +793,10 @@ export type ContestationCreateManyGuildInput = {
   intervention_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationUpdateWithoutGuildInput = {
@@ -683,9 +804,10 @@ export type ContestationUpdateWithoutGuildInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   intervention?: Prisma.InterventionUpdateOneRequiredWithoutContestationsNestedInput
   contester?: Prisma.MemberUpdateOneRequiredWithoutContestationsNestedInput
+  resolved_by?: Prisma.AdminUpdateOneWithoutResolved_contestationsNestedInput
 }
 
 export type ContestationUncheckedUpdateWithoutGuildInput = {
@@ -693,9 +815,10 @@ export type ContestationUncheckedUpdateWithoutGuildInput = {
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationUncheckedUpdateManyWithoutGuildInput = {
@@ -703,18 +826,20 @@ export type ContestationUncheckedUpdateManyWithoutGuildInput = {
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationCreateManyContesterInput = {
   id?: string
   intervention_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationUpdateWithoutContesterInput = {
@@ -722,27 +847,71 @@ export type ContestationUpdateWithoutContesterInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   guild?: Prisma.GuildUpdateOneRequiredWithoutContestationsNestedInput
   intervention?: Prisma.InterventionUpdateOneRequiredWithoutContestationsNestedInput
+  resolved_by?: Prisma.AdminUpdateOneWithoutResolved_contestationsNestedInput
 }
 
 export type ContestationUncheckedUpdateWithoutContesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationUncheckedUpdateManyWithoutContesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ContestationCreateManyResolved_byInput = {
+  id?: string
+  intervention_id: string
+  contester_id: string
+  reason: string
+  status?: $Enums.ContestationStatus
+  created_at?: Date | string
+  resolved_at?: Date | string | null
+}
+
+export type ContestationUpdateWithoutResolved_byInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  guild?: Prisma.GuildUpdateOneRequiredWithoutContestationsNestedInput
+  intervention?: Prisma.InterventionUpdateOneRequiredWithoutContestationsNestedInput
+  contester?: Prisma.MemberUpdateOneRequiredWithoutContestationsNestedInput
+}
+
+export type ContestationUncheckedUpdateWithoutResolved_byInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
+  contester_id?: Prisma.StringFieldUpdateOperationsInput | string
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ContestationUncheckedUpdateManyWithoutResolved_byInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  intervention_id?: Prisma.StringFieldUpdateOperationsInput | string
+  contester_id?: Prisma.StringFieldUpdateOperationsInput | string
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationCreateManyInterventionInput = {
@@ -750,9 +919,10 @@ export type ContestationCreateManyInterventionInput = {
   guild_id: string
   contester_id: string
   reason: string
-  status: $Enums.ContestationStatus
+  resolved_by_admin_id?: string | null
+  status?: $Enums.ContestationStatus
   created_at?: Date | string
-  updated_at?: Date | string
+  resolved_at?: Date | string | null
 }
 
 export type ContestationUpdateWithoutInterventionInput = {
@@ -760,9 +930,10 @@ export type ContestationUpdateWithoutInterventionInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   guild?: Prisma.GuildUpdateOneRequiredWithoutContestationsNestedInput
   contester?: Prisma.MemberUpdateOneRequiredWithoutContestationsNestedInput
+  resolved_by?: Prisma.AdminUpdateOneWithoutResolved_contestationsNestedInput
 }
 
 export type ContestationUncheckedUpdateWithoutInterventionInput = {
@@ -770,9 +941,10 @@ export type ContestationUncheckedUpdateWithoutInterventionInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ContestationUncheckedUpdateManyWithoutInterventionInput = {
@@ -780,9 +952,10 @@ export type ContestationUncheckedUpdateManyWithoutInterventionInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   contester_id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  resolved_by_admin_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumContestationStatusFieldUpdateOperationsInput | $Enums.ContestationStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -793,12 +966,14 @@ export type ContestationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   intervention_id?: boolean
   contester_id?: boolean
   reason?: boolean
+  resolved_by_admin_id?: boolean
   status?: boolean
   created_at?: boolean
-  updated_at?: boolean
+  resolved_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }, ExtArgs["result"]["contestation"]>
 
 export type ContestationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -807,12 +982,14 @@ export type ContestationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   intervention_id?: boolean
   contester_id?: boolean
   reason?: boolean
+  resolved_by_admin_id?: boolean
   status?: boolean
   created_at?: boolean
-  updated_at?: boolean
+  resolved_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }, ExtArgs["result"]["contestation"]>
 
 export type ContestationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -821,12 +998,14 @@ export type ContestationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   intervention_id?: boolean
   contester_id?: boolean
   reason?: boolean
+  resolved_by_admin_id?: boolean
   status?: boolean
   created_at?: boolean
-  updated_at?: boolean
+  resolved_at?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }, ExtArgs["result"]["contestation"]>
 
 export type ContestationSelectScalar = {
@@ -835,26 +1014,30 @@ export type ContestationSelectScalar = {
   intervention_id?: boolean
   contester_id?: boolean
   reason?: boolean
+  resolved_by_admin_id?: boolean
   status?: boolean
   created_at?: boolean
-  updated_at?: boolean
+  resolved_at?: boolean
 }
 
-export type ContestationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "intervention_id" | "contester_id" | "reason" | "status" | "created_at" | "updated_at", ExtArgs["result"]["contestation"]>
+export type ContestationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "intervention_id" | "contester_id" | "reason" | "resolved_by_admin_id" | "status" | "created_at" | "resolved_at", ExtArgs["result"]["contestation"]>
 export type ContestationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }
 export type ContestationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }
 export type ContestationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   intervention?: boolean | Prisma.InterventionDefaultArgs<ExtArgs>
   contester?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  resolved_by?: boolean | Prisma.Contestation$resolved_byArgs<ExtArgs>
 }
 
 export type $ContestationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -863,6 +1046,7 @@ export type $ContestationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     guild: Prisma.$GuildPayload<ExtArgs>
     intervention: Prisma.$InterventionPayload<ExtArgs>
     contester: Prisma.$MemberPayload<ExtArgs>
+    resolved_by: Prisma.$AdminPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -870,9 +1054,10 @@ export type $ContestationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     intervention_id: string
     contester_id: string
     reason: string
+    resolved_by_admin_id: string | null
     status: $Enums.ContestationStatus
     created_at: Date
-    updated_at: Date
+    resolved_at: Date | null
   }, ExtArgs["result"]["contestation"]>
   composites: {}
 }
@@ -1270,6 +1455,7 @@ export interface Prisma__ContestationClient<T, Null = never, ExtArgs extends run
   guild<T extends Prisma.GuildDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuildDefaultArgs<ExtArgs>>): Prisma.Prisma__GuildClient<runtime.Types.Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   intervention<T extends Prisma.InterventionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InterventionDefaultArgs<ExtArgs>>): Prisma.Prisma__InterventionClient<runtime.Types.Result.GetResult<Prisma.$InterventionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   contester<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  resolved_by<T extends Prisma.Contestation$resolved_byArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contestation$resolved_byArgs<ExtArgs>>): Prisma.Prisma__AdminClient<runtime.Types.Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1304,9 +1490,10 @@ export interface ContestationFieldRefs {
   readonly intervention_id: Prisma.FieldRef<"Contestation", 'String'>
   readonly contester_id: Prisma.FieldRef<"Contestation", 'String'>
   readonly reason: Prisma.FieldRef<"Contestation", 'String'>
+  readonly resolved_by_admin_id: Prisma.FieldRef<"Contestation", 'String'>
   readonly status: Prisma.FieldRef<"Contestation", 'ContestationStatus'>
   readonly created_at: Prisma.FieldRef<"Contestation", 'DateTime'>
-  readonly updated_at: Prisma.FieldRef<"Contestation", 'DateTime'>
+  readonly resolved_at: Prisma.FieldRef<"Contestation", 'DateTime'>
 }
     
 
@@ -1705,6 +1892,25 @@ export type ContestationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many Contestations to delete.
    */
   limit?: number
+}
+
+/**
+ * Contestation.resolved_by
+ */
+export type Contestation$resolved_byArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Admin
+   */
+  select?: Prisma.AdminSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Admin
+   */
+  omit?: Prisma.AdminOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminInclude<ExtArgs> | null
+  where?: Prisma.AdminWhereInput
 }
 
 /**
