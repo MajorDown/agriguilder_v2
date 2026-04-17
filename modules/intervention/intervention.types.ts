@@ -7,6 +7,7 @@ export type PublicIntervention = Omit<Intervention, "worker_id" | "payer_id" | "
     payer: PublicMember;
     guildName: string;
     tools: PublicTool[];
+    isContestable: boolean;
 }
 
 export type CreateInterventionInput = {

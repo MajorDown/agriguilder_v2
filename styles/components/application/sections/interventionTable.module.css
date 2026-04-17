@@ -106,7 +106,8 @@
 
 .dateSection,
 .membersSection,
-.toolsSection {
+.toolsSection,
+.descriptionSection {
     width: 100%;
     display: flex;
     flex-direction: column;

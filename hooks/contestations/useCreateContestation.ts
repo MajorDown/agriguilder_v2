@@ -36,7 +36,7 @@ export default function useCreateContestation(): UseCreateContestationResult {
             setErrorMessage("");
             setSuccessMessage("");
 
-            const response = await FetchManager.fetch("/api/contestation.create", {
+            const response = await FetchManager.fetch("/api/contestation/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,7 +44,6 @@ export default function useCreateContestation(): UseCreateContestationResult {
                 body: JSON.stringify({
                     interventionId: payload.interventionId,
                     guildName: payload.guildName,
-                    userId,
                     reason: payload.reason,
                 }),
             });

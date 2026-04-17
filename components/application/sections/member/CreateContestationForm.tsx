@@ -9,6 +9,7 @@ import styles from "@/styles/components/application/sections/interventionTable.m
 export type CreateContestationFormProps = {
     interventionId: string;
     guildName: string;
+    onCreate: () => void;
 };
 
 export default function CreateContestationForm(props: CreateContestationFormProps) {

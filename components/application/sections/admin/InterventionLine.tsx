@@ -9,6 +9,8 @@ import InterventionDetailsModal from "@/components/application/sections/member/I
 export type InterventionLineProps = {
     intervention: PublicIntervention;
     actualUserEmail?: string;
+    onCreateContestation: () => void;
+
 };
 
 export default function InterventionLine(props: InterventionLineProps) {
@@ -32,6 +34,7 @@ export default function InterventionLine(props: InterventionLineProps) {
             content: (
                 <InterventionDetailsModal
                     intervention={props.intervention}
+                    onCreate={props.onCreateContestation}
                 />
             ),
         });

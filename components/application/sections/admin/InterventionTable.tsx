@@ -55,6 +55,7 @@ export default function InterventionTable() {
                     key={intervention.id}
                     intervention={intervention}
                     actualUserEmail={selectedRole === "membre" ? user?.email : undefined}
+                    onCreateContestation={refreshInterventions}
                 />
             ))}
         </section>

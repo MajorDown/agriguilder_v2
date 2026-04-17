@@ -43,7 +43,6 @@ export default function useGetInterventionByMember(
                 },
             });
             const data: GetByMemberResponse = await response.json();
-            console.log(data)
 
             if (!response.ok || !data.success) {
                 setInterventions([]);

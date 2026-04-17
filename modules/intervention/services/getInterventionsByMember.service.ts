@@ -3,7 +3,7 @@ import ErrorManager from "@/managers/ErrorManager";
 import { PublicIntervention } from "../intervention.types";
 
 export async function getInterventionsByMember(memberId: string): Promise<PublicIntervention[]> {
-    try {
+    try { 
         const interventions = await prisma.intervention.findMany({
             where: {
                 OR: [
@@ -34,7 +34,11 @@ export async function getInterventionsByMember(memberId: string): Promise<Public
                 { created_at: "desc" },
             ],
         });
-
+        const guild = await prisma.guild.findFirst({
+            where: {
+                id: interventions[0]?.guild_id,
+            },
+        });
         const publicInterventions: PublicIntervention[] = interventions.map((intervention) => {
             return {
                 id: intervention.id,
@@ -48,6 +52,11 @@ export async function getInterventionsByMember(memberId: string): Promise<Public
                 created_at: intervention.created_at,
                 updated_at: intervention.updated_at,
                 guildName: intervention.guild.name,
+                // si la consultation date de plus longtemps que le délai 
+                // de contestation de la guilde, alors l'intervention n'est plus contestable
+                isContestable: guild?.max_contestation_delay ? 
+                    (new Date().getTime() - new Date(intervention.created_at).getTime()) 
+                    <= guild.max_contestation_delay * 24 * 60 * 60 * 1000 : true,
                 worker: {
                     id: intervention.worker.id,
                     points_balance: intervention.worker.points_balance,
