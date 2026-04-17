@@ -4,7 +4,6 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 1vw;
     padding: 0.5vw;
 }
 
@@ -14,7 +13,6 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 1vw;
     padding: 0.5vw;
     background-color: var(--color-light);
 }
@@ -23,9 +21,171 @@
     text-align: center;
     color: var(--color-dark);
     font-weight: 700;
+    text-align: center;
+}
+
+#tableHeader p {
+    text-align: center;
+}
+
+#tableHeader :nth-child(1) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(2) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(3) {
+    width: 20%;
+}
+
+#tableHeader :nth-child(4) {
+    width: 20%;
+}
+
+#tableHeader :nth-child(5) {
+    width: 5%;
+}
+
+#tableHeader :nth-child(6) {
+    width: 20%;
+}
+
+.dates {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dates p {
+    width: 50%;
+    text-align: center;
+}
+
+.worker,
+.payer {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.interventionLine .value {
+    width: 10%;
+    color: var(--color-dark)
+}
+
+.interventionLine .valueRed {
+    width: 10%;
+    color: var(--color-error);
+}
+
+.status {
+    width: 10%;
 }
 
 .interventionLine button {
     background-color: transparent;
     border: none;
+    flex: 1;
+    cursor: pointer;
+}
+
+.modalContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.dateSection,
+.membersSection,
+.toolsSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.line {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.durationSection,
+.valueSection,
+.statusSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.horizon {
+    height: 0;
+    border-bottom: 1px solid var(--color-dark);
+    flex: 1;
+}
+
+.toolsSection ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5vw;
+}
+
+.toolLine,
+.toolLineHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.toolLineHeader p {
+    width: 15%;
+    text-align: center;
+}
+
+.toolLineHeader :nth-child(1) {
+    text-align: left;
+}
+
+.toolLineHeader :nth-child(4) {
+    text-align: right;
+}
+
+.valueSection p {
+    font-weight: 700;
+}
+
+.contestSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
 }
