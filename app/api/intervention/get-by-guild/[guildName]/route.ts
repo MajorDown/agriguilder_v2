@@ -2,8 +2,8 @@ import { NextRequest } from "next/server";
 import RequestManager from "@/managers/RequestManager";
 import ResponseManager from "@/managers/ResponseManager";
 import TokenManager from "@/managers/TokenManager";
-import { verifyMemberAuth } from "@/modules/member/services/verifyMemberAuth.service";
-import { getInterventionsByMember } from "@/modules/intervention/services/getInterventionsByMember.service";
+import { getInterventionsByGuild } from "@/modules/intervention/services/getInterventionsByGuild.service";
+import { verifyAdminAuth } from "@/modules/admin/services/verifyAdminAuth.service";
 
 type RouteContext = {
     params: Promise<{
@@ -30,11 +30,11 @@ export async function GET(request: NextRequest, context: RouteContext) {
             });
         }
         const payload = TokenManager.verifyAccessToken(access_token);
-        const memberId = await verifyMemberAuth({
+        await verifyAdminAuth({
             userId: payload.accountId,
             guildName: guildName,
         });
-        const interventions = await getInterventionsByMember(memberId);
+        const interventions = await getInterventionsByGuild(guildName);
         return ResponseManager.success(interventions);
     } catch (error) {
         return ResponseManager.error(error);

@@ -11,6 +11,7 @@
 export type * from './models/EmailAuthCode'
 export type * from './models/User'
 export type * from './models/Session'
+export type * from './models/Dev'
 export type * from './models/Guild'
 export type * from './models/Member'
 export type * from './models/Admin'

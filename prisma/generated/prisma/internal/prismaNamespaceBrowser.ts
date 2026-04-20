@@ -54,6 +54,7 @@ export const ModelName = {
   EmailAuthCode: 'EmailAuthCode',
   User: 'User',
   Session: 'Session',
+  Dev: 'Dev',
   Guild: 'Guild',
   Member: 'Member',
   Admin: 'Admin',
@@ -126,6 +127,15 @@ export const SessionScalarFieldEnum = {
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const DevScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  created_at: 'created_at'
+} as const
+
+export type DevScalarFieldEnum = (typeof DevScalarFieldEnum)[keyof typeof DevScalarFieldEnum]
 
 
 export const GuildScalarFieldEnum = {

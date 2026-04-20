@@ -387,6 +387,7 @@ export const ModelName = {
   EmailAuthCode: 'EmailAuthCode',
   User: 'User',
   Session: 'Session',
+  Dev: 'Dev',
   Guild: 'Guild',
   Member: 'Member',
   Admin: 'Admin',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailAuthCode" | "user" | "session" | "guild" | "member" | "admin" | "employee" | "reinitialization" | "rule" | "tool" | "adjustment" | "intervention" | "contestation" | "request"
+    modelProps: "emailAuthCode" | "user" | "session" | "dev" | "guild" | "member" | "admin" | "employee" | "reinitialization" | "rule" | "tool" | "adjustment" | "intervention" | "contestation" | "request"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -636,6 +637,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SessionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Dev: {
+      payload: Prisma.$DevPayload<ExtArgs>
+      fields: Prisma.DevFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DevFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DevFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        findFirst: {
+          args: Prisma.DevFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DevFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        findMany: {
+          args: Prisma.DevFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>[]
+        }
+        create: {
+          args: Prisma.DevCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        createMany: {
+          args: Prisma.DevCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DevCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>[]
+        }
+        delete: {
+          args: Prisma.DevDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        update: {
+          args: Prisma.DevUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        deleteMany: {
+          args: Prisma.DevDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DevUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DevUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>[]
+        }
+        upsert: {
+          args: Prisma.DevUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevPayload>
+        }
+        aggregate: {
+          args: Prisma.DevAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDev>
+        }
+        groupBy: {
+          args: Prisma.DevGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DevCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevCountAggregateOutputType> | number
         }
       }
     }
@@ -1537,6 +1612,15 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
+export const DevScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  created_at: 'created_at'
+} as const
+
+export type DevScalarFieldEnum = (typeof DevScalarFieldEnum)[keyof typeof DevScalarFieldEnum]
+
+
 export const GuildScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1949,6 +2033,7 @@ export type GlobalOmitConfig = {
   emailAuthCode?: Prisma.EmailAuthCodeOmit
   user?: Prisma.UserOmit
   session?: Prisma.SessionOmit
+  dev?: Prisma.DevOmit
   guild?: Prisma.GuildOmit
   member?: Prisma.MemberOmit
   admin?: Prisma.AdminOmit

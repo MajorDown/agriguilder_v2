@@ -40,6 +40,7 @@ model User {
   memberships Member[]
   adminships  Admin[]
   employments Employee[]
+  dev         Dev?
 }
 
 model Session {
@@ -57,6 +58,13 @@ model Session {
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
+}
+
+model Dev {
+  id         String   @id @default(uuid())
+  user_id    String   @unique
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Guild {

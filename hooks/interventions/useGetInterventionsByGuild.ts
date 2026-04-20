@@ -1,0 +1,74 @@
+'use client';
+
+import { useCallback, useEffect, useState } from "react";
+import { PublicIntervention } from "@/modules/intervention/intervention.types";
+import FetchManager from "@/managers/FetchManager";
+
+export type UseGuildInterventionsResult = {
+    interventions: PublicIntervention[];
+    isLoading: boolean;
+    errorMessage: string;
+    refreshInterventions: () => Promise<void>;
+};
+
+type GetByGuildResponse = {
+    success: boolean;
+    data?: PublicIntervention[];
+    message?: string;
+};
+
+export default function useGetInterventionsByGuild(
+    guildName?: string
+): UseGuildInterventionsResult {
+    const [interventions, setInterventions] = useState<PublicIntervention[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+
+    const refreshInterventions = useCallback(async () => {
+        if (!guildName) {
+            setInterventions([]);
+            setErrorMessage("");
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            setErrorMessage("");
+
+            const response = await FetchManager.fetch(`/api/intervention/get-by-guild/${encodeURIComponent(guildName)}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data: GetByGuildResponse = await response.json();
+
+            if (!response.ok || !data.success) {
+                setInterventions([]);
+                setErrorMessage(
+                    data.message || "Impossible de récupérer les interventions de la guilde."
+                );
+                return;
+            }
+
+            setInterventions(data.data ?? []);
+        } catch (error) {
+            setInterventions([]);
+            setErrorMessage("Une erreur est survenue lors du chargement des interventions.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, [guildName]);
+
+    useEffect(() => {
+        refreshInterventions();
+    }, [refreshInterventions]);
+
+    return {
+        interventions,
+        isLoading,
+        errorMessage,
+        refreshInterventions,
+    };
+}
