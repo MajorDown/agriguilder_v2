@@ -122,8 +122,8 @@ export default function InterventionDetailsModal(props: InterventionDetailsModal
                 <div className={styles.horizon}></div>
                 <p>{intervention.status === "VALIDEE" ? "Validé" : "1 contestation en cours"}</p>
             </div>
-            {intervention.isContestable && intervention.status === "VALIDEE" && <p>vous constatez une erreur ?</p>}
-            {!wantToContest && intervention.isContestable && intervention.status === "VALIDEE" && <div className={styles.contestSection}>
+            {intervention.isContestable && intervention.status === "VALIDEE" && selectedRole === 'membre' &&<p>vous constatez une erreur ?</p>}
+            {!wantToContest && intervention.isContestable && intervention.status === "VALIDEE" && selectedRole === 'membre' && <div className={styles.contestSection}>
                 <Image src={"/images/icons/signal-dark-on-green.svg"} alt={"contester"} width={30} height={30} />
                 <AppBtn label={"Contester"} color={"dark"} onClick={() => setWantToContest(true)}/>
                 <Image src={"/images/icons/signal-dark-on-green.svg"} alt={"contester"} width={30} height={30} />

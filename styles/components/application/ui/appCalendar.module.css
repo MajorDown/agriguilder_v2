@@ -46,12 +46,27 @@
     gap: 0.5vw;
 }
 
-.cell {
+.cell,
+.clickableCell {
     position: relative;
-    min-width: 4vw;
-    min-height: 4vw;
+    min-width: 5vw;
+    aspect-ratio: 1 / 1;
     padding: 0.5vw;
     background-color: var(--color-light);
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    line-height: 1;
+    text-align: left;
+}
+
+.clickableCell {
     cursor: pointer;
 }
 

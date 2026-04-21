@@ -1,24 +1,23 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import styles from '@/styles/components/application/ui/appCalendar.module.css';
 import Image from 'next/image';
-
-export type CalendarIntervention = {
-    id: string;
-    day: Date | string;
-};
+import styles from '@/styles/components/application/ui/appCalendar.module.css';
+import useUserContext from '@/contexts/userContext/useUserContext';
+import useMemberInterventions from '@/hooks/interventions/useGetInterventionsByMember';
+import { PublicIntervention } from '@/modules/intervention/intervention.types';
+import useModal from '@/contexts/modalContext/useModal';
+import InterventionCalendarModal from '@/components/application/sections/admin/InterventionCalendarModal';
 
 export type AppCalendarProps = {
-    initialMonth: number; // 0 = janvier, 11 = décembre
+    initialMonth: number;
     initialYear: number;
-    interventions: CalendarIntervention[];
 };
 
 type CalendarCell = {
     key: string;
     dayNumber?: number;
-    hasIntervention: boolean;
+    interventions: PublicIntervention[];
     isEmpty: boolean;
     isToday: boolean;
 };
@@ -26,6 +25,15 @@ type CalendarCell = {
 const WEEK_DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
 export default function AppCalendar(props: AppCalendarProps) {
+    const { selectedGuild } = useUserContext();
+    const { openModal } = useModal();
+
+    const {
+        interventions,
+        isLoading,
+        errorMessage,
+    } = useMemberInterventions(selectedGuild ?? undefined);
+
     const [currentMonth, setCurrentMonth] = useState(props.initialMonth);
     const [currentYear, setCurrentYear] = useState(props.initialYear);
 
@@ -43,39 +51,42 @@ export default function AppCalendar(props: AppCalendarProps) {
             month: 'long',
             year: 'numeric',
         });
+
         return capitalize(
             formatter.format(new Date(currentYear, currentMonth, 1))
         );
     }, [currentMonth, currentYear]);
 
-    const interventionDaysSet = useMemo(() => {
-        const result = new Set<string>();
-        for (const intervention of props.interventions) {
-            const date = new Date(intervention.day);
+    const interventionsByDay = useMemo(() => {
+        const result = new Map<string, PublicIntervention[]>();
 
+        for (const intervention of interventions) {
+            const date = new Date(intervention.day);
             const key = buildDateKey(
                 date.getFullYear(),
                 date.getMonth(),
                 date.getDate()
             );
-            result.add(key);
+
+            const existing = result.get(key) ?? [];
+            existing.push(intervention);
+            result.set(key, existing);
         }
+
         return result;
-    }, [props.interventions]);
+    }, [interventions]);
 
     const cells = useMemo((): CalendarCell[] => {
         const result: CalendarCell[] = [];
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        // JS : dimanche = 0, lundi = 1, ..., samedi = 6
-        // On veut : lundi = 0, ..., dimanche = 6
         const jsDay = firstDayOfMonth.getDay();
         const firstDayIndex = jsDay === 0 ? 6 : jsDay - 1;
         for (let i = 0; i < firstDayIndex; i++) {
             result.push({
                 key: `empty-${currentYear}-${currentMonth}-${i}`,
                 isEmpty: true,
-                hasIntervention: false,
+                interventions: [],
                 isToday: false,
             });
         }
@@ -85,12 +96,13 @@ export default function AppCalendar(props: AppCalendarProps) {
                 key,
                 dayNumber: day,
                 isEmpty: false,
-                hasIntervention: interventionDaysSet.has(key),
+                interventions: interventionsByDay.get(key) ?? [],
                 isToday: key === todayKey,
             });
         }
+
         return result;
-    }, [currentMonth, currentYear, interventionDaysSet, todayKey]);
+    }, [currentMonth, currentYear, interventionsByDay, todayKey]);
 
     function handlePreviousMonth() {
         if (currentMonth === 0) {
@@ -108,6 +120,41 @@ export default function AppCalendar(props: AppCalendarProps) {
             return;
         }
         setCurrentMonth((prev) => prev + 1);
+    }
+
+    function handleOpenDayModal(dayNumber: number, dayInterventions: PublicIntervention[]) {
+        const date = new Date(currentYear, currentMonth, dayNumber);
+        const dateLabel = new Intl.DateTimeFormat('fr-FR', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+        }).format(date);
+        openModal({
+            title: `Interventions du ${dateLabel}`,
+            size: 'large',
+            content: (
+                <InterventionCalendarModal
+                    dateLabel={dateLabel}
+                    interventions={dayInterventions}
+                />
+            ),
+        });
+    }
+
+    if (isLoading) {
+        return (
+            <section className={styles.calendar}>
+                <p>Chargement des interventions...</p>
+            </section>
+        );
+    }
+
+    if (errorMessage) {
+        return (
+            <section className={styles.calendar}>
+                <p>{errorMessage}</p>
+            </section>
+        );
     }
 
     return (
@@ -131,6 +178,7 @@ export default function AppCalendar(props: AppCalendarProps) {
                     →
                 </button>
             </div>
+
             <div className={styles.weekHeader}>
                 {WEEK_DAYS.map((weekDay) => (
                     <div key={weekDay} className={styles.weekDay}>
@@ -138,6 +186,7 @@ export default function AppCalendar(props: AppCalendarProps) {
                     </div>
                 ))}
             </div>
+
             <div className={styles.grid}>
                 {cells.map((cell) => {
                     if (cell.isEmpty) {
@@ -149,29 +198,43 @@ export default function AppCalendar(props: AppCalendarProps) {
                             />
                         );
                     }
+
+                    const hasIntervention = cell.interventions.length > 0;
                     const className = [
                         styles.cell,
                         cell.isToday ? styles.today : '',
-                        cell.hasIntervention ? styles.withIntervention : '',
+                        hasIntervention ? styles.withIntervention : '',
+                        hasIntervention ? styles.clickableCell : '',
                     ]
                         .filter(Boolean)
                         .join(' ');
+
                     return (
-                        <div
+                        <button
                             key={cell.key}
+                            type="button"
                             className={className}
+                            onClick={() => {
+                                if (!cell.dayNumber || !hasIntervention) {
+                                    return;
+                                }
+                                handleOpenDayModal(cell.dayNumber, cell.interventions);
+                            }}
+                            disabled={!hasIntervention}
                         >
-                            {cell.hasIntervention && (<Image
+                            {hasIntervention && (
+                                <Image
                                     src="/images/icons/historique-dark-on-green.svg"
                                     alt=""
                                     width={32}
                                     height={32}
                                 />
-                            )}                            
+                            )}
+
                             <span className={styles.dayNumber}>
                                 {cell.dayNumber}
                             </span>
-                        </div>
+                        </button>
                     );
                 })}
             </div>
@@ -189,5 +252,6 @@ function capitalize(value: string): string {
     if (!value) {
         return value;
     }
+
     return value.charAt(0).toUpperCase() + value.slice(1);
 }
