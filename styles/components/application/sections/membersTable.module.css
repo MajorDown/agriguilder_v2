@@ -35,6 +35,14 @@
     text-align: center;
 }
 
+#memberTableHeader div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
 #indexLine {
     display: flex;
     flex-direction: row;
@@ -105,6 +113,14 @@
 }
 
 #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.adjustBalanceContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;

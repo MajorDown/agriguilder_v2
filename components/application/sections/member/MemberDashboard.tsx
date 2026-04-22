@@ -33,20 +33,23 @@ export default function MemberDashboard() {
             <div className={styles.card}>
                 <h4>Interventions qui vous concernent</h4>
                 <p>Total : {data?.interventions.total}</p>
-                <p>dont en tant que déclarant : {data?.interventions.asWorker}</p>
-                <p>effectuées ce mois-ci : {data?.interventions.thisMonth}</p>
+                <p>déclarées ce mois-ci : {data?.interventions.thisMonth}</p>
+                <p>déclaration de votre part : {data?.interventions.asWorker}</p>
+                <p>dont en attente d'une validation : {data?.interventions.pendingOtherValidation}</p>
+                <p>autre déclarations : {data?.interventions.asPayer}</p>
+                <p>en attente de votre validation : {data?.interventions.pendingMyValidation}</p>
             </div>
             <div className={styles.card}>
                 <h4>Outils utilisés</h4>
                 <p>Total : {data?.tools.total}</p>
-                <p>Ce mois-ci : {data?.tools.thisMonth}</p>
-                <p>Top 3 : {data?.tools.top3.first}, {data?.tools.top3.second}, {data?.tools.top3.third}</p>
+                <p>dont ce mois-ci : {data?.tools.thisMonth}</p>
+                <p>les plus utilisés :{data?.tools.top3.first}, {data?.tools.top3.second}, {data?.tools.top3.third}</p>
             </div>
             <div className={styles.card}>
                 <h4>Contestations</h4>
                 <p>Total : {data?.contestations.total}</p>
-                <p>Ce mois-ci : {data?.contestations.thisMonth}</p>
-                <p>De vous : {data?.contestations.fromMe}</p>
+                <p>dont ce mois-ci : {data?.contestations.thisMonth}</p>
+                <p>de votre part : {data?.contestations.fromMe}</p>
                 <p>En attente de traitement : {data?.contestations.pending}</p>
             </div>
         </section>

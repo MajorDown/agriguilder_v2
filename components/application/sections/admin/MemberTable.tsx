@@ -8,6 +8,7 @@ import useModal from "@/contexts/modalContext/useModal";
 import CreateMemberForm from "../../forms/CreateMemberForm";
 import useMemberTable from "@/hooks/members/useMemberTable";
 import AppSpinner from "../../ui/AppSpinner";
+import AdjustMemberBalanceForm from "../../forms/AdjustMemberBalanceForm";
 
 export type MembersTableProps = {
     guildName: string;
@@ -23,23 +24,19 @@ export default function MembersTable(props: MembersTableProps) {
 
     const sortedMembers = useMemo(() => {
         const membersCopy = [...members];
-
         if (sortBy === "society") {
             return membersCopy.sort((a, b) => (a.society ?? "").localeCompare(b.society ?? "", "fr"));
         }
-
         if (sortBy === "lastname") {
             return membersCopy.sort((a, b) => (a.lastname ?? "").localeCompare(b.lastname ?? "", "fr"));
         }
-
         if (sortBy === "solde") {
             return membersCopy.sort((a, b) => b.points_balance - a.points_balance);
         }
-
         return membersCopy;
     }, [members, sortBy]);
 
-    const handleOpenModal = () => {
+    const handleOpenCreateModal = () => {
         openModal({
             title: "Créer un nouveau membre",
             content: (
@@ -53,6 +50,21 @@ export default function MembersTable(props: MembersTableProps) {
             )
         });
     };
+
+    const handleOpenAdjustModal = () => {
+        openModal({
+            title: "Ajuster le solde d'un membre",
+            content: (
+                <AdjustMemberBalanceForm
+                    members={members}
+                    onSuccess={async () => {
+                        closeModal();
+                        await refreshMembers();
+                    }}
+                />
+            )
+        });
+    }
 
     if (isLoading) {
         return (
@@ -87,14 +99,17 @@ export default function MembersTable(props: MembersTableProps) {
                             <option value="solde">Solde</option>
                         </select>
                     </label>
-
                     {props.isAdminView && (<AppBtn
-                        onClick={handleOpenModal}
+                        onClick={handleOpenAdjustModal}
+                        color="light"
+                        label="Ajuster le solde d'un membre"
+                    />)}
+                    {props.isAdminView && (<AppBtn
+                        onClick={handleOpenCreateModal}
                         color="light"
                         label="Créer un nouveau membre"
                     />)}
                 </div>
-
                 <p>Aucun membre trouvé pour cette guilde.</p>
             </section>
         );
@@ -115,11 +130,18 @@ export default function MembersTable(props: MembersTableProps) {
                         <option value="solde">Solde</option>
                     </select>
                 </label>
-                {props.isAdminView && (<AppBtn
-                    onClick={handleOpenModal}
-                    color="light"
-                    label="Créer un nouveau membre"
-                />)}
+                <div>
+                    {props.isAdminView && (<AppBtn
+                        onClick={handleOpenAdjustModal}
+                        color="light"
+                        label="Ajuster le solde d'un membre"
+                    />)}
+                    {props.isAdminView && (<AppBtn
+                        onClick={handleOpenCreateModal}
+                        color="light"
+                        label="Créer un nouveau membre"
+                    />)}
+                </div>
             </div>
             <div id={styles.indexLine}>
                 <p>identité</p>
