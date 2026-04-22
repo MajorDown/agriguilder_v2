@@ -11,13 +11,13 @@ type UseMemberDashboardReturn = {
     refresh: () => Promise<void>;
 };
 
-export default function useMemberDashboard(memberId: string): UseMemberDashboardReturn {
+export default function useMemberDashboard(selectedGuild: string | null, userId: string | null): UseMemberDashboardReturn {
     const [data, setData] = useState<MemberDashboardData | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     const refresh = useCallback(async () => {
-        if (!member) {
+        if (!userId || !selectedGuild) {
             setData(null);
             setError(null);
             setIsLoading(false);
@@ -29,7 +29,7 @@ export default function useMemberDashboard(memberId: string): UseMemberDashboard
 
         try {
             const response = await FetchManager.fetch(
-                `/api/dashboard/member/`,
+                `/api/dashboard/member/${encodeURIComponent(selectedGuild)}`,
                 {
                     method: "GET",
                     cache: "no-store",
@@ -48,7 +48,7 @@ export default function useMemberDashboard(memberId: string): UseMemberDashboard
         } finally {
             setIsLoading(false);
         }
-    }, [selectedGuild]);
+    }, [selectedGuild, userId]);
 
     useEffect(() => {
         refresh();

@@ -1,0 +1,17 @@
+.card {
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 75%;
+    padding: 0.5vw;
+}
+
+.card h4 {
+    margin-bottom: 0.5vw;
+}
+
+.card * {
+    color: var(--color-dark);
+}

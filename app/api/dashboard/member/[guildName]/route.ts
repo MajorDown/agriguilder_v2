@@ -2,8 +2,9 @@ import { NextRequest } from "next/server";
 import RequestManager from "@/managers/RequestManager";
 import ResponseManager from "@/managers/ResponseManager";
 import TokenManager from "@/managers/TokenManager";
-import { getAdminDashboardData } from "@/modules/dashboard/getAdminDashboardData.service";
-import { verifyAdminAuth } from "@/modules/admin/services/verifyAdminAuth.service";
+import { getMemberDashboardData } from "@/modules/dashboard/getMemberDashboardData.service";
+import { verifyMemberAuth } from "@/modules/member/services/verifyMemberAuth.service";
+import LogManager from "@/managers/LogManager";
 
 type RouteContext = {
     params: Promise<{
@@ -30,11 +31,11 @@ export async function GET(request: NextRequest, context: RouteContext) {
             });
         }
         const payload = TokenManager.verifyAccessToken(access_token);
-        const adminId = await verifyAdminAuth({
+        const memberId = await verifyMemberAuth({
             userId: payload.accountId,
             guildName: guildName,
         });
-        const dashboardData = await getAdminDashboardData(guildName);
+        const dashboardData = await getMemberDashboardData(guildName, memberId);
         return ResponseManager.success({
             status: 200,
             code: "DASHBOARD_DATA_RETRIEVED",
@@ -42,6 +43,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
             data: dashboardData,
         });
     } catch (error) {
+        console.log(error)
         return ResponseManager.error(error);
     }
 }
