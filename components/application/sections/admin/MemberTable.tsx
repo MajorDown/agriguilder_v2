@@ -8,7 +8,7 @@ import useModal from "@/contexts/modalContext/useModal";
 import CreateMemberForm from "../../forms/CreateMemberForm";
 import useMemberTable from "@/hooks/members/useMemberTable";
 import AppSpinner from "../../ui/AppSpinner";
-import AdjustMemberBalanceForm from "../../forms/AdjustMemberBalanceForm";
+import CreateAdjustmentForm from "../../forms/CreateAdjustmentForm";
 
 export type MembersTableProps = {
     guildName: string;
@@ -55,7 +55,7 @@ export default function MembersTable(props: MembersTableProps) {
         openModal({
             title: "Ajuster le solde d'un membre",
             content: (
-                <AdjustMemberBalanceForm
+                <CreateAdjustmentForm
                     members={members}
                     onSuccess={async () => {
                         closeModal();
