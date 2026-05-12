@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
             {
                 name: dto.name,
                 coef: dto.coef,
+                unit: dto.unit,
                 guildName: dto.guildName,
                 adminId: adminId,
             }

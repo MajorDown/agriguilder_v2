@@ -24,6 +24,7 @@ export default function InterventionCalendarModal(props: InterventionCalendarMod
         <div>
             {interventions.map((intervention) => (
                 <InterventionDetailsModal 
+                    key={intervention.id}
                     intervention={intervention} 
                     onCreate={() => {}}
                 />

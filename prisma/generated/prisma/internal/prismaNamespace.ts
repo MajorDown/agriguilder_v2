@@ -1703,6 +1703,7 @@ export const ToolScalarFieldEnum = {
   guild_id: 'guild_id',
   admin_id: 'admin_id',
   name: 'name',
+  unit: 'unit',
   coef: 'coef',
   version: 'version',
   is_active: 'is_active',
@@ -1734,6 +1735,7 @@ export const InterventionScalarFieldEnum = {
   payer_id: 'payer_id',
   day: 'day',
   duration: 'duration',
+  surface: 'surface',
   description: 'description',
   status: 'status',
   created_at: 'created_at',
@@ -1870,6 +1872,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolUnit'
+ */
+export type EnumToolUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolUnit[]'
+ */
+export type ListEnumToolUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolUnit[]'>
     
 
 

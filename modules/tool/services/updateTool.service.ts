@@ -8,6 +8,7 @@ import ErrorManager from "@/managers/ErrorManager";
  * @returns {Promise<void>} - une promesse qui se résout lorsque le tool est mis à jour
  */
 export async function updateTool(input: UpdateToolInput): Promise<void> {
+    console.log('input :', input);
     try {
         await prisma.tool.update({
             where: {
@@ -17,6 +18,7 @@ export async function updateTool(input: UpdateToolInput): Promise<void> {
             data: {
                 name: input.name,
                 coef: input.coef,
+                unit: input.unit,
                 version: {
                     increment: 1,
                 }

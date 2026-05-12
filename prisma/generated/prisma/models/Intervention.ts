@@ -28,10 +28,12 @@ export type AggregateIntervention = {
 
 export type InterventionAvgAggregateOutputType = {
   duration: number | null
+  surface: number | null
 }
 
 export type InterventionSumAggregateOutputType = {
   duration: number | null
+  surface: number | null
 }
 
 export type InterventionMinAggregateOutputType = {
@@ -41,6 +43,7 @@ export type InterventionMinAggregateOutputType = {
   payer_id: string | null
   day: Date | null
   duration: number | null
+  surface: number | null
   description: string | null
   status: $Enums.InterventionStatus | null
   created_at: Date | null
@@ -54,6 +57,7 @@ export type InterventionMaxAggregateOutputType = {
   payer_id: string | null
   day: Date | null
   duration: number | null
+  surface: number | null
   description: string | null
   status: $Enums.InterventionStatus | null
   created_at: Date | null
@@ -67,6 +71,7 @@ export type InterventionCountAggregateOutputType = {
   payer_id: number
   day: number
   duration: number
+  surface: number
   description: number
   status: number
   created_at: number
@@ -77,10 +82,12 @@ export type InterventionCountAggregateOutputType = {
 
 export type InterventionAvgAggregateInputType = {
   duration?: true
+  surface?: true
 }
 
 export type InterventionSumAggregateInputType = {
   duration?: true
+  surface?: true
 }
 
 export type InterventionMinAggregateInputType = {
@@ -90,6 +97,7 @@ export type InterventionMinAggregateInputType = {
   payer_id?: true
   day?: true
   duration?: true
+  surface?: true
   description?: true
   status?: true
   created_at?: true
@@ -103,6 +111,7 @@ export type InterventionMaxAggregateInputType = {
   payer_id?: true
   day?: true
   duration?: true
+  surface?: true
   description?: true
   status?: true
   created_at?: true
@@ -116,6 +125,7 @@ export type InterventionCountAggregateInputType = {
   payer_id?: true
   day?: true
   duration?: true
+  surface?: true
   description?: true
   status?: true
   created_at?: true
@@ -215,7 +225,8 @@ export type InterventionGroupByOutputType = {
   worker_id: string
   payer_id: string
   day: Date
-  duration: number
+  duration: number | null
+  surface: number | null
   description: string | null
   status: $Enums.InterventionStatus
   created_at: Date
@@ -251,7 +262,8 @@ export type InterventionWhereInput = {
   worker_id?: Prisma.StringFilter<"Intervention"> | string
   payer_id?: Prisma.StringFilter<"Intervention"> | string
   day?: Prisma.DateTimeFilter<"Intervention"> | Date | string
-  duration?: Prisma.FloatFilter<"Intervention"> | number
+  duration?: Prisma.FloatNullableFilter<"Intervention"> | number | null
+  surface?: Prisma.FloatNullableFilter<"Intervention"> | number | null
   description?: Prisma.StringNullableFilter<"Intervention"> | string | null
   status?: Prisma.EnumInterventionStatusFilter<"Intervention"> | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFilter<"Intervention"> | Date | string
@@ -269,7 +281,8 @@ export type InterventionOrderByWithRelationInput = {
   worker_id?: Prisma.SortOrder
   payer_id?: Prisma.SortOrder
   day?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  surface?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -290,7 +303,8 @@ export type InterventionWhereUniqueInput = Prisma.AtLeast<{
   worker_id?: Prisma.StringFilter<"Intervention"> | string
   payer_id?: Prisma.StringFilter<"Intervention"> | string
   day?: Prisma.DateTimeFilter<"Intervention"> | Date | string
-  duration?: Prisma.FloatFilter<"Intervention"> | number
+  duration?: Prisma.FloatNullableFilter<"Intervention"> | number | null
+  surface?: Prisma.FloatNullableFilter<"Intervention"> | number | null
   description?: Prisma.StringNullableFilter<"Intervention"> | string | null
   status?: Prisma.EnumInterventionStatusFilter<"Intervention"> | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFilter<"Intervention"> | Date | string
@@ -308,7 +322,8 @@ export type InterventionOrderByWithAggregationInput = {
   worker_id?: Prisma.SortOrder
   payer_id?: Prisma.SortOrder
   day?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  surface?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -329,7 +344,8 @@ export type InterventionScalarWhereWithAggregatesInput = {
   worker_id?: Prisma.StringWithAggregatesFilter<"Intervention"> | string
   payer_id?: Prisma.StringWithAggregatesFilter<"Intervention"> | string
   day?: Prisma.DateTimeWithAggregatesFilter<"Intervention"> | Date | string
-  duration?: Prisma.FloatWithAggregatesFilter<"Intervention"> | number
+  duration?: Prisma.FloatNullableWithAggregatesFilter<"Intervention"> | number | null
+  surface?: Prisma.FloatNullableWithAggregatesFilter<"Intervention"> | number | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Intervention"> | string | null
   status?: Prisma.EnumInterventionStatusWithAggregatesFilter<"Intervention"> | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Intervention"> | Date | string
@@ -339,7 +355,8 @@ export type InterventionScalarWhereWithAggregatesInput = {
 export type InterventionCreateInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -357,7 +374,8 @@ export type InterventionUncheckedCreateInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -369,7 +387,8 @@ export type InterventionUncheckedCreateInput = {
 export type InterventionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,7 +406,8 @@ export type InterventionUncheckedUpdateInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,7 +422,8 @@ export type InterventionCreateManyInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -412,7 +433,8 @@ export type InterventionCreateManyInput = {
 export type InterventionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -425,7 +447,8 @@ export type InterventionUncheckedUpdateManyInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -449,6 +472,7 @@ export type InterventionCountOrderByAggregateInput = {
   payer_id?: Prisma.SortOrder
   day?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  surface?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -457,6 +481,7 @@ export type InterventionCountOrderByAggregateInput = {
 
 export type InterventionAvgOrderByAggregateInput = {
   duration?: Prisma.SortOrder
+  surface?: Prisma.SortOrder
 }
 
 export type InterventionMaxOrderByAggregateInput = {
@@ -466,6 +491,7 @@ export type InterventionMaxOrderByAggregateInput = {
   payer_id?: Prisma.SortOrder
   day?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  surface?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -479,6 +505,7 @@ export type InterventionMinOrderByAggregateInput = {
   payer_id?: Prisma.SortOrder
   day?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  surface?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -487,6 +514,7 @@ export type InterventionMinOrderByAggregateInput = {
 
 export type InterventionSumOrderByAggregateInput = {
   duration?: Prisma.SortOrder
+  surface?: Prisma.SortOrder
 }
 
 export type InterventionScalarRelationFilter = {
@@ -679,7 +707,8 @@ export type InterventionUpdateOneRequiredWithoutContestationsNestedInput = {
 export type InterventionCreateWithoutGuildInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -695,7 +724,8 @@ export type InterventionUncheckedCreateWithoutGuildInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -739,7 +769,8 @@ export type InterventionScalarWhereInput = {
   worker_id?: Prisma.StringFilter<"Intervention"> | string
   payer_id?: Prisma.StringFilter<"Intervention"> | string
   day?: Prisma.DateTimeFilter<"Intervention"> | Date | string
-  duration?: Prisma.FloatFilter<"Intervention"> | number
+  duration?: Prisma.FloatNullableFilter<"Intervention"> | number | null
+  surface?: Prisma.FloatNullableFilter<"Intervention"> | number | null
   description?: Prisma.StringNullableFilter<"Intervention"> | string | null
   status?: Prisma.EnumInterventionStatusFilter<"Intervention"> | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFilter<"Intervention"> | Date | string
@@ -749,7 +780,8 @@ export type InterventionScalarWhereInput = {
 export type InterventionCreateWithoutWorkerInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -764,7 +796,8 @@ export type InterventionUncheckedCreateWithoutWorkerInput = {
   id?: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -786,7 +819,8 @@ export type InterventionCreateManyWorkerInputEnvelope = {
 export type InterventionCreateWithoutPayerInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -801,7 +835,8 @@ export type InterventionUncheckedCreateWithoutPayerInput = {
   id?: string
   worker_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -855,7 +890,8 @@ export type InterventionUpdateManyWithWhereWithoutPayerInput = {
 export type InterventionCreateWithoutUsed_toolsInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -872,7 +908,8 @@ export type InterventionUncheckedCreateWithoutUsed_toolsInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -904,7 +941,8 @@ export type InterventionUpdateManyWithWhereWithoutUsed_toolsInput = {
 export type InterventionCreateWithoutContestationsInput = {
   id?: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -921,7 +959,8 @@ export type InterventionUncheckedCreateWithoutContestationsInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -948,7 +987,8 @@ export type InterventionUpdateToOneWithWhereWithoutContestationsInput = {
 export type InterventionUpdateWithoutContestationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -965,7 +1005,8 @@ export type InterventionUncheckedUpdateWithoutContestationsInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -978,7 +1019,8 @@ export type InterventionCreateManyGuildInput = {
   worker_id: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -988,7 +1030,8 @@ export type InterventionCreateManyGuildInput = {
 export type InterventionUpdateWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1004,7 +1047,8 @@ export type InterventionUncheckedUpdateWithoutGuildInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1018,7 +1062,8 @@ export type InterventionUncheckedUpdateManyWithoutGuildInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1029,7 +1074,8 @@ export type InterventionCreateManyWorkerInput = {
   id?: string
   payer_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -1040,7 +1086,8 @@ export type InterventionCreateManyPayerInput = {
   id?: string
   worker_id: string
   day: Date | string
-  duration: number
+  duration?: number | null
+  surface?: number | null
   description?: string | null
   status: $Enums.InterventionStatus
   created_at?: Date | string
@@ -1050,7 +1097,8 @@ export type InterventionCreateManyPayerInput = {
 export type InterventionUpdateWithoutWorkerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1065,7 +1113,8 @@ export type InterventionUncheckedUpdateWithoutWorkerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1078,7 +1127,8 @@ export type InterventionUncheckedUpdateManyWithoutWorkerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1088,7 +1138,8 @@ export type InterventionUncheckedUpdateManyWithoutWorkerInput = {
 export type InterventionUpdateWithoutPayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1103,7 +1154,8 @@ export type InterventionUncheckedUpdateWithoutPayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1116,7 +1168,8 @@ export type InterventionUncheckedUpdateManyWithoutPayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1126,7 +1179,8 @@ export type InterventionUncheckedUpdateManyWithoutPayerInput = {
 export type InterventionUpdateWithoutUsed_toolsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1143,7 +1197,8 @@ export type InterventionUncheckedUpdateWithoutUsed_toolsInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1157,7 +1212,8 @@ export type InterventionUncheckedUpdateManyWithoutUsed_toolsInput = {
   worker_id?: Prisma.StringFieldUpdateOperationsInput | string
   payer_id?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.FloatFieldUpdateOperationsInput | number
+  duration?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  surface?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumInterventionStatusFieldUpdateOperationsInput | $Enums.InterventionStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1211,6 +1267,7 @@ export type InterventionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   payer_id?: boolean
   day?: boolean
   duration?: boolean
+  surface?: boolean
   description?: boolean
   status?: boolean
   created_at?: boolean
@@ -1230,6 +1287,7 @@ export type InterventionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   payer_id?: boolean
   day?: boolean
   duration?: boolean
+  surface?: boolean
   description?: boolean
   status?: boolean
   created_at?: boolean
@@ -1246,6 +1304,7 @@ export type InterventionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   payer_id?: boolean
   day?: boolean
   duration?: boolean
+  surface?: boolean
   description?: boolean
   status?: boolean
   created_at?: boolean
@@ -1262,13 +1321,14 @@ export type InterventionSelectScalar = {
   payer_id?: boolean
   day?: boolean
   duration?: boolean
+  surface?: boolean
   description?: boolean
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type InterventionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "worker_id" | "payer_id" | "day" | "duration" | "description" | "status" | "created_at" | "updated_at", ExtArgs["result"]["intervention"]>
+export type InterventionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "worker_id" | "payer_id" | "day" | "duration" | "surface" | "description" | "status" | "created_at" | "updated_at", ExtArgs["result"]["intervention"]>
 export type InterventionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   worker?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
@@ -1303,7 +1363,8 @@ export type $InterventionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     worker_id: string
     payer_id: string
     day: Date
-    duration: number
+    duration: number | null
+    surface: number | null
     description: string | null
     status: $Enums.InterventionStatus
     created_at: Date
@@ -1742,6 +1803,7 @@ export interface InterventionFieldRefs {
   readonly payer_id: Prisma.FieldRef<"Intervention", 'String'>
   readonly day: Prisma.FieldRef<"Intervention", 'DateTime'>
   readonly duration: Prisma.FieldRef<"Intervention", 'Float'>
+  readonly surface: Prisma.FieldRef<"Intervention", 'Float'>
   readonly description: Prisma.FieldRef<"Intervention", 'String'>
   readonly status: Prisma.FieldRef<"Intervention", 'InterventionStatus'>
   readonly created_at: Prisma.FieldRef<"Intervention", 'DateTime'>

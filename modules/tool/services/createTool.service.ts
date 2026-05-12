@@ -16,6 +16,7 @@ export async function createTool(input: CreateToolInput): Promise<PublicTool> {
             data: {
                 name: input.name,
                 coef: input.coef,
+                unit: input.unit,
                 guild_id: guild.id,
                 admin_id: input.adminId,
             }

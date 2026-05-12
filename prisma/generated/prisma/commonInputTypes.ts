@@ -233,9 +233,26 @@ export type FloatWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
 }
 
+export type EnumToolUnitFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolUnit | Prisma.EnumToolUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolUnitFilter<$PrismaModel> | $Enums.ToolUnit
+}
+
 export type BoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type EnumToolUnitWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolUnit | Prisma.EnumToolUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolUnitWithAggregatesFilter<$PrismaModel> | $Enums.ToolUnit
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolUnitFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolUnitFilter<$PrismaModel>
 }
 
 export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -535,9 +552,26 @@ export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
 }
 
+export type NestedEnumToolUnitFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolUnit | Prisma.EnumToolUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolUnitFilter<$PrismaModel> | $Enums.ToolUnit
+}
+
 export type NestedBoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type NestedEnumToolUnitWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolUnit | Prisma.EnumToolUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolUnit[] | Prisma.ListEnumToolUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolUnitWithAggregatesFilter<$PrismaModel> | $Enums.ToolUnit
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolUnitFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolUnitFilter<$PrismaModel>
 }
 
 export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {

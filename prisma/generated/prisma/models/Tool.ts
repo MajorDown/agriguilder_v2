@@ -41,6 +41,7 @@ export type ToolMinAggregateOutputType = {
   guild_id: string | null
   admin_id: string | null
   name: string | null
+  unit: $Enums.ToolUnit | null
   coef: number | null
   version: number | null
   is_active: boolean | null
@@ -53,6 +54,7 @@ export type ToolMaxAggregateOutputType = {
   guild_id: string | null
   admin_id: string | null
   name: string | null
+  unit: $Enums.ToolUnit | null
   coef: number | null
   version: number | null
   is_active: boolean | null
@@ -65,6 +67,7 @@ export type ToolCountAggregateOutputType = {
   guild_id: number
   admin_id: number
   name: number
+  unit: number
   coef: number
   version: number
   is_active: number
@@ -89,6 +92,7 @@ export type ToolMinAggregateInputType = {
   guild_id?: true
   admin_id?: true
   name?: true
+  unit?: true
   coef?: true
   version?: true
   is_active?: true
@@ -101,6 +105,7 @@ export type ToolMaxAggregateInputType = {
   guild_id?: true
   admin_id?: true
   name?: true
+  unit?: true
   coef?: true
   version?: true
   is_active?: true
@@ -113,6 +118,7 @@ export type ToolCountAggregateInputType = {
   guild_id?: true
   admin_id?: true
   name?: true
+  unit?: true
   coef?: true
   version?: true
   is_active?: true
@@ -212,6 +218,7 @@ export type ToolGroupByOutputType = {
   guild_id: string
   admin_id: string
   name: string
+  unit: $Enums.ToolUnit
   coef: number
   version: number
   is_active: boolean
@@ -247,6 +254,7 @@ export type ToolWhereInput = {
   guild_id?: Prisma.StringFilter<"Tool"> | string
   admin_id?: Prisma.StringFilter<"Tool"> | string
   name?: Prisma.StringFilter<"Tool"> | string
+  unit?: Prisma.EnumToolUnitFilter<"Tool"> | $Enums.ToolUnit
   coef?: Prisma.FloatFilter<"Tool"> | number
   version?: Prisma.IntFilter<"Tool"> | number
   is_active?: Prisma.BoolFilter<"Tool"> | boolean
@@ -262,6 +270,7 @@ export type ToolOrderByWithRelationInput = {
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   coef?: Prisma.SortOrder
   version?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -281,6 +290,7 @@ export type ToolWhereUniqueInput = Prisma.AtLeast<{
   guild_id?: Prisma.StringFilter<"Tool"> | string
   admin_id?: Prisma.StringFilter<"Tool"> | string
   name?: Prisma.StringFilter<"Tool"> | string
+  unit?: Prisma.EnumToolUnitFilter<"Tool"> | $Enums.ToolUnit
   coef?: Prisma.FloatFilter<"Tool"> | number
   version?: Prisma.IntFilter<"Tool"> | number
   is_active?: Prisma.BoolFilter<"Tool"> | boolean
@@ -296,6 +306,7 @@ export type ToolOrderByWithAggregationInput = {
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   coef?: Prisma.SortOrder
   version?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -316,6 +327,7 @@ export type ToolScalarWhereWithAggregatesInput = {
   guild_id?: Prisma.StringWithAggregatesFilter<"Tool"> | string
   admin_id?: Prisma.StringWithAggregatesFilter<"Tool"> | string
   name?: Prisma.StringWithAggregatesFilter<"Tool"> | string
+  unit?: Prisma.EnumToolUnitWithAggregatesFilter<"Tool"> | $Enums.ToolUnit
   coef?: Prisma.FloatWithAggregatesFilter<"Tool"> | number
   version?: Prisma.IntWithAggregatesFilter<"Tool"> | number
   is_active?: Prisma.BoolWithAggregatesFilter<"Tool"> | boolean
@@ -326,6 +338,7 @@ export type ToolScalarWhereWithAggregatesInput = {
 export type ToolCreateInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -341,6 +354,7 @@ export type ToolUncheckedCreateInput = {
   guild_id: string
   admin_id: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -352,6 +366,7 @@ export type ToolUncheckedCreateInput = {
 export type ToolUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -367,6 +382,7 @@ export type ToolUncheckedUpdateInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -380,6 +396,7 @@ export type ToolCreateManyInput = {
   guild_id: string
   admin_id: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -390,6 +407,7 @@ export type ToolCreateManyInput = {
 export type ToolUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -402,6 +420,7 @@ export type ToolUncheckedUpdateManyInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -429,6 +448,7 @@ export type ToolCountOrderByAggregateInput = {
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   coef?: Prisma.SortOrder
   version?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -446,6 +466,7 @@ export type ToolMaxOrderByAggregateInput = {
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   coef?: Prisma.SortOrder
   version?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -458,6 +479,7 @@ export type ToolMinOrderByAggregateInput = {
   guild_id?: Prisma.SortOrder
   admin_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   coef?: Prisma.SortOrder
   version?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -554,6 +576,10 @@ export type ToolUncheckedUpdateManyWithoutAdminNestedInput = {
   deleteMany?: Prisma.ToolScalarWhereInput | Prisma.ToolScalarWhereInput[]
 }
 
+export type EnumToolUnitFieldUpdateOperationsInput = {
+  set?: $Enums.ToolUnit
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -599,6 +625,7 @@ export type ToolUncheckedUpdateManyWithoutInterventionsNestedInput = {
 export type ToolCreateWithoutGuildInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -612,6 +639,7 @@ export type ToolUncheckedCreateWithoutGuildInput = {
   id?: string
   admin_id: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -654,6 +682,7 @@ export type ToolScalarWhereInput = {
   guild_id?: Prisma.StringFilter<"Tool"> | string
   admin_id?: Prisma.StringFilter<"Tool"> | string
   name?: Prisma.StringFilter<"Tool"> | string
+  unit?: Prisma.EnumToolUnitFilter<"Tool"> | $Enums.ToolUnit
   coef?: Prisma.FloatFilter<"Tool"> | number
   version?: Prisma.IntFilter<"Tool"> | number
   is_active?: Prisma.BoolFilter<"Tool"> | boolean
@@ -664,6 +693,7 @@ export type ToolScalarWhereInput = {
 export type ToolCreateWithoutAdminInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -676,6 +706,7 @@ export type ToolCreateWithoutAdminInput = {
 export type ToolUncheckedCreateWithoutAdminInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -713,6 +744,7 @@ export type ToolUpdateManyWithWhereWithoutAdminInput = {
 export type ToolCreateWithoutInterventionsInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -727,6 +759,7 @@ export type ToolUncheckedCreateWithoutInterventionsInput = {
   guild_id: string
   admin_id: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -759,6 +792,7 @@ export type ToolCreateManyGuildInput = {
   id?: string
   admin_id: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -769,6 +803,7 @@ export type ToolCreateManyGuildInput = {
 export type ToolUpdateWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -782,6 +817,7 @@ export type ToolUncheckedUpdateWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -794,6 +830,7 @@ export type ToolUncheckedUpdateManyWithoutGuildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -804,6 +841,7 @@ export type ToolUncheckedUpdateManyWithoutGuildInput = {
 export type ToolCreateManyAdminInput = {
   id?: string
   name: string
+  unit?: $Enums.ToolUnit
   coef: number
   version?: number
   is_active?: boolean
@@ -814,6 +852,7 @@ export type ToolCreateManyAdminInput = {
 export type ToolUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -826,6 +865,7 @@ export type ToolUpdateWithoutAdminInput = {
 export type ToolUncheckedUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -837,6 +877,7 @@ export type ToolUncheckedUpdateWithoutAdminInput = {
 export type ToolUncheckedUpdateManyWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -847,6 +888,7 @@ export type ToolUncheckedUpdateManyWithoutAdminInput = {
 export type ToolUpdateWithoutInterventionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -861,6 +903,7 @@ export type ToolUncheckedUpdateWithoutInterventionsInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -873,6 +916,7 @@ export type ToolUncheckedUpdateManyWithoutInterventionsInput = {
   guild_id?: Prisma.StringFieldUpdateOperationsInput | string
   admin_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumToolUnitFieldUpdateOperationsInput | $Enums.ToolUnit
   coef?: Prisma.FloatFieldUpdateOperationsInput | number
   version?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -916,6 +960,7 @@ export type ToolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   guild_id?: boolean
   admin_id?: boolean
   name?: boolean
+  unit?: boolean
   coef?: boolean
   version?: boolean
   is_active?: boolean
@@ -932,6 +977,7 @@ export type ToolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   guild_id?: boolean
   admin_id?: boolean
   name?: boolean
+  unit?: boolean
   coef?: boolean
   version?: boolean
   is_active?: boolean
@@ -946,6 +992,7 @@ export type ToolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   guild_id?: boolean
   admin_id?: boolean
   name?: boolean
+  unit?: boolean
   coef?: boolean
   version?: boolean
   is_active?: boolean
@@ -960,6 +1007,7 @@ export type ToolSelectScalar = {
   guild_id?: boolean
   admin_id?: boolean
   name?: boolean
+  unit?: boolean
   coef?: boolean
   version?: boolean
   is_active?: boolean
@@ -967,7 +1015,7 @@ export type ToolSelectScalar = {
   revoked_at?: boolean
 }
 
-export type ToolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "admin_id" | "name" | "coef" | "version" | "is_active" | "created_at" | "revoked_at", ExtArgs["result"]["tool"]>
+export type ToolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guild_id" | "admin_id" | "name" | "unit" | "coef" | "version" | "is_active" | "created_at" | "revoked_at", ExtArgs["result"]["tool"]>
 export type ToolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
   admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
@@ -995,6 +1043,7 @@ export type $ToolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     guild_id: string
     admin_id: string
     name: string
+    unit: $Enums.ToolUnit
     coef: number
     version: number
     is_active: boolean
@@ -1430,6 +1479,7 @@ export interface ToolFieldRefs {
   readonly guild_id: Prisma.FieldRef<"Tool", 'String'>
   readonly admin_id: Prisma.FieldRef<"Tool", 'String'>
   readonly name: Prisma.FieldRef<"Tool", 'String'>
+  readonly unit: Prisma.FieldRef<"Tool", 'ToolUnit'>
   readonly coef: Prisma.FieldRef<"Tool", 'Float'>
   readonly version: Prisma.FieldRef<"Tool", 'Int'>
   readonly is_active: Prisma.FieldRef<"Tool", 'Boolean'>

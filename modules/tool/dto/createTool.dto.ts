@@ -1,4 +1,5 @@
-import { DTO, isRequired, isString, isNumber } from '@/managers/DtoManager';
+import { DTO, isRequired, isString, isNumber, isEnum } from '@/managers/DtoManager';
+import { ToolUnit } from '@/prisma/generated/prisma/browser';
 
 export class CreateToolDto extends DTO {
     @isRequired()
@@ -8,6 +9,10 @@ export class CreateToolDto extends DTO {
     @isRequired()
     @isNumber()
     coef!: number;
+
+    @isRequired()
+    @isEnum(ToolUnit)
+    unit!: ToolUnit;
 
     @isRequired()
     @isString()

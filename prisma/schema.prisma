@@ -186,11 +186,17 @@ model Rule {
   @@index([admin_id])
 }
 
+enum ToolUnit {
+  HEURE
+  ARE
+}
+
 model Tool {
   id         String    @id @default(uuid())
   guild_id   String
   admin_id   String
   name       String
+  unit       ToolUnit  @default(HEURE)
   coef       Float
   version    Int       @default(1)
   is_active  Boolean   @default(true)
@@ -242,8 +248,9 @@ model Intervention {
   guild_id    String
   worker_id   String
   payer_id    String
-  day         DateTime
-  duration    Float
+  day         DateTime           @db.Date
+  duration    Float?
+  surface     Float?
   description String?
   status      InterventionStatus
   created_at  DateTime           @default(now())

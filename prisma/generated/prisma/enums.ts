@@ -17,6 +17,14 @@ export const EmailAuthCodeContext = {
 export type EmailAuthCodeContext = (typeof EmailAuthCodeContext)[keyof typeof EmailAuthCodeContext]
 
 
+export const ToolUnit = {
+  HEURE: 'HEURE',
+  ARE: 'ARE'
+} as const
+
+export type ToolUnit = (typeof ToolUnit)[keyof typeof ToolUnit]
+
+
 export const AdjustmentType = {
   INITIALISATION: 'INITIALISATION',
   CORRECTION: 'CORRECTION'

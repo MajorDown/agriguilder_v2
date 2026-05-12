@@ -1,5 +1,4 @@
 'use client';
-
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/components/application/ui/appCalendar.module.css';
@@ -39,6 +38,7 @@ export default function AppCalendar(props: AppCalendarProps) {
 
     const todayKey = useMemo(() => {
         const today = new Date();
+
         return buildDateKey(
             today.getFullYear(),
             today.getMonth(),
@@ -61,12 +61,7 @@ export default function AppCalendar(props: AppCalendarProps) {
         const result = new Map<string, PublicIntervention[]>();
 
         for (const intervention of interventions) {
-            const date = new Date(intervention.day);
-            const key = buildDateKey(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate()
-            );
+            const key = getDateKeyFromApi(intervention.day);
 
             const existing = result.get(key) ?? [];
             existing.push(intervention);
@@ -78,10 +73,13 @@ export default function AppCalendar(props: AppCalendarProps) {
 
     const cells = useMemo((): CalendarCell[] => {
         const result: CalendarCell[] = [];
+
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
         const jsDay = firstDayOfMonth.getDay();
         const firstDayIndex = jsDay === 0 ? 6 : jsDay - 1;
+
         for (let i = 0; i < firstDayIndex; i++) {
             result.push({
                 key: `empty-${currentYear}-${currentMonth}-${i}`,
@@ -90,8 +88,10 @@ export default function AppCalendar(props: AppCalendarProps) {
                 isToday: false,
             });
         }
+
         for (let day = 1; day <= daysInMonth; day++) {
             const key = buildDateKey(currentYear, currentMonth, day);
+
             result.push({
                 key,
                 dayNumber: day,
@@ -110,6 +110,7 @@ export default function AppCalendar(props: AppCalendarProps) {
             setCurrentYear((prev) => prev - 1);
             return;
         }
+
         setCurrentMonth((prev) => prev - 1);
     }
 
@@ -119,16 +120,22 @@ export default function AppCalendar(props: AppCalendarProps) {
             setCurrentYear((prev) => prev + 1);
             return;
         }
+
         setCurrentMonth((prev) => prev + 1);
     }
 
-    function handleOpenDayModal(dayNumber: number, dayInterventions: PublicIntervention[]) {
+    function handleOpenDayModal(
+        dayNumber: number,
+        dayInterventions: PublicIntervention[]
+    ) {
         const date = new Date(currentYear, currentMonth, dayNumber);
+
         const dateLabel = new Intl.DateTimeFormat('fr-FR', {
             day: '2-digit',
             month: 'long',
             year: 'numeric',
         }).format(date);
+
         openModal({
             title: `Interventions du ${dateLabel}`,
             size: 'large',
@@ -168,7 +175,9 @@ export default function AppCalendar(props: AppCalendarProps) {
                 >
                     ←
                 </button>
+
                 <p className={styles.title}>{monthLabel}</p>
+
                 <button
                     type="button"
                     className={styles.navButton}
@@ -200,6 +209,7 @@ export default function AppCalendar(props: AppCalendarProps) {
                     }
 
                     const hasIntervention = cell.interventions.length > 0;
+
                     const className = [
                         styles.cell,
                         cell.isToday ? styles.today : '',
@@ -218,7 +228,11 @@ export default function AppCalendar(props: AppCalendarProps) {
                                 if (!cell.dayNumber || !hasIntervention) {
                                     return;
                                 }
-                                handleOpenDayModal(cell.dayNumber, cell.interventions);
+
+                                handleOpenDayModal(
+                                    cell.dayNumber,
+                                    cell.interventions
+                                );
                             }}
                             disabled={!hasIntervention}
                         >
@@ -245,7 +259,16 @@ export default function AppCalendar(props: AppCalendarProps) {
 function buildDateKey(year: number, month: number, day: number): string {
     const safeMonth = String(month + 1).padStart(2, '0');
     const safeDay = String(day).padStart(2, '0');
+
     return `${year}-${safeMonth}-${safeDay}`;
+}
+
+function getDateKeyFromApi(value: string | Date): string {
+    if (typeof value === 'string') {
+        return value.slice(0, 10);
+    }
+
+    return value.toISOString().slice(0, 10);
 }
 
 function capitalize(value: string): string {

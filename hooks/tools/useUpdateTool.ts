@@ -4,6 +4,8 @@ import { useCallback, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import { PublicTool } from "@/modules/tool/tool.types";
 
+export type ToolUnit = "HEURE" | "ARE";
+
 type UseUpdateToolParams = {
     tool: PublicTool;
     guildName: string;
@@ -20,6 +22,7 @@ export type UseUpdateToolReturn = {
     isEditing: boolean;
     name: string;
     coef: string;
+    unit: ToolUnit;
     isSubmitting: boolean;
     errorMessage: string | null;
     successMessage: string | null;
@@ -27,6 +30,7 @@ export type UseUpdateToolReturn = {
     cancelEditing: () => void;
     handleNameChange: (value: string) => void;
     handleCoefChange: (value: string) => void;
+    handleUnitChange: (value: ToolUnit) => void;
     submitUpdate: () => Promise<boolean>;
 };
 
@@ -35,9 +39,12 @@ export default function useUpdateTool(
 ): UseUpdateToolReturn {
     const { tool, guildName, onSuccess } = params;
 
+    const initialUnit = normalizeToolUnit(tool.unit);
+
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [name, setName] = useState<string>(tool.name);
     const [coef, setCoef] = useState<string>(tool.coef.toString());
+    const [unit, setUnit] = useState<ToolUnit>(initialUnit);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -45,18 +52,20 @@ export default function useUpdateTool(
     const startEditing = useCallback(() => {
         setName(tool.name);
         setCoef(tool.coef.toString());
+        setUnit(normalizeToolUnit(tool.unit));
         setErrorMessage(null);
         setSuccessMessage(null);
         setIsEditing(true);
-    }, [tool.coef, tool.name]);
+    }, [tool.coef, tool.name, tool.unit]);
 
     const cancelEditing = useCallback(() => {
         setName(tool.name);
         setCoef(tool.coef.toString());
+        setUnit(normalizeToolUnit(tool.unit));
         setErrorMessage(null);
         setSuccessMessage(null);
         setIsEditing(false);
-    }, [tool.coef, tool.name]);
+    }, [tool.coef, tool.name, tool.unit]);
 
     const handleNameChange = useCallback((value: string) => {
         setName(value);
@@ -66,14 +75,20 @@ export default function useUpdateTool(
         setCoef(value);
     }, []);
 
+    const handleUnitChange = useCallback((value: ToolUnit) => {
+        setUnit(value);
+    }, []);
+
     const submitUpdate = useCallback(async (): Promise<boolean> => {
         setErrorMessage(null);
         setSuccessMessage(null);
 
+        const trimmedGuildName = guildName.trim();
         const trimmedName = name.trim();
-        const parsedCoef = Number(coef);
+        const trimmedCoef = coef.trim();
+        const parsedCoef = Number(trimmedCoef);
 
-        if (!guildName.trim()) {
+        if (!trimmedGuildName) {
             setErrorMessage("Aucune guilde n'est sélectionnée.");
             return false;
         }
@@ -83,7 +98,7 @@ export default function useUpdateTool(
             return false;
         }
 
-        if (!coef.trim()) {
+        if (!trimmedCoef) {
             setErrorMessage("Le coefficient est obligatoire.");
             return false;
         }
@@ -98,6 +113,11 @@ export default function useUpdateTool(
             return false;
         }
 
+        if (!isValidToolUnit(unit)) {
+            setErrorMessage("L'unité de calcul de l'outil est invalide.");
+            return false;
+        }
+
         setIsSubmitting(true);
 
         try {
@@ -108,9 +128,10 @@ export default function useUpdateTool(
                 },
                 body: JSON.stringify({
                     id: tool.id,
-                    guildName,
+                    guildName: trimmedGuildName,
                     name: trimmedName,
                     coef: parsedCoef,
+                    unit,
                 }),
             });
 
@@ -143,12 +164,13 @@ export default function useUpdateTool(
         } finally {
             setIsSubmitting(false);
         }
-    }, [coef, guildName, name, onSuccess, tool.id]);
+    }, [coef, guildName, name, onSuccess, tool.id, unit]);
 
     return {
         isEditing,
         name,
         coef,
+        unit,
         isSubmitting,
         errorMessage,
         successMessage,
@@ -156,6 +178,19 @@ export default function useUpdateTool(
         cancelEditing,
         handleNameChange,
         handleCoefChange,
+        handleUnitChange,
         submitUpdate,
     };
+}
+
+function isValidToolUnit(value: string): value is ToolUnit {
+    return value === "HEURE" || value === "ARE";
+}
+
+function normalizeToolUnit(value: string | null | undefined): ToolUnit {
+    if (value === "ARE") {
+        return "ARE";
+    }
+
+    return "HEURE";
 }

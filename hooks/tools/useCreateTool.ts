@@ -1,7 +1,10 @@
 'use client';
+
 import { FormEvent, useCallback, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import useUserContext from "@/contexts/userContext/useUserContext";
+
+export type ToolUnit = "HEURE" | "ARE";
 
 type UseCreateToolParams = {
     guildName: string;
@@ -17,11 +20,13 @@ type ApiErrorResponse = {
 export type UseCreateToolReturn = {
     toolName: string;
     toolCoef: string;
+    toolUnit: ToolUnit;
     isSubmitting: boolean;
     errorMessage: string | null;
     successMessage: string | null;
     handleToolNameChange: (value: string) => void;
     handleToolCoefChange: (value: string) => void;
+    handleToolUnitChange: (value: ToolUnit) => void;
     handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
     resetForm: () => void;
 };
@@ -32,6 +37,8 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
 
     const [toolName, setToolName] = useState<string>("");
     const [toolCoef, setToolCoef] = useState<string>("");
+    const [toolUnit, setToolUnit] = useState<ToolUnit>("HEURE");
+
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -44,24 +51,42 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
         setToolCoef(value);
     };
 
+    const handleToolUnitChange = (value: ToolUnit) => {
+        setToolUnit(value);
+    };
+
     const resetForm = useCallback(() => {
         setToolName("");
         setToolCoef("");
+        setToolUnit("HEURE");
         setErrorMessage(null);
         setSuccessMessage(null);
     }, []);
 
     const handleSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("submit !");
+
         setErrorMessage(null);
         setSuccessMessage(null);
 
+        const trimmedGuildName = guildName.trim();
         const trimmedToolName = toolName.trim();
-        const parsedCoef = Number(toolCoef);
+        const trimmedToolCoef = toolCoef.trim();
+        const parsedCoef = Number(trimmedToolCoef);
 
-        if (!guildName.trim()) {
+        const adminId = user?.relations.find(
+            (relation) =>
+                relation.guildName === guildName &&
+                relation.role === "admin"
+        )?.role;
+
+        if (!trimmedGuildName) {
             setErrorMessage("Aucune guilde n'est sélectionnée.");
+            return;
+        }
+
+        if (!adminId) {
+            setErrorMessage("Aucun administrateur valide n'est associé à cette guilde.");
             return;
         }
 
@@ -70,7 +95,7 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
             return;
         }
 
-        if (!toolCoef.trim()) {
+        if (!trimmedToolCoef) {
             setErrorMessage("Le coefficient de l'outil est obligatoire.");
             return;
         }
@@ -85,6 +110,11 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
             return;
         }
 
+        if (!isValidToolUnit(toolUnit)) {
+            setErrorMessage("L'unité de calcul de l'outil est invalide.");
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
@@ -94,9 +124,10 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    guildName,
-                    adminId: user?.relations.find(rel => rel.guildName === guildName && rel.role === "admin")?.roleId,
+                    guildName: trimmedGuildName,
+                    adminId,
                     name: trimmedToolName,
+                    unit: toolUnit,
                     coef: parsedCoef,
                 }),
             });
@@ -116,8 +147,7 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
             }
 
             setSuccessMessage("L'outil a bien été créé.");
-            setToolName("");
-            setToolCoef("");
+            resetForm();
 
             if (onSuccess) {
                 await onSuccess();
@@ -128,17 +158,23 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
         } finally {
             setIsSubmitting(false);
         }
-    }, [guildName, onSuccess, toolCoef, toolName]);
+    }, [guildName, onSuccess, resetForm, toolCoef, toolName, toolUnit, user]);
 
     return {
         toolName,
         toolCoef,
+        toolUnit,
         isSubmitting,
         errorMessage,
         successMessage,
         handleToolNameChange,
         handleToolCoefChange,
+        handleToolUnitChange,
         handleSubmit,
         resetForm,
     };
+}
+
+function isValidToolUnit(value: string): value is ToolUnit {
+    return value === "HEURE" || value === "ARE";
 }

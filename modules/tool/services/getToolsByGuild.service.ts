@@ -18,6 +18,7 @@ export async function getToolsByGuild(guildName: string): Promise<PublicTool[]> 
                 id: true,
                 name: true,
                 coef: true,
+                unit: true,
                 is_active: true,
                 version: true
             }

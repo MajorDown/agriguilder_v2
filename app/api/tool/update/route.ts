@@ -16,6 +16,7 @@ export async function PUT(request: NextRequest) {
                 message: "Token d'accès manquant",
             });
         }
+        console.log("DTO reçu:", dto);
         const payload = TokenManager.verifyAccessToken(access_token);
         await verifyAdminAuth({
             userId: payload.accountId,
