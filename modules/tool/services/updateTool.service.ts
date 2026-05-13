@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma/prisma";
-import { UpdateToolInput } from "../tool.types";
+import { UpdateToolInput } from "@/modules/tool/tool.types";
 import ErrorManager from "@/managers/ErrorManager";
 
 /**
@@ -29,7 +29,7 @@ export async function updateTool(input: UpdateToolInput): Promise<void> {
         throw ErrorManager.create({
             statusCode: 500,
             code: 'TOOL_UPDATE_FAILED',
-            message: 'An error occurred while updating the tool.',
+            message: 'Echec de la mise à jour de l\'outil',
         })
     }
 }

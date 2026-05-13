@@ -16,6 +16,7 @@ export type CreateInterventionInput = {
     payerId: string;
     day: string;
     duration: number;
+    surface?: number;
     tools: string[];
     description?: string | null;
 }

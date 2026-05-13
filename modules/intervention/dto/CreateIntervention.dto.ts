@@ -17,6 +17,9 @@ export class CreateInterventionDto extends DTO {
     @isNumber()
     duration!: number;
 
+    @isNumber()
+    surface!: number;
+
     @isRequired()
     tools!: string[];
 

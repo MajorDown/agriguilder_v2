@@ -21,6 +21,7 @@ export async function createIntervention(input: CreateInterventionInput) {
                 payer_id: input.payerId,
                 day: new Date(input.day),
                 duration: input.duration,
+                surface: input.surface,
                 status: guild.max_validation_delay === 0 ? "VALIDEE" : "DECLARE",
                 used_tools: {
                     connect: input.tools.map(toolId => ({ id: toolId }))
