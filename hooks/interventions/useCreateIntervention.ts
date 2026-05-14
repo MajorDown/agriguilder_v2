@@ -14,6 +14,7 @@ export default function useCreateInterventionForm(
     const [selectedMemberId, setSelectedMemberId] = useState<string>("");
     const [selectedDate, setSelectedDate] = useState<string>("");
     const [selectedDuration, setSelectedDuration] = useState<number>(0);
+    const [ selectedSurface, setSelectedSurface ] = useState<number>(0);
     const [selectedTools, setSelectedTools] = useState<string[]>([]);
     const [description, setDescription] = useState<string>("");
 
@@ -25,6 +26,7 @@ export default function useCreateInterventionForm(
         setSelectedMemberId("");
         setSelectedDate("");
         setSelectedDuration(0);
+        setSelectedSurface(0);
         setSelectedTools([]);
         setDescription("");
     };
@@ -75,6 +77,7 @@ export default function useCreateInterventionForm(
                     payerId: selectedMemberId,
                     day: selectedDate,
                     duration: selectedDuration,
+                    surface: selectedSurface,
                     tools: selectedTools,
                     description: description.trim() || null,
                 }),
@@ -102,12 +105,14 @@ export default function useCreateInterventionForm(
         selectedMemberId,
         selectedDate,
         selectedDuration,
+        selectedSurface,
         selectedTools,
         description,
 
         setSelectedMemberId,
         setSelectedDate,
         setSelectedDuration,
+        setSelectedSurface,
         setSelectedTools,
         setDescription,
 

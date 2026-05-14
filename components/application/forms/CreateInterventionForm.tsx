@@ -8,6 +8,7 @@ import AppBtn from "../ui/buttons/AppBtn";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useCreateIntervention from "@/hooks/interventions/useCreateIntervention";
 import styles from "@/styles/pages/declarer.module.css";
+import AppSurfaceInput from "../ui/inputs/AppSurfaceInput";
 
 export type CreateInterventionFormProps = {
     onCreated?: () => void;
@@ -20,11 +21,13 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
         selectedMemberId,
         selectedDate,
         selectedDuration,
+        selectedSurface,
         selectedTools,
         description,
         setSelectedMemberId,
         setSelectedDate,
         setSelectedDuration,
+        setSelectedSurface,
         setSelectedTools,
         setDescription,
         isLoading,
@@ -58,6 +61,12 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                     value={selectedDuration}
                     onChange={setSelectedDuration}
                     label="Durée de l'intervention :"
+                />
+
+                <AppSurfaceInput
+                    value={selectedSurface}
+                    onChange={setSelectedSurface}
+                    label="Surface concernée (/!\ en ares) :"
                 />
 
                 <ToolSelector
