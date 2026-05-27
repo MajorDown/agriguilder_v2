@@ -58,7 +58,7 @@ export default function CreateToolForm(props: CreateToolFormProps) {
                     }}
                 >
                     <option value="HEURE">Heure</option>
-                    <option value="ARE">Are</option>
+                    <option value="HECTARE">Hectare</option>
                 </select>
             </label>
 

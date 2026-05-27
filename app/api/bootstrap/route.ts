@@ -35,7 +35,6 @@ export async function GET() {
                     name: "GuilderCompany",
                     city: "Bournezeau",
                     department: "85",
-                    point_euro_value: 12,
                     human_hour_point_value: 1,
                     max_declaration_delay: 7,
                     max_validation_delay: 2,

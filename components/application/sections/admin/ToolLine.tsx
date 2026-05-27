@@ -10,7 +10,7 @@ import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import AppInput from "../../ui/inputs/AppInput";
 import ToolSwitch from "./ToolSwitch";
 
-export type ToolUnit = "HEURE" | "ARE";
+export type ToolUnit = "HEURE" | "HECTARE";
 
 export type ToolLineProps = {
     tool: PublicTool;
@@ -155,9 +155,10 @@ export default function ToolLine(props: ToolLineProps) {
                         onChange={(event) => {
                             handleUnitChange(event.target.value as ToolUnit);
                         }}
+                        style={{color: "grey"}}
                     >
-                        <option value="HEURE">/Heure</option>
-                        <option value="ARE">/Are</option>
+                        <option value="HEURE" style={{color: "grey"}}>/Heure</option>
+                        <option value="HECTARE" style={{color: "grey"}}>/Hectare</option>
                     </select>
                 </label>
             )}
@@ -195,8 +196,8 @@ export default function ToolLine(props: ToolLineProps) {
 }
 
 function formatToolUnit(unit: string | null | undefined): string {
-    if (unit === "ARE") {
-        return "are";
+    if (unit === "HECTARE") {
+        return "hectare";
     }
 
     return "heure";

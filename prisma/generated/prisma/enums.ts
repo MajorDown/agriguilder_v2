@@ -19,7 +19,7 @@ export type EmailAuthCodeContext = (typeof EmailAuthCodeContext)[keyof typeof Em
 
 export const ToolUnit = {
   HEURE: 'HEURE',
-  ARE: 'ARE'
+  HECTARE: 'HECTARE'
 } as const
 
 export type ToolUnit = (typeof ToolUnit)[keyof typeof ToolUnit]

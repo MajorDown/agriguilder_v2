@@ -188,7 +188,7 @@ model Rule {
 
 enum ToolUnit {
   HEURE
-  ARE
+  HECTARE
 }
 
 model Tool {

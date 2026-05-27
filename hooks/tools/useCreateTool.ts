@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import useUserContext from "@/contexts/userContext/useUserContext";
 
-export type ToolUnit = "HEURE" | "ARE";
+export type ToolUnit = "HEURE" | "HECTARE";
 
 type UseCreateToolParams = {
     guildName: string;
@@ -176,5 +176,5 @@ export default function useCreateTool(params: UseCreateToolParams): UseCreateToo
 }
 
 function isValidToolUnit(value: string): value is ToolUnit {
-    return value === "HEURE" || value === "ARE";
+    return value === "HEURE" || value === "HECTARE";
 }

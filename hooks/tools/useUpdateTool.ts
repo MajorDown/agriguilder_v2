@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import { PublicTool } from "@/modules/tool/tool.types";
 
-export type ToolUnit = "HEURE" | "ARE";
+export type ToolUnit = "HEURE" | "HECTARE";
 
 type UseUpdateToolParams = {
     tool: PublicTool;
@@ -184,12 +184,12 @@ export default function useUpdateTool(
 }
 
 function isValidToolUnit(value: string): value is ToolUnit {
-    return value === "HEURE" || value === "ARE";
+    return value === "HEURE" || value === "HECTARE";
 }
 
 function normalizeToolUnit(value: string | null | undefined): ToolUnit {
-    if (value === "ARE") {
-        return "ARE";
+    if (value === "HECTARE") {
+        return "HECTARE";
     }
 
     return "HEURE";
