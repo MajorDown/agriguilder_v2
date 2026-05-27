@@ -19,7 +19,7 @@ export default function InterventionLine(props: InterventionLineProps) {
     const calculateInterventionValue = (intervention: PublicIntervention): string => {
         return intervention.tools
             .reduce((total, tool) => {
-                return total + (tool.coef * intervention.duration);
+                return total + (tool.coef * (intervention.duration ?? 0));
             }, 0)
             .toLocaleString("fr-FR", {
                 minimumFractionDigits: 2,

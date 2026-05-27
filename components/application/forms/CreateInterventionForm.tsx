@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import MemberSelect from "@/components/application/ui/inputs/MemberSelect";
 import AppDateInput from "@/components/application/ui/inputs/AppDateInput";
@@ -7,6 +7,7 @@ import ToolSelector from "../ui/inputs/ToolSelector";
 import AppBtn from "../ui/buttons/AppBtn";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useCreateIntervention from "@/hooks/interventions/useCreateIntervention";
+import useGetTools from "@/hooks/tools/useToolTable";
 import styles from "@/styles/pages/declarer.module.css";
 import AppSurfaceInput from "../ui/inputs/AppSurfaceInput";
 
@@ -16,6 +17,7 @@ export type CreateInterventionFormProps = {
 
 export default function CreateInterventionForm(props: CreateInterventionFormProps) {
     const { selectedGuild } = useUserContext();
+    const { tools, isLoading: toolsLoading } = useGetTools(selectedGuild ?? "");
 
     const {
         selectedMemberId,
@@ -35,6 +37,7 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
         successMessage,
         submit,
     } = useCreateIntervention({
+        tools,
         onSuccess: props.onCreated,
     });
 
@@ -66,10 +69,12 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                 <AppSurfaceInput
                     value={selectedSurface}
                     onChange={setSelectedSurface}
-                    label="Surface concernée (/!\ en ares) :"
+                    label="Surface concernée (/!\ en hectares) :"
                 />
 
                 <ToolSelector
+                    tools={tools}
+                    isLoading={toolsLoading}
                     selectedTools={selectedTools}
                     onChange={setSelectedTools}
                 />
@@ -91,11 +96,11 @@ export default function CreateInterventionForm(props: CreateInterventionFormProp
                 </div>
 
                 {successMessage && (
-                    <p className={"success"}>{successMessage}</p>
+                    <p className="success">{successMessage}</p>
                 )}
 
                 {errorMessage && (
-                    <p className={"error"}>{errorMessage}</p>
+                    <p className="error">{errorMessage}</p>
                 )}
 
                 <AppBtn

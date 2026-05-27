@@ -6,15 +6,21 @@ import { Prisma } from "@/prisma/generated/prisma/client";
 type InterventionForPoints = {
     worker_id: string;
     payer_id: string;
-    duration: number;
+    duration: number | null;
+    surface: number | null;
     used_tools: {
         coef: number;
+        unit: "HEURE" | "HECTARE";
     }[];
 };
 
 export function computeInterventionPoints(intervention: InterventionForPoints): number {
     return intervention.used_tools.reduce((sum, tool) => {
-        return sum + (intervention.duration * tool.coef);
+        if (tool.unit === "HECTARE") {
+            return sum + ((intervention.surface ?? 0) * tool.coef);
+        }
+
+        return sum + ((intervention.duration ?? 0) * tool.coef);
     }, 0);
 }
 
@@ -37,7 +43,7 @@ export async function updateMemberPointsBalance(memberId: string): Promise<numbe
             statusCode: 404,
             code: "MEMBER_NOT_FOUND",
             message: "Membre non trouvé",
-        })
+        });
     }
 
     const lastReinitialization = await prisma.reinitialization.findFirst({
@@ -91,9 +97,11 @@ export async function updateMemberPointsBalance(memberId: string): Promise<numbe
                 worker_id: true,
                 payer_id: true,
                 duration: true,
+                surface: true,
                 used_tools: {
                     select: {
                         coef: true,
+                        unit: true,
                     },
                 },
             },

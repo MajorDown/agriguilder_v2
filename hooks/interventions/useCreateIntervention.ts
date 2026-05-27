@@ -1,20 +1,22 @@
 import { FormEvent, useState } from "react";
 import FetchManager from "@/managers/FetchManager";
 import useUserContext from "@/contexts/userContext/useUserContext";
+import { PublicTool } from "@/modules/tool/tool.types";
 
-export type UseCreateInterventionFormParams = {
+export type UseCreateInterventionParams = {
+    tools: PublicTool[];
     onSuccess?: () => void;
 };
 
-export default function useCreateInterventionForm(
-    params?: UseCreateInterventionFormParams
+export default function useCreateIntervention(
+    params: UseCreateInterventionParams
 ) {
     const { selectedGuild } = useUserContext();
 
     const [selectedMemberId, setSelectedMemberId] = useState<string>("");
     const [selectedDate, setSelectedDate] = useState<string>("");
     const [selectedDuration, setSelectedDuration] = useState<number>(0);
-    const [ selectedSurface, setSelectedSurface ] = useState<number>(0);
+    const [selectedSurface, setSelectedSurface] = useState<number>(0);
     const [selectedTools, setSelectedTools] = useState<string[]>([]);
     const [description, setDescription] = useState<string>("");
 
@@ -70,6 +72,19 @@ export default function useCreateInterventionForm(
                 return false;
             }
 
+            const selectedToolObjects = params.tools.filter((tool) =>
+                selectedTools.includes(tool.id)
+            );
+
+            const hasSurfaceBasedTool = selectedToolObjects.some((tool) =>
+                tool.unit === "HECTARE"
+            );
+
+            if (hasSurfaceBasedTool && selectedSurface <= 0) {
+                setErrorMessage("La surface doit être renseignée pour les outils calculés à la surface.");
+                return false;
+            }
+
             await FetchManager.fetch("/api/intervention/create", {
                 method: "POST",
                 body: JSON.stringify({
@@ -85,7 +100,7 @@ export default function useCreateInterventionForm(
 
             resetForm();
             setSuccessMessage("L'intervention a bien été déclarée.");
-            params?.onSuccess?.();
+            params.onSuccess?.();
 
             return true;
         } catch (error) {

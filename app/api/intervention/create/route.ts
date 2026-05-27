@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
             payerId: dto.payerId,
             day: dto.day,
             duration: dto.duration,
+            surface: dto.surface,
             tools: dto.tools,
             description: dto.description,
         });

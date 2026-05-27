@@ -1,28 +1,27 @@
-import useGetTools from "@/hooks/tools/useToolTable";
-import useUserContext from "@/contexts/userContext/useUserContext";
-import { useState } from "react";
 import Image from "next/image";
 import styles from "@/styles/components/application/ui/inputs/toolSelector.module.css";
+import { PublicTool } from "@/modules/tool/tool.types";
 
 export type ToolSelectorProps = {
+    tools: PublicTool[];
+    isLoading: boolean;
     selectedTools: string[];
     onChange: (selectedTools: string[]) => void;
-}
+};
 
 export default function ToolSelector(props: ToolSelectorProps) {
-    const { selectedGuild } = useUserContext();
-    const { tools, isLoading } = useGetTools(selectedGuild ?? "");
-
     const toggleTool = (toolId: string) => {
         if (props.selectedTools.includes(toolId)) {
             props.onChange(
-                props.selectedTools.filter(id => id !== toolId)
+                props.selectedTools.filter((id) => id !== toolId)
             );
-        } else {
-            props.onChange(
-                [...props.selectedTools, toolId]
-            );
+            return;
         }
+
+        props.onChange([
+            ...props.selectedTools,
+            toolId,
+        ]);
     };
 
     return (
@@ -32,7 +31,7 @@ export default function ToolSelector(props: ToolSelectorProps) {
             </label>
 
             <div className={styles.toolsList}>
-                {!isLoading && tools.map(tool => (
+                {!props.isLoading && props.tools.map((tool) => (
                     <button
                         key={tool.id}
                         type="button"

@@ -1,4 +1,5 @@
 import AppInput from "./AppInput";
+import Styles from '@/styles/components/application/ui/inputs/appSurfaceInput.module.css';
 
 export type AppSurfaceInputProps = {
     value: number;
@@ -9,6 +10,7 @@ export type AppSurfaceInputProps = {
 export default function AppSurfaceInput(props: AppSurfaceInputProps) {
     return (
         <AppInput
+            id={Styles.surfaceInput}
             type="number"
             value={props.value.toString()}
             onChange={(newValue) => {
