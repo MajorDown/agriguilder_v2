@@ -14,6 +14,7 @@ export type UserAppData = {
         society?: string;
         email: string;
         phone: string | null;
+        isDev?: boolean;
         relations: GuildRelation[];
 } | null;
 

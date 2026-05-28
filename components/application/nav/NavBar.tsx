@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function NavBar() {
     const pathname = usePathname();
-    const { selectedRole } = useUserContext();
+    const { selectedRole, user } = useUserContext();
 
     return (<nav id={styles.navBar}>
         <NavLink 
@@ -78,5 +78,13 @@ export default function NavBar() {
             image={"options"} 
             selected={pathname === "/options"} 
         />
+        {user?.isDev && (
+            <NavLink 
+                href={"/gestion"} 
+                label={"Gestion"} 
+                image={"jugement"} 
+                selected={pathname === "/gestion"} 
+            />
+        )}
     </nav>)
 }

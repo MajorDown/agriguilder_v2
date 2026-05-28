@@ -4,7 +4,7 @@ import AppBtn from "../ui/buttons/AppBtn";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useModal from "@/contexts/modalContext/useModal";
 import UpdateUserInfosForm from "@/components/application/forms/UpdateUserInfosForm";
-import UpdateUserEmailForm from "@/components/application/forms/updateUserEmailForm";
+import UpdateUserEmailForm from "@/components/application/forms/UpdateUserEmailForm";
 import UpdateUserPasswordForm from "@/components/application/forms/UpdateUserPasswordForm";
 
 export default function UserOptions() {

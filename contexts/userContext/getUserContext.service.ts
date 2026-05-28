@@ -48,6 +48,11 @@ export async function getUserAppData(): Promise<UserAppData> {
             email: true,
             phone: true,
             society: true,
+            dev: {
+                select: {
+                    id: true,
+                }
+            }
         }
     });
 
@@ -111,6 +116,7 @@ export async function getUserAppData(): Promise<UserAppData> {
         society: user.society || '',
         email: user.email,
         phone: user.phone,
+        isDev: !!user.dev,
         relations,
     };
 }

@@ -29,6 +29,7 @@ export default function Header() {
             <Image src="/images/icons/logo-white.svg" alt="logo" width={45} height={59} priority/>
             <h1>Agriguilder</h1>
         </Link>
+        {user?.isDev && (<div>DEV</div>)}
         {user?.id && <div id={"welcomer"}>
             <p>Bienvenue, {user.firstname} !</p>
             <p>votre guilde : <GuildSelect guilds={dataForGuildSelect} /></p>
