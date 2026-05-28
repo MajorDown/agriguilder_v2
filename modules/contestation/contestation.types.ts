@@ -13,3 +13,16 @@ export type CreateContestationInput = {
     guildName: string;
     contester_id: string;
 }
+
+export type ResolveContestationInput = {
+    contestationId: string;
+    guildName: string;
+    adminId: string;
+    status: "ACCEPTEE" | "REFUSEE";
+    payerId: string;
+    day: string;
+    duration: number;
+    surface?: number;
+    tools: string[];
+    description?: string | null;
+}

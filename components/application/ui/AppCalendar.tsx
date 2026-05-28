@@ -137,7 +137,7 @@ export default function AppCalendar(props: AppCalendarProps) {
         }).format(date);
 
         openModal({
-            title: `Interventions du ${dateLabel}`,
+            title: `Interventions du ${dateLabel} (${dayInterventions.length})`,
             size: 'large',
             content: (
                 <InterventionCalendarModal

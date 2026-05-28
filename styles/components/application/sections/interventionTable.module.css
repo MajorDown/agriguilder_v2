@@ -102,6 +102,9 @@
     justify-content: center;
     align-items: center;
     gap: 1vw;
+    padding-bottom: 1vw;
+    border-bottom: 2px solid var(--color-dark);
+    margin-bottom: 1vw;
 }
 
 .dateSection,

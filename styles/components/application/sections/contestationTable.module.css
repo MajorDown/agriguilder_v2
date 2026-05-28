@@ -103,110 +103,23 @@
     gap: 1vw;
 }
 
-.dateSection,
-.membersSection,
-.toolsSection,
-.descriptionSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.line {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.durationSection,
-.valueSection,
-.statusSection {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+#form {
     gap: 1vw;
 }
 
-.horizon {
-    height: 0;
-    border-bottom: 1px solid var(--color-dark);
-    flex: 1;
-}
-
-.toolsSection ul {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0.5vw;
-}
-
-.toolLine,
-.toolLineHeader {
-    padding-top: 0.5vw;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1vw;
-}
-
-.toolLineHeader p,
-.toolLine p {
-    width: 15%;
-    text-align: center;
-}
-
-.toolLineHeader :nth-child(1),
-.toolLine :nth-child(1) {
-    text-align: left;
-}
-
-.toolLine {
-    border-top: 1px solid var(--color-dark);
-}
-
-.toolLineHeader :nth-child(4),
-.toolLine :nth-child(4) {
-    text-align: right;
-}
-
-.valueSection p {
+#form label {
+    color: var(--color-dark);
     font-weight: 700;
 }
 
-.contestSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1vw;
-}
-
-.contestationForm {
+#description {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5vw;
 }
 
-.contestationForm label {
-    width: 100%;
-    text-align: left;
+#description textarea {
+    color: var(--color-dark);
 }

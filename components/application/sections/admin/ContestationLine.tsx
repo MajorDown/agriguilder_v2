@@ -3,6 +3,8 @@
 import { PublicContestation } from "@/modules/contestation/contestation.types";
 import styles from "@/styles/components/application/sections/contestationTable.module.css";
 import Image from "next/image";
+import useModal from "@/contexts/modalContext/useModal";
+import ResolveContestationForm from "@/components/application/forms/ResolveContestationForm";
 
 export type ContestationLineProps = {
     contestation: PublicContestation;
@@ -17,6 +19,23 @@ export type ContestationLineProps = {
  */
 export default function ContestationLine(props: ContestationLineProps) {
     const { contestation } = props;
+    const { openModal, closeModal } = useModal();
+
+    const handleOpenResolveModal = () => {
+        openModal({
+            title: "Résolution de la contestation",
+            size: "large",
+            content: (
+                <ResolveContestationForm
+                    contestation={contestation}
+                    onResolved={() => {
+                        props.onResolveContestation();
+                        closeModal();
+                    }}
+                />
+            ),
+        });
+    };
 
     return (
         <div className={styles.contestationLine}>
@@ -33,7 +52,7 @@ export default function ContestationLine(props: ContestationLineProps) {
             <button
                 type="button"
                 className={styles.detailsButton}
-                onClick={props.onResolveContestation}
+                onClick={handleOpenResolveModal}
                 disabled={contestation.status !== "EN_ATTENTE"}
             >
                 <Image
