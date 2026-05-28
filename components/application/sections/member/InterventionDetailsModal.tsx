@@ -123,7 +123,7 @@ export default function InterventionDetailsModal(props: InterventionDetailsModal
                                         {tool.coef.toLocaleString("fr-FR", {
                                             minimumFractionDigits: 2,
                                             maximumFractionDigits: 2,
-                                        })}
+                                        })}({tool.unit === "HECTARE" ? "/ha" : "/h"})
                                     </p>
                                     <p>
                                         {toolValue.toLocaleString("fr-FR", {

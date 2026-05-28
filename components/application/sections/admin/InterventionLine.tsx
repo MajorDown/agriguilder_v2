@@ -5,27 +5,34 @@ import styles from "@/styles/components/application/sections/interventionTable.m
 import Image from "next/image";
 import useModal from "@/contexts/modalContext/useModal";
 import InterventionDetailsModal from "@/components/application/sections/member/InterventionDetailsModal";
+import {
+    calculateInterventionValue,
+    formatInterventionValue,
+} from "@/modules/intervention/services/calculateInterventionValue.service";
 
 export type InterventionLineProps = {
     intervention: PublicIntervention;
     actualUserEmail?: string;
     onCreateContestation: () => void;
-
 };
 
+/**
+ * @description Composant représentant une ligne d'intervention dans Interventiontable.
+ * @param {PublicIntervention} props.intervention - L'intervention à afficher.
+ * @param {string} [props.actualUserEmail] - L'email de l'utilisateur actuel pour personnaliser l'affichage.
+ * @param {() => void} props.onCreateContestation - Fonction à appeler lors de la création d'une contestation.
+ * @returns {JSX.Element} Le composant InterventionLine.
+ */
 export default function InterventionLine(props: InterventionLineProps) {
     const { openModal } = useModal();
 
-    const calculateInterventionValue = (intervention: PublicIntervention): string => {
-        return intervention.tools
-            .reduce((total, tool) => {
-                return total + (tool.coef * (intervention.duration ?? 0));
-            }, 0)
-            .toLocaleString("fr-FR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            });
-    };
+    const interventionValue = calculateInterventionValue({
+        duration: props.intervention.duration,
+        surface: props.intervention.surface,
+        tools: props.intervention.tools,
+    });
+
+    const formattedInterventionValue = formatInterventionValue(interventionValue);
 
     const handleOpenDetails = () => {
         openModal({
@@ -68,11 +75,11 @@ export default function InterventionLine(props: InterventionLineProps) {
                     </>
                 )}
             </div>
-            {/* si l'utilisateur actuel est le payeur, afficher la valeur en rouge */}
+
             {props.actualUserEmail === props.intervention.payer.email ? (
-                <span className={styles.valueRed}>{calculateInterventionValue(props.intervention)}⋈</span>
+                <span className={styles.valueRed}>{formattedInterventionValue}⋈</span>
             ) : (
-                <span className={styles.value}>{calculateInterventionValue(props.intervention)}⋈</span>
+                <span className={styles.value}>{formattedInterventionValue}⋈</span>
             )}
 
             <p className={styles.status}>{props.intervention.status}</p>
