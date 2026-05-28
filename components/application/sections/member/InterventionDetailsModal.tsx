@@ -5,7 +5,7 @@ import styles from "@/styles/components/application/sections/interventionTable.m
 import AppBtn from "../../ui/buttons/AppBtn";
 import Image from "next/image";
 import { useState } from "react";
-import CreateContestationForm from "@/components/application/sections/member/CreateContestationForm";
+import CreateContestationForm from "@/components/application/forms/CreateContestationForm";
 import useUserContext from "@/contexts/userContext/useUserContext";
 
 export type InterventionDetailsModalProps = {

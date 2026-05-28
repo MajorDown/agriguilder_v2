@@ -1,9 +1,10 @@
 'use client';
 
 import { FormEvent, useState } from "react";
-import AppBtn from "../../ui/buttons/AppBtn";
+import AppBtn from "../ui/buttons/AppBtn";
 import useUserContext from "@/contexts/userContext/useUserContext";
 import useCreateContestation from "@/hooks/contestations/useCreateContestation";
+import useModal from "@/contexts/modalContext/useModal";
 import styles from "@/styles/components/application/sections/interventionTable.module.css";
 
 export type CreateContestationFormProps = {
@@ -14,6 +15,7 @@ export type CreateContestationFormProps = {
 
 export default function CreateContestationForm(props: CreateContestationFormProps) {
     const { user } = useUserContext();
+    const { closeModal } = useModal();
     const [reason, setReason] = useState("");
 
     const {
@@ -43,6 +45,8 @@ export default function CreateContestationForm(props: CreateContestationFormProp
 
         if (success) {
             setReason("");
+            props.onCreate();
+            closeModal();
         }
     };
 

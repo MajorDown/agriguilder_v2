@@ -1,0 +1,212 @@
+#tableHeader {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5vw;
+}
+
+.contestationLine {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5vw;
+    background-color: var(--color-light);
+}
+
+.contestationLine p {
+    text-align: center;
+    color: var(--color-dark);
+    font-weight: 700;
+    text-align: center;
+}
+
+#tableHeader p {
+    text-align: center;
+}
+
+#tableHeader :nth-child(1) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(2) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(3) {
+    width: 20%;
+}
+
+#tableHeader :nth-child(4) {
+    width: 30%;
+}
+
+#tableHeader :nth-child(5) {
+    width: 10%;
+}
+
+.dates {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dates p {
+    width: 50%;
+    text-align: center;
+}
+
+.contester {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contestationLine :nth-child(3) {
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    line-clamp: 2;
+
+    min-width: 0;
+}
+
+.status {
+    width: 10%;
+}
+
+.contestationLine button {
+    background-color: transparent;
+    border: none;
+    flex: 1;
+    cursor: pointer;
+}
+
+.modalContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.dateSection,
+.membersSection,
+.toolsSection,
+.descriptionSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.line {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.durationSection,
+.valueSection,
+.statusSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.horizon {
+    height: 0;
+    border-bottom: 1px solid var(--color-dark);
+    flex: 1;
+}
+
+.toolsSection ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5vw;
+}
+
+.toolLine,
+.toolLineHeader {
+    padding-top: 0.5vw;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.toolLineHeader p,
+.toolLine p {
+    width: 15%;
+    text-align: center;
+}
+
+.toolLineHeader :nth-child(1),
+.toolLine :nth-child(1) {
+    text-align: left;
+}
+
+.toolLine {
+    border-top: 1px solid var(--color-dark);
+}
+
+.toolLineHeader :nth-child(4),
+.toolLine :nth-child(4) {
+    text-align: right;
+}
+
+.valueSection p {
+    font-weight: 700;
+}
+
+.contestSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.contestationForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.contestationForm label {
+    width: 100%;
+    text-align: left;
+}
