@@ -1,0 +1,73 @@
+#tableHeader {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5vw;
+}
+
+.guildLine {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5vw;
+    background-color: var(--color-light);
+}
+
+.guildLine p {
+    text-align: center;
+    color: var(--color-dark);
+    font-weight: 700;
+    text-align: center;
+}
+
+#tableHeader p {
+    text-align: center;
+}
+
+#tableHeader :nth-child(1) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(2) {
+    width: 15%;
+}
+
+#tableHeader :nth-child(3) {
+    width: 20%;
+}
+
+#tableHeader :nth-child(4) {
+    width: 20%;
+}
+
+#tableHeader :nth-child(5) {
+    width: 5%;
+}
+
+#tableHeader :nth-child(6) {
+    width: 20%;
+}
+
+
+.guildLine button {
+    background-color: transparent;
+    border: none;
+    flex: 1;
+    cursor: pointer;
+}
+
+.modalContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    padding-bottom: 1vw;
+    border-bottom: 2px solid var(--color-dark);
+    margin-bottom: 1vw;
+}

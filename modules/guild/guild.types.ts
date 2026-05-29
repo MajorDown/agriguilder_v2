@@ -15,3 +15,52 @@ export type PublicGuildWithRules = {
     updated_at: Date;
     rules: PublicRule[];
 }
+
+export type PublicGuildWithData = {
+    name: string;
+    id: string;
+    created_at: Date;
+    city: string;
+    department: string;
+    updated_at: Date;
+    subscriptions: {
+        created_at: Date;
+        package: string;
+        ends_at: Date;
+        revoked_at: Date | null;
+    }[];
+    reinitializations: {
+        admin_id: string;
+        created_at: Date;
+        point_euro_value: number;
+    }[];
+    members: {
+        revoked_at: Date | null;
+        user: {
+            email: string;
+            firstname: string;
+            lastname: string;
+            phone: string;
+        };
+    }[];
+    admins: {
+        revoked_at: Date | null;
+        user: {
+            email: string;
+            firstname: string;
+            lastname: string;
+            phone: string;
+        };
+    }[];
+    rules: {
+        content: string;
+        created_at: Date;
+    }[];
+    tools: {
+        name: string;
+        unit: string;
+        coef: number;
+        version: string;
+        is_active: boolean;
+    }[];
+}
