@@ -43,6 +43,11 @@ export type Dev = Prisma.DevModel
  */
 export type Guild = Prisma.GuildModel
 /**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
  * Model Member
  * 
  */

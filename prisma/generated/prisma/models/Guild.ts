@@ -292,6 +292,7 @@ export type GuildWhereInput = {
   max_contestation_delay?: Prisma.IntFilter<"Guild"> | number
   created_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
+  subscriptions?: Prisma.SubscriptionListRelationFilter
   reinitializations?: Prisma.ReinitializationListRelationFilter
   members?: Prisma.MemberListRelationFilter
   admins?: Prisma.AdminListRelationFilter
@@ -317,6 +318,7 @@ export type GuildOrderByWithRelationInput = {
   max_contestation_delay?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   reinitializations?: Prisma.ReinitializationOrderByRelationAggregateInput
   members?: Prisma.MemberOrderByRelationAggregateInput
   admins?: Prisma.AdminOrderByRelationAggregateInput
@@ -345,6 +347,7 @@ export type GuildWhereUniqueInput = Prisma.AtLeast<{
   max_contestation_delay?: Prisma.IntFilter<"Guild"> | number
   created_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Guild"> | Date | string
+  subscriptions?: Prisma.SubscriptionListRelationFilter
   reinitializations?: Prisma.ReinitializationListRelationFilter
   members?: Prisma.MemberListRelationFilter
   admins?: Prisma.AdminListRelationFilter
@@ -408,6 +411,7 @@ export type GuildCreateInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -433,6 +437,7 @@ export type GuildUncheckedCreateInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -458,6 +463,7 @@ export type GuildUpdateInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -483,6 +489,7 @@ export type GuildUncheckedUpdateInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -622,6 +629,20 @@ export type FloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type GuildCreateNestedOneWithoutSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.GuildCreateWithoutSubscriptionsInput, Prisma.GuildUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.GuildCreateOrConnectWithoutSubscriptionsInput
+  connect?: Prisma.GuildWhereUniqueInput
+}
+
+export type GuildUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.GuildCreateWithoutSubscriptionsInput, Prisma.GuildUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.GuildCreateOrConnectWithoutSubscriptionsInput
+  upsert?: Prisma.GuildUpsertWithoutSubscriptionsInput
+  connect?: Prisma.GuildWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GuildUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.GuildUpdateWithoutSubscriptionsInput>, Prisma.GuildUncheckedUpdateWithoutSubscriptionsInput>
 }
 
 export type GuildCreateNestedOneWithoutMembersInput = {
@@ -764,6 +785,122 @@ export type GuildUpdateOneRequiredWithoutRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GuildUpdateToOneWithWhereWithoutRequestsInput, Prisma.GuildUpdateWithoutRequestsInput>, Prisma.GuildUncheckedUpdateWithoutRequestsInput>
 }
 
+export type GuildCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  latitude?: number | null
+  longitude?: number | null
+  city: string
+  department: string
+  human_hour_point_value?: number
+  max_declaration_delay?: number
+  max_validation_delay?: number
+  max_contestation_delay?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
+  members?: Prisma.MemberCreateNestedManyWithoutGuildInput
+  admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutGuildInput
+  rules?: Prisma.RuleCreateNestedManyWithoutGuildInput
+  tools?: Prisma.ToolCreateNestedManyWithoutGuildInput
+  adjustments?: Prisma.AdjustmentCreateNestedManyWithoutGuildInput
+  interventions?: Prisma.InterventionCreateNestedManyWithoutGuildInput
+  contestations?: Prisma.ContestationCreateNestedManyWithoutGuildInput
+  requests?: Prisma.RequestCreateNestedManyWithoutGuildInput
+}
+
+export type GuildUncheckedCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  latitude?: number | null
+  longitude?: number | null
+  city: string
+  department: string
+  human_hour_point_value?: number
+  max_declaration_delay?: number
+  max_validation_delay?: number
+  max_contestation_delay?: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
+  admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGuildInput
+  rules?: Prisma.RuleUncheckedCreateNestedManyWithoutGuildInput
+  tools?: Prisma.ToolUncheckedCreateNestedManyWithoutGuildInput
+  adjustments?: Prisma.AdjustmentUncheckedCreateNestedManyWithoutGuildInput
+  interventions?: Prisma.InterventionUncheckedCreateNestedManyWithoutGuildInput
+  contestations?: Prisma.ContestationUncheckedCreateNestedManyWithoutGuildInput
+  requests?: Prisma.RequestUncheckedCreateNestedManyWithoutGuildInput
+}
+
+export type GuildCreateOrConnectWithoutSubscriptionsInput = {
+  where: Prisma.GuildWhereUniqueInput
+  create: Prisma.XOR<Prisma.GuildCreateWithoutSubscriptionsInput, Prisma.GuildUncheckedCreateWithoutSubscriptionsInput>
+}
+
+export type GuildUpsertWithoutSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.GuildUpdateWithoutSubscriptionsInput, Prisma.GuildUncheckedUpdateWithoutSubscriptionsInput>
+  create: Prisma.XOR<Prisma.GuildCreateWithoutSubscriptionsInput, Prisma.GuildUncheckedCreateWithoutSubscriptionsInput>
+  where?: Prisma.GuildWhereInput
+}
+
+export type GuildUpdateToOneWithWhereWithoutSubscriptionsInput = {
+  where?: Prisma.GuildWhereInput
+  data: Prisma.XOR<Prisma.GuildUpdateWithoutSubscriptionsInput, Prisma.GuildUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type GuildUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
+  human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
+  members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
+  admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutGuildNestedInput
+  rules?: Prisma.RuleUpdateManyWithoutGuildNestedInput
+  tools?: Prisma.ToolUpdateManyWithoutGuildNestedInput
+  adjustments?: Prisma.AdjustmentUpdateManyWithoutGuildNestedInput
+  interventions?: Prisma.InterventionUpdateManyWithoutGuildNestedInput
+  contestations?: Prisma.ContestationUpdateManyWithoutGuildNestedInput
+  requests?: Prisma.RequestUpdateManyWithoutGuildNestedInput
+}
+
+export type GuildUncheckedUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
+  human_hour_point_value?: Prisma.FloatFieldUpdateOperationsInput | number
+  max_declaration_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_validation_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
+  admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGuildNestedInput
+  rules?: Prisma.RuleUncheckedUpdateManyWithoutGuildNestedInput
+  tools?: Prisma.ToolUncheckedUpdateManyWithoutGuildNestedInput
+  adjustments?: Prisma.AdjustmentUncheckedUpdateManyWithoutGuildNestedInput
+  interventions?: Prisma.InterventionUncheckedUpdateManyWithoutGuildNestedInput
+  contestations?: Prisma.ContestationUncheckedUpdateManyWithoutGuildNestedInput
+  requests?: Prisma.RequestUncheckedUpdateManyWithoutGuildNestedInput
+}
+
 export type GuildCreateWithoutMembersInput = {
   id?: string
   name: string
@@ -777,6 +914,7 @@ export type GuildCreateWithoutMembersInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutGuildInput
@@ -801,6 +939,7 @@ export type GuildUncheckedCreateWithoutMembersInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGuildInput
@@ -841,6 +980,7 @@ export type GuildUpdateWithoutMembersInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutGuildNestedInput
@@ -865,6 +1005,7 @@ export type GuildUncheckedUpdateWithoutMembersInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGuildNestedInput
@@ -889,6 +1030,7 @@ export type GuildCreateWithoutAdminsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutGuildInput
@@ -913,6 +1055,7 @@ export type GuildUncheckedCreateWithoutAdminsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGuildInput
@@ -953,6 +1096,7 @@ export type GuildUpdateWithoutAdminsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutGuildNestedInput
@@ -977,6 +1121,7 @@ export type GuildUncheckedUpdateWithoutAdminsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGuildNestedInput
@@ -1001,6 +1146,7 @@ export type GuildCreateWithoutEmployeesInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1025,6 +1171,7 @@ export type GuildUncheckedCreateWithoutEmployeesInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1065,6 +1212,7 @@ export type GuildUpdateWithoutEmployeesInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1089,6 +1237,7 @@ export type GuildUncheckedUpdateWithoutEmployeesInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1113,6 +1262,7 @@ export type GuildCreateWithoutReinitializationsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutGuildInput
@@ -1137,6 +1287,7 @@ export type GuildUncheckedCreateWithoutReinitializationsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGuildInput
@@ -1177,6 +1328,7 @@ export type GuildUpdateWithoutReinitializationsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutGuildNestedInput
@@ -1201,6 +1353,7 @@ export type GuildUncheckedUpdateWithoutReinitializationsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGuildNestedInput
@@ -1225,6 +1378,7 @@ export type GuildCreateWithoutRulesInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1249,6 +1403,7 @@ export type GuildUncheckedCreateWithoutRulesInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1289,6 +1444,7 @@ export type GuildUpdateWithoutRulesInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1313,6 +1469,7 @@ export type GuildUncheckedUpdateWithoutRulesInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1337,6 +1494,7 @@ export type GuildCreateWithoutToolsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1361,6 +1519,7 @@ export type GuildUncheckedCreateWithoutToolsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1401,6 +1560,7 @@ export type GuildUpdateWithoutToolsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1425,6 +1585,7 @@ export type GuildUncheckedUpdateWithoutToolsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1449,6 +1610,7 @@ export type GuildCreateWithoutAdjustmentsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1473,6 +1635,7 @@ export type GuildUncheckedCreateWithoutAdjustmentsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1513,6 +1676,7 @@ export type GuildUpdateWithoutAdjustmentsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1537,6 +1701,7 @@ export type GuildUncheckedUpdateWithoutAdjustmentsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1561,6 +1726,7 @@ export type GuildCreateWithoutInterventionsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1585,6 +1751,7 @@ export type GuildUncheckedCreateWithoutInterventionsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1625,6 +1792,7 @@ export type GuildUpdateWithoutInterventionsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1649,6 +1817,7 @@ export type GuildUncheckedUpdateWithoutInterventionsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1673,6 +1842,7 @@ export type GuildCreateWithoutContestationsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1697,6 +1867,7 @@ export type GuildUncheckedCreateWithoutContestationsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1737,6 +1908,7 @@ export type GuildUpdateWithoutContestationsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1761,6 +1933,7 @@ export type GuildUncheckedUpdateWithoutContestationsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1785,6 +1958,7 @@ export type GuildCreateWithoutRequestsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminCreateNestedManyWithoutGuildInput
@@ -1809,6 +1983,7 @@ export type GuildUncheckedCreateWithoutRequestsInput = {
   max_contestation_delay?: number
   created_at?: Date | string
   updated_at?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutGuildInput
   reinitializations?: Prisma.ReinitializationUncheckedCreateNestedManyWithoutGuildInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutGuildInput
   admins?: Prisma.AdminUncheckedCreateNestedManyWithoutGuildInput
@@ -1849,6 +2024,7 @@ export type GuildUpdateWithoutRequestsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUpdateManyWithoutGuildNestedInput
@@ -1873,6 +2049,7 @@ export type GuildUncheckedUpdateWithoutRequestsInput = {
   max_contestation_delay?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutGuildNestedInput
   reinitializations?: Prisma.ReinitializationUncheckedUpdateManyWithoutGuildNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutGuildNestedInput
   admins?: Prisma.AdminUncheckedUpdateManyWithoutGuildNestedInput
@@ -1890,6 +2067,7 @@ export type GuildUncheckedUpdateWithoutRequestsInput = {
  */
 
 export type GuildCountOutputType = {
+  subscriptions: number
   reinitializations: number
   members: number
   admins: number
@@ -1903,6 +2081,7 @@ export type GuildCountOutputType = {
 }
 
 export type GuildCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  subscriptions?: boolean | GuildCountOutputTypeCountSubscriptionsArgs
   reinitializations?: boolean | GuildCountOutputTypeCountReinitializationsArgs
   members?: boolean | GuildCountOutputTypeCountMembersArgs
   admins?: boolean | GuildCountOutputTypeCountAdminsArgs
@@ -1923,6 +2102,13 @@ export type GuildCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the GuildCountOutputType
    */
   select?: Prisma.GuildCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * GuildCountOutputType without action
+ */
+export type GuildCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionWhereInput
 }
 
 /**
@@ -2009,6 +2195,7 @@ export type GuildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   max_contestation_delay?: boolean
   created_at?: boolean
   updated_at?: boolean
+  subscriptions?: boolean | Prisma.Guild$subscriptionsArgs<ExtArgs>
   reinitializations?: boolean | Prisma.Guild$reinitializationsArgs<ExtArgs>
   members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   admins?: boolean | Prisma.Guild$adminsArgs<ExtArgs>
@@ -2069,6 +2256,7 @@ export type GuildSelectScalar = {
 
 export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "city" | "department" | "human_hour_point_value" | "max_declaration_delay" | "max_validation_delay" | "max_contestation_delay" | "created_at" | "updated_at", ExtArgs["result"]["guild"]>
 export type GuildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  subscriptions?: boolean | Prisma.Guild$subscriptionsArgs<ExtArgs>
   reinitializations?: boolean | Prisma.Guild$reinitializationsArgs<ExtArgs>
   members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   admins?: boolean | Prisma.Guild$adminsArgs<ExtArgs>
@@ -2087,6 +2275,7 @@ export type GuildIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $GuildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Guild"
   objects: {
+    subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     reinitializations: Prisma.$ReinitializationPayload<ExtArgs>[]
     members: Prisma.$MemberPayload<ExtArgs>[]
     admins: Prisma.$AdminPayload<ExtArgs>[]
@@ -2505,6 +2694,7 @@ readonly fields: GuildFieldRefs;
  */
 export interface Prisma__GuildClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  subscriptions<T extends Prisma.Guild$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reinitializations<T extends Prisma.Guild$reinitializationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$reinitializationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReinitializationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   members<T extends Prisma.Guild$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   admins<T extends Prisma.Guild$adminsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2946,6 +3136,30 @@ export type GuildDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Guilds to delete.
    */
   limit?: number
+}
+
+/**
+ * Guild.subscriptions
+ */
+export type Guild$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
 }
 
 /**

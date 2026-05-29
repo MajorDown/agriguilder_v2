@@ -81,6 +81,7 @@ model Guild {
   created_at             DateTime @default(now())
   updated_at             DateTime @updatedAt
 
+  subscriptions     Subscription[]
   reinitializations Reinitialization[]
   members           Member[]
   admins            Admin[]
@@ -91,6 +92,18 @@ model Guild {
   interventions     Intervention[]
   contestations     Contestation[]
   requests          Request[]
+}
+
+model Subscription {
+  id         String    @id @default(uuid())
+  guild_id   String
+  package    String // définira les limites métiers (nombre max de membres et d'admin)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  ends_at    DateTime
+  revoked_at DateTime?
+
+  guild Guild @relation(fields: [guild_id], references: [id], onDelete: Cascade)
 }
 
 model Member {

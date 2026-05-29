@@ -56,6 +56,7 @@ export const ModelName = {
   Session: 'Session',
   Dev: 'Dev',
   Guild: 'Guild',
+  Subscription: 'Subscription',
   Member: 'Member',
   Admin: 'Admin',
   Employee: 'Employee',
@@ -154,6 +155,19 @@ export const GuildScalarFieldEnum = {
 } as const
 
 export type GuildScalarFieldEnum = (typeof GuildScalarFieldEnum)[keyof typeof GuildScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  guild_id: 'guild_id',
+  package: 'package',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  ends_at: 'ends_at',
+  revoked_at: 'revoked_at'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
 export const MemberScalarFieldEnum = {

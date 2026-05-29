@@ -1,10 +1,10 @@
 'use client';
 import AppPage from "@/components/application/ui/AppPage";
 
-export default function GestionPage() {
+export default function InscriptionPage() {
 
     return (
-        <AppPage title="Gestion de l'application" forDev>
+        <AppPage title="Inscription d'une nouvelle guilde" forDev>
             <p>en cours</p>
         </AppPage>
     );

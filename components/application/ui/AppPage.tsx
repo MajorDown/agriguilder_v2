@@ -13,6 +13,7 @@ type AccessRequirement = Role | 'visiteur' | 'user';
 export type AppPageProps = PropsWithChildren<{
     title?: string;
     requiredRole?: AccessRequirement[];
+    forDev?: boolean; // si la page exige d'être dev
 }>;
 
 export default function AppPage(props: AppPageProps) {
@@ -61,7 +62,7 @@ export default function AppPage(props: AppPageProps) {
         <>
             {isConnected && <NavBar />}
             <article className={styles.appPage}>
-                {isAuthorized ? (
+                {(isAuthorized || (props.forDev && user?.isDev)) ? (
                     <>
                         {props.title && <h2>{props.title}</h2>}
                         {props.children}

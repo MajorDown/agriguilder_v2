@@ -78,13 +78,19 @@ export default function NavBar() {
             image={"options"} 
             selected={pathname === "/options"} 
         />
-        {user?.isDev && (
+        {user?.isDev && (<>
             <NavLink 
                 href={"/gestion"} 
                 label={"Gestion"} 
-                image={"jugement"} 
+                image={"guilde"} 
                 selected={pathname === "/gestion"} 
             />
-        )}
+            <NavLink
+                href={"/inscription"}
+                label={"Inscription"}
+                image={"admin"}
+                selected={pathname === "/inscription"}
+            />
+        </>)}
     </nav>)
 }
