@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Documentation technique
 
-## Getting Started
+## Pages
 
-First, run the development server:
+### Application générale
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+| `/connexion` | `app/(application)/connexion/page.tsx` | Connexion utilisateur |
+| `/dashboard` | `app/(application)/dashboard/page.tsx` | Tableau de bord |
+| `/guilde` | `app/(application)/guilde/page.tsx` | Informations de guilde |
+| `/options` | `app/(application)/options/page.tsx` | Options utilisateur |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Espace membre
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| `/declarer` | `app/(application)/(membre)/declarer/page.tsx` | Déclaration d’intervention |
+| `/historique` | `app/(application)/(membre)/historique/page.tsx` | Historique membre |
+| `/soldes` | `app/(application)/(membre)/soldes/page.tsx` | Soldes / points |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Espace admin
 
-## Learn More
+| `/membres` | `app/(application)/(admin)/membres/page.tsx` | Gestion des membres |
+| `/outils` | `app/(application)/(admin)/outils/page.tsx` | Gestion des outils |
+| `/interventions` | `app/(application)/(admin)/interventions/page.tsx` | Gestion des interventions |
+| `/contestations` | `app/(application)/(admin)/contestations/page.tsx` | Gestion des contestations |
 
-To learn more about Next.js, take a look at the following resources:
+### Espace dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| `/gestion` | `app/(application)/(dev)/gestion/page.tsx` | Gestion globale de l’application |
+| `/inscription` | `app/(application)/(dev)/inscription/page.tsx` | Inscription / création d’une guilde |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Endpoints API
 
-## Deploy on Vercel
+### Auth / session
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| `POST` | `/api/session/login` | Connexion utilisateur |
+| `POST` | `/api/session/logout` | Déconnexion utilisateur |
+| `POST` | `/api/session/refresh` | Rafraîchissement de session |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### User
+
+| `POST` | `/api/user/signup` | Création de compte |
+| `GET` | `/api/user/get-context` | Récupération du contexte utilisateur |
+| `PUT` | `/api/user/update/infos` | Mise à jour des informations utilisateur |
+| `PUT` | `/api/user/update/email` | Mise à jour email |
+| `PUT` | `/api/user/update/password` | Mise à jour mot de passe |
+
+### Email auth code
+
+| `POST` | `/api/email-auth-code/create` | Création d’un code email |
+| `POST` | `/api/email-auth-code/check` | Vérification d’un code email |
+
+### Guild
+
+| `GET` | `/api/guild/get-all` | Liste des guildes, réservé dev |
+| `POST` | `/api/guild/create` | Création d’une guilde |
+| `GET` | `/api/guild/get-informations/[guildName]` | Informations d’une guilde |
+
+### Dashboard
+
+| `GET` | `/api/dashboard/admin/[guildName]` | Données dashboard admin |
+| `GET` | `/api/dashboard/member/[guildName]` | Données dashboard membre |
+
+### Members
+
+| `GET` | `/api/member/get-by-guild/[guildName]` | Liste des membres d’une guilde |
+| `POST` | `/api/member/create` | Création d’un membre |
+| `POST` | `/api/member/check-by-email` | Vérification d’un membre par email |
+| `DELETE` | `/api/member/delete` | Suppression / révocation d’un membre |
+
+### Tools
+
+| `GET` | `/api/tool/get-by-guild/[guildName]` | Liste des outils d’une guilde |
+| `POST` | `/api/tool/create` | Création d’un outil |
+| `PUT` | `/api/tool/update` | Mise à jour d’un outil |
+| `PUT` | `/api/tool/update/status` | Activation / désactivation d’un outil |
+| `DELETE` | `/api/tool/delete` | Suppression / révocation d’un outil |
+
+### Rules
+
+| `POST` | `/api/rule/create` | Création d’une règle |
+| `PUT` | `/api/rule/update` | Mise à jour d’une règle |
+| `DELETE` | `/api/rule/delete` | Suppression d’une règle |
+
+### Interventions
+
+| `POST` | `/api/intervention/create` | Création d’une intervention |
+| `GET` | `/api/intervention/get-by-guild/[guildName]` | Liste des interventions d’une guilde |
+| `GET` | `/api/intervention/get-by-member/[guildName]` | Liste des interventions du membre connecté |
+
+### Contestations
+
+| `POST` | `/api/contestation/create` | Création d’une contestation |
+| `GET` | `/api/contestation/get-by-guild/[guildName]` | Liste des contestations d’une guilde |
+| `PUT` | `/api/contestation/resolve` | Résolution d’une contestation |
+
+### Adjustments
+
+| `POST` | `/api/adjustment/create` | Création d’un ajustement de points |
+
+### Bootstrap
+
+| `GET` | `/api/bootstrap` | Initialisation / données de démarrage |
