@@ -5,7 +5,7 @@ export type CreateReinitializationInput = {
     department: string;
     humanHourPointValue: number;
     maxDeclarationDelay: number;
-    maxValidationDelay: number;
+    maxValidationDelay?: number;
     maxContestationDelay: number;
     pointEuroValue: number;
     confirm: boolean;

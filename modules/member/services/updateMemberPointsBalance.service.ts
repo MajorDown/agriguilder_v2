@@ -2,6 +2,7 @@ import { prisma } from "@/prisma/prisma";
 import { InterventionStatus } from "@/prisma/generated/prisma/enums";
 import ErrorManager from "@/managers/ErrorManager";
 import { Prisma } from "@/prisma/generated/prisma/client";
+import { getLastReinitializationDate } from "@/modules/reinitialization/services/getLastReinitializationDate.service";
 
 type InterventionForPoints = {
     worker_id: string;
@@ -24,11 +25,6 @@ export function computeInterventionPoints(intervention: InterventionForPoints): 
     }, 0);
 }
 
-/**
- * @description recalcule et met à jour le solde de points d'un membre
- * @param memberId l'id du membre dont on veut recalculer le solde de points
- * @return le nouveau solde de points du membre
- */
 export async function updateMemberPointsBalance(memberId: string): Promise<number> {
     const member = await prisma.member.findUnique({
         where: { id: memberId },
@@ -46,19 +42,7 @@ export async function updateMemberPointsBalance(memberId: string): Promise<numbe
         });
     }
 
-    const lastReinitialization = await prisma.reinitialization.findFirst({
-        where: {
-            guild_id: member.guild_id,
-        },
-        orderBy: {
-            created_at: "desc",
-        },
-        select: {
-            created_at: true,
-        },
-    });
-
-    const lastReinitializationDate = lastReinitialization?.created_at ?? null;
+    const lastReinitializationDate = await getLastReinitializationDate(member.guild_id);
 
     const adjustmentWhere: Prisma.AdjustmentWhereInput = {
         guild_id: member.guild_id,
@@ -78,7 +62,7 @@ export async function updateMemberPointsBalance(memberId: string): Promise<numbe
             { payer_id: member.id },
         ],
         ...(lastReinitializationDate && {
-            day: {
+            created_at: {
                 gt: lastReinitializationDate,
             },
         }),

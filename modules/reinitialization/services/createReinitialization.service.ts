@@ -22,6 +22,8 @@ export async function createReinitialization(
     input: CreateReinitializationInput
 ): Promise<CreateReinitializationResult> {
     try {
+        const enforcedMaxValidationDelay = 0;
+
         if (!input.confirm) {
             throw ErrorManager.create({
                 statusCode: 400,
@@ -32,7 +34,6 @@ export async function createReinitialization(
 
         assertPositiveOrZero(input.humanHourPointValue, "humanHourPointValue");
         assertPositiveOrZero(input.maxDeclarationDelay, "maxDeclarationDelay");
-        assertPositiveOrZero(input.maxValidationDelay, "maxValidationDelay");
         assertPositiveOrZero(input.maxContestationDelay, "maxContestationDelay");
         assertPositiveOrZero(input.pointEuroValue, "pointEuroValue");
 
@@ -163,7 +164,7 @@ export async function createReinitialization(
                     department: input.department,
                     human_hour_point_value: input.humanHourPointValue,
                     max_declaration_delay: input.maxDeclarationDelay,
-                    max_validation_delay: input.maxValidationDelay,
+                    max_validation_delay: enforcedMaxValidationDelay,
                     max_contestation_delay: input.maxContestationDelay,
                 },
                 select: {
@@ -227,7 +228,7 @@ export async function createReinitialization(
                 department: result.updatedGuild.department,
                 humanHourPointValue: result.updatedGuild.human_hour_point_value,
                 maxDeclarationDelay: result.updatedGuild.max_declaration_delay,
-                maxValidationDelay: result.updatedGuild.max_validation_delay,
+                maxValidationDelay: enforcedMaxValidationDelay,
                 maxContestationDelay: result.updatedGuild.max_contestation_delay,
                 pointEuroValue: input.pointEuroValue,
                 lines: result.reportLines,

@@ -21,7 +21,7 @@ export default function GuildPage() {
             {errorMessage && <p>{errorMessage}</p>}
             {!isLoading && !errorMessage && guild && (
                 <>
-                    <GuildInformations guild={guild} />
+                    <GuildInformations guild={guild} onGuildUpdated={refreshGuild} />
                     <RuleTable rules={guild.rules} guildName={guild.name} onRefresh={refreshGuild} />
                 </>
             )}

@@ -27,10 +27,8 @@ export class CreateReinitializationDto extends DTO {
     @range(0, 3650)
     maxDeclarationDelay!: number;
 
-    @isRequired()
     @isNumber()
-    @range(0, 3650)
-    maxValidationDelay!: number;
+    maxValidationDelay?: number;
 
     @isRequired()
     @isNumber()

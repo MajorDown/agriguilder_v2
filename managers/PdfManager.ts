@@ -173,7 +173,7 @@ class PdfManager {
                 });
                 y -= 16;
                 entries.push({
-                    text: `Heure humaine : ${this.formatNumber(report.humanHourPointValue)} point(s) | 1 point = ${this.formatNumber(report.pointEuroValue)} EUR`,
+                    text: `Valeur du point : ${this.formatNumber(report.pointEuroValue)} EUR`,
                     x: 40,
                     y,
                     font: "F1",

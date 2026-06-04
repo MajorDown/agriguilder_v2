@@ -7,13 +7,12 @@ import { verifyAdminAuth } from "@/modules/admin/services/verifyAdminAuth.servic
 import { CreateReinitializationDto } from "@/modules/reinitialization/dto/CreateReinitialization.dto";
 import { createReinitialization } from "@/modules/reinitialization/services/createReinitialization.service";
 
-function slugify(value: string): string {
-    return value
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-zA-Z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .toLowerCase();
+function formatFileDate(value: Date): string {
+    const day = value.getDate().toString().padStart(2, "0");
+    const month = (value.getMonth() + 1).toString().padStart(2, "0");
+    const year = value.getFullYear().toString().slice(-2);
+
+    return `${day}.${month}.${year}`;
 }
 
 export async function POST(request: NextRequest) {
@@ -40,7 +39,7 @@ export async function POST(request: NextRequest) {
             department: dto.department,
             humanHourPointValue: dto.humanHourPointValue,
             maxDeclarationDelay: dto.maxDeclarationDelay,
-            maxValidationDelay: dto.maxValidationDelay,
+            maxValidationDelay: 0,
             maxContestationDelay: dto.maxContestationDelay,
             pointEuroValue: dto.pointEuroValue,
             confirm: dto.confirm,
@@ -48,8 +47,8 @@ export async function POST(request: NextRequest) {
         });
 
         const pdfBuffer = PdfManager.buildReinitializationReport(result.report);
-        const generatedAt = result.createdAt.toISOString().slice(0, 10);
-        const fileName = `rapport-reinitialisation-${slugify(result.guildName)}-${generatedAt}.pdf`;
+        const fileDate = formatFileDate(result.createdAt);
+        const fileName = `guilde ${result.guildName} - réinitialisation du ${fileDate}.pdf`;
 
         return new NextResponse(new Uint8Array(pdfBuffer), {
             status: 200,

@@ -1,0 +1,66 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.introduction,
+.warning,
+.error,
+.success,
+.previewHeader p,
+.previewHeader h4 {
+    color: var(--color-dark);
+}
+
+.warning {
+    font-weight: 700;
+}
+
+.error {
+    color: #b42318;
+    font-weight: 700;
+}
+
+.success {
+    color: #027a48;
+    font-weight: 700;
+}
+
+.inlineFields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.previewSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.previewActions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.previewFrame {
+    width: 100%;
+    min-height: 70vh;
+    border: 1px solid var(--color-dark);
+    background: white;
+}

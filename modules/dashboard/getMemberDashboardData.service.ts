@@ -2,14 +2,15 @@ import { prisma } from '@/prisma/prisma';
 import type { MemberDashboardData } from './dashboard.types';
 import ErrorManager from '@/managers/ErrorManager';
 import { getGuildByName } from '../guild/services/getGuildByName.service';
+import { getLastReinitializationDate } from '../reinitialization/services/getLastReinitializationDate.service';
 
 export async function getMemberDashboardData(
     guildName: string,
     memberId: string
 ): Promise<MemberDashboardData> {
     try {
-        console.log('guildeName:', guildName);
         const guild = await getGuildByName(guildName);
+
         if (!guild) {
             throw ErrorManager.create({
                 statusCode: 404,
@@ -17,6 +18,7 @@ export async function getMemberDashboardData(
                 message: 'Guilde non trouvée',
             });
         }
+
         const member = await prisma.member.findUnique({
             where: {
                 id: memberId,
@@ -27,6 +29,7 @@ export async function getMemberDashboardData(
                 points_balance: true,
             },
         });
+
         if (!member) {
             throw ErrorManager.create({
                 statusCode: 404,
@@ -34,6 +37,7 @@ export async function getMemberDashboardData(
                 message: 'Membre non trouvé',
             });
         }
+
         if (member.guild_id !== guild.id) {
             throw ErrorManager.create({
                 statusCode: 403,
@@ -41,8 +45,11 @@ export async function getMemberDashboardData(
                 message: "Le membre n'appartient pas à la guilde",
             });
         }
+
+        const lastReinitializationDate = await getLastReinitializationDate(guild.id);
         const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
         const startOfNextMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1);
+
         const interventions = await prisma.intervention.findMany({
             where: {
                 guild_id: guild.id,
@@ -50,6 +57,11 @@ export async function getMemberDashboardData(
                     { worker_id: memberId },
                     { payer_id: memberId },
                 ],
+                ...(lastReinitializationDate && {
+                    created_at: {
+                        gt: lastReinitializationDate,
+                    },
+                }),
             },
             select: {
                 id: true,
@@ -65,13 +77,23 @@ export async function getMemberDashboardData(
                 },
             },
         });
+
         const contestations = await prisma.contestation.findMany({
             where: {
                 guild_id: guild.id,
                 intervention: {
-                    OR: [
-                        { worker_id: memberId },
-                        { payer_id: memberId },
+                    AND: [
+                        {
+                            OR: [
+                                { worker_id: memberId },
+                                { payer_id: memberId },
+                            ],
+                        },
+                        ...(lastReinitializationDate ? [{
+                            created_at: {
+                                gt: lastReinitializationDate,
+                            },
+                        }] : []),
                     ],
                 },
             },
@@ -82,39 +104,46 @@ export async function getMemberDashboardData(
                 created_at: true,
             },
         });
+
         const interventionsThisMonth = interventions.filter(
             (intervention) =>
                 intervention.created_at >= startOfMonth &&
                 intervention.created_at < startOfNextMonth
         );
+
         const asWorker = interventions.filter(
             (intervention) => intervention.worker_id === memberId
         ).length;
+
         const asPayer = interventions.filter(
             (intervention) => intervention.payer_id === memberId
         ).length;
+
         const pendingOtherValidation = interventions.filter(
             (intervention) =>
                 intervention.worker_id === memberId &&
                 intervention.status === 'DECLARE'
         ).length;
+
         const pendingMyValidation = interventions.filter(
             (intervention) =>
                 intervention.payer_id === memberId &&
                 intervention.status === 'DECLARE'
         ).length;
+
         const allTools = interventions.flatMap((intervention) => intervention.used_tools);
-        const thisMonthTools = interventionsThisMonth.flatMap(
-            (intervention) => intervention.used_tools
-        );
+        const thisMonthTools = interventionsThisMonth.flatMap((intervention) => intervention.used_tools);
+
         const uniqueTools = new Map<string, string>();
         for (const tool of allTools) {
             uniqueTools.set(tool.id, tool.name);
         }
+
         const uniqueThisMonthTools = new Set<string>();
         for (const tool of thisMonthTools) {
             uniqueThisMonthTools.add(tool.id);
         }
+
         const toolUsageCount = new Map<string, { name: string; count: number }>();
         for (const tool of allTools) {
             const existing = toolUsageCount.get(tool.id);
@@ -127,20 +156,25 @@ export async function getMemberDashboardData(
                 });
             }
         }
+
         const topTools = Array.from(toolUsageCount.values())
             .sort((a, b) => b.count - a.count)
             .slice(0, 3);
+
         const contestationsThisMonth = contestations.filter(
             (contestation) =>
                 contestation.created_at >= startOfMonth &&
                 contestation.created_at < startOfNextMonth
         );
+
         const contestationsFromMe = contestations.filter(
             (contestation) => contestation.contester_id === memberId
         ).length;
+
         const pendingContestations = contestations.filter(
             (contestation) => contestation.status === 'EN_ATTENTE'
         ).length;
+
         return {
             pointsBalance: member.points_balance,
             interventions: {
@@ -171,8 +205,7 @@ export async function getMemberDashboardData(
         throw ErrorManager.throwOrCreate(error, {
             statusCode: 500,
             code: 'MEMBER_DASHBOARD_DATA_ERROR',
-            message:
-                'Erreur lors de la récupération des données du tableau de bord membre',
+            message: 'Erreur lors de la récupération des données du tableau de bord membre',
         });
     }
 }
