@@ -33,6 +33,17 @@ export type PublicGuildWithRules = {
     max_contestation_delay: number;
     created_at: Date;
     updated_at: Date;
+    admins: {
+        id: string;
+        created_at: Date;
+        user: {
+            email: string;
+            firstname: string;
+            lastname: string;
+            phone: string;
+            society: string | null;
+        };
+    }[];
     rules: PublicRule[];
 }
 

@@ -1,5 +1,6 @@
 'use client';
 
+import CreateAdminForm from "@/components/application/forms/CreateAdminForm";
 import CreateReinitializationForm from "@/components/application/forms/CreateReinitializationForm";
 import AppBtn from "@/components/application/ui/buttons/AppBtn";
 import useModal from "@/contexts/modalContext/useModal";
@@ -13,8 +14,24 @@ export type GuildInformationsProps = {
 };
 
 export default function GuildInformations(props: GuildInformationsProps) {
-    const { openModal } = useModal();
+    const { openModal, closeModal } = useModal();
     const { selectedRole } = useUserContext();
+
+    const handleOpenCreateAdminModal = () => {
+        openModal({
+            title: "Créer un nouvel admin",
+            size: "medium",
+            content: (
+                <CreateAdminForm
+                    guildName={props.guild.name}
+                    onSuccess={async () => {
+                        closeModal();
+                        await props.onGuildUpdated?.();
+                    }}
+                />
+            ),
+        });
+    };
 
     const handleOpenReinitializationModal = () => {
         openModal({
@@ -75,6 +92,27 @@ export default function GuildInformations(props: GuildInformationsProps) {
                     )}
                 </div>
             </div>
+            <div className={styles.line}>
+                <div className={styles.column}>
+                    <p>Administrateurs :</p>
+                    {props.guild.admins.length > 0 ? (
+                        props.guild.admins.map((admin) => (
+                            <p key={admin.id}>
+                                {admin.user.firstname} {admin.user.lastname} - {admin.user.email}
+                            </p>
+                        ))
+                    ) : (
+                        <p>Aucun admin actif.</p>
+                    )}
+                </div>
+            </div>
+            {selectedRole === "admin" && (
+                <AppBtn
+                    label="Créer un nouvel admin"
+                    color="light"
+                    onClick={handleOpenCreateAdminModal}
+                />
+            )}
         </section>
     );
 }

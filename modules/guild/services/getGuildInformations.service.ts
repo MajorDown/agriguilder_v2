@@ -7,6 +7,27 @@ export async function getGuildInformations(guildName: string): Promise<PublicGui
         const guild = await prisma.guild.findUnique({
             where: { name: guildName },
             include: {
+                admins: {
+                    where: {
+                        revoked_at: null,
+                    },
+                    select: {
+                        id: true,
+                        created_at: true,
+                        user: {
+                            select: {
+                                email: true,
+                                firstname: true,
+                                lastname: true,
+                                phone: true,
+                                society: true,
+                            },
+                        },
+                    },
+                    orderBy: {
+                        created_at: "asc",
+                    },
+                },
                 rules: {
                     select: {
                         id: true,
@@ -36,6 +57,7 @@ export async function getGuildInformations(guildName: string): Promise<PublicGui
             max_contestation_delay: guild.max_contestation_delay,
             created_at: guild.created_at,
             updated_at: guild.updated_at,
+            admins: guild.admins,
             rules: guild.rules.map(rule => ({
                 id: rule.id,
                 content: rule.content,
