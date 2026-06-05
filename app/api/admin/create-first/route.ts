@@ -2,13 +2,14 @@ import { NextRequest } from "next/server";
 import RequestManager from "@/managers/RequestManager";
 import ResponseManager from "@/managers/ResponseManager";
 import TokenManager from "@/managers/TokenManager";
-import { CreateGuildDto } from "@/modules/guild/dto/CreateGuild.dto";
-import { createGuild } from "@/modules/guild/services/createGuild.service";
+import { CreateFirstGuildAdminDto } from "@/modules/admin/dto/CreateFirstGuildAdmin.dto";
+import { createFirstGuildAdmin } from "@/modules/admin/services/createFirstGuildAdmin.service";
 import { verifyUserIsDev } from "@/modules/dev/services/verifyUserIsDev.service";
 
 export async function POST(request: NextRequest) {
     try {
-        const { access_token, dto } = await RequestManager.extract(request, CreateGuildDto);
+        const { access_token, dto } = await RequestManager.extract(request, CreateFirstGuildAdminDto);
+
         if (!access_token) {
             return ResponseManager.error({
                 statusCode: 401,
@@ -16,19 +17,20 @@ export async function POST(request: NextRequest) {
                 message: "Token d'accès manquant",
             });
         }
+
         const payload = TokenManager.verifyAccessToken(access_token);
         await verifyUserIsDev(payload.accountId);
 
-        const guild = await createGuild({
-            name: dto.name.trim(),
-            city: dto.city.trim(),
-            department: dto.department.trim(),
-            humanHourPointValue: dto.humanHourPointValue,
-            maxDeclarationDelay: dto.maxDeclarationDelay,
-            maxContestationDelay: dto.maxContestationDelay,
+        const admin = await createFirstGuildAdmin({
+            guildId: dto.guildId,
+            email: dto.email.trim(),
+            firstname: dto.firstname.trim(),
+            lastname: dto.lastname.trim(),
+            phone: dto.phone.trim(),
+            society: dto.society?.trim() || undefined,
         });
 
-        return ResponseManager.created(guild);
+        return ResponseManager.created(admin);
     } catch (error) {
         return ResponseManager.error(error);
     }

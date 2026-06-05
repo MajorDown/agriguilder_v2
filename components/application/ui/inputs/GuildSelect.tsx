@@ -18,10 +18,14 @@ type GuildSelectProps = {
  */
 export default function GuildSelect(props: GuildSelectProps) {
     const router = useRouter();
-    const { selectedGuild, setSelectedGuild } = useUserContext();
+    const { selectedGuild, setSelectedGuild, setSelectedRole, user } = useUserContext();
 
     const handleGuildChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedGuild(e.target.value);
+        const nextGuild = e.target.value;
+        const nextRole = user?.relations.find((relation) => relation.guildName === nextGuild)?.role ?? null;
+
+        setSelectedGuild(nextGuild);
+        setSelectedRole(nextRole);
         router.push(`/dashboard`);
     }
 

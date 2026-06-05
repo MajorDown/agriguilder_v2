@@ -8,6 +8,9 @@ export class CreateGuildDto extends DTO {
     @isRequired()
     @isString()
     city!: string;
+
+    @isRequired()
+    @isString()
     department!: string;
 
     @isRequired()

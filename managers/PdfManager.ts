@@ -9,8 +9,8 @@ type PdfTextEntry = {
 };
 
 class PdfManager {
-    private static readonly pageWidth = 842;
-    private static readonly pageHeight = 595;
+    private static readonly pageWidth = 595;
+    private static readonly pageHeight = 842;
 
     private static escape(value: string): string {
         return value
@@ -56,10 +56,10 @@ class PdfManager {
         };
 
         const fontObjectId = {
-            helvetica: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"),
-            helveticaBold: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"),
-            courier: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>"),
-            courierBold: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >>"),
+            helvetica: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"),
+            helveticaBold: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"),
+            courier: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>"),
+            courierBold: addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding >>"),
         };
 
         const pagesId = addObject("<< /Type /Pages /Kids [] /Count 0 >>");
@@ -102,8 +102,8 @@ class PdfManager {
     }
 
     static buildReinitializationReport(report: ReinitializationReport): Buffer {
-        const firstPageRows = 18;
-        const nextPageRows = 24;
+        const firstPageRows = 28;
+        const nextPageRows = 34;
         const pages: PdfTextEntry[][] = [];
         const rows = report.lines.length > 0 ? report.lines : [{
             memberId: "none",
@@ -129,27 +129,19 @@ class PdfManager {
 
         chunks.forEach((chunk, pageIndex) => {
             const entries: PdfTextEntry[] = [];
-            let y = 555;
+            let y = 802;
 
             if (pageIndex === 0) {
                 entries.push({
-                    text: "Rapport de reinitialisation de guilde",
+                    text: "Agriguilder - Rapport de Pr\u00E9-r\u00E9initialisation de guilde",
                     x: 40,
                     y,
                     font: "F2",
-                    size: 18,
+                    size: 17,
                 });
                 y -= 28;
                 entries.push({
-                    text: `Guilde precedente : ${report.previousGuildName}`,
-                    x: 40,
-                    y,
-                    font: "F1",
-                    size: 11,
-                });
-                y -= 16;
-                entries.push({
-                    text: `Guilde appliquee : ${report.guildName}`,
+                    text: `Guilde pr\u00E9c\u00E9dente : ${report.previousGuildName}`,
                     x: 40,
                     y,
                     font: "F1",
@@ -165,14 +157,6 @@ class PdfManager {
                 });
                 y -= 16;
                 entries.push({
-                    text: `Localisation : ${report.city} (${report.department})`,
-                    x: 40,
-                    y,
-                    font: "F1",
-                    size: 11,
-                });
-                y -= 16;
-                entries.push({
                     text: `Valeur du point : ${this.formatNumber(report.pointEuroValue)} EUR`,
                     x: 40,
                     y,
@@ -181,7 +165,7 @@ class PdfManager {
                 });
                 y -= 16;
                 entries.push({
-                    text: `Delais : declaration ${report.maxDeclarationDelay} j | validation ${report.maxValidationDelay} j | contestation ${report.maxContestationDelay} j`,
+                    text: `D\u00E9lais : d\u00E9claration ${report.maxDeclarationDelay} j | contestation ${report.maxContestationDelay} j`,
                     x: 40,
                     y,
                     font: "F1",
@@ -190,7 +174,7 @@ class PdfManager {
                 y -= 28;
             } else {
                 entries.push({
-                    text: `Rapport de reinitialisation - ${report.guildName} - page ${pageIndex + 1}`,
+                    text: `Agriguilder - Rapport de Pr\u00E9-r\u00E9initialisation - page ${pageIndex + 1}`,
                     x: 40,
                     y,
                     font: "F2",
@@ -200,12 +184,12 @@ class PdfManager {
             }
 
             entries.push({ text: "Membre", x: 40, y, font: "F4", size: 10 });
-            entries.push({ text: "Email", x: 250, y, font: "F4", size: 10 });
-            entries.push({ text: "Solde final", x: 560, y, font: "F4", size: 10 });
-            entries.push({ text: "Valeur EUR", x: 680, y, font: "F4", size: 10 });
+            entries.push({ text: "Email", x: 185, y, font: "F4", size: 10 });
+            entries.push({ text: "Solde final", x: 430, y, font: "F4", size: 10 });
+            entries.push({ text: "Valeur EUR", x: 505, y, font: "F4", size: 10 });
             y -= 16;
             entries.push({
-                text: "--------------------------------------------------------------------------------------------------------------",
+                text: "----------------------------------------------------------------------------------",
                 x: 40,
                 y,
                 font: "F3",
@@ -216,22 +200,22 @@ class PdfManager {
             chunk.forEach((line) => {
                 const memberLabel = this.truncate(
                     `${line.lastname} ${line.firstname}`.trim() || line.lastname,
-                    34
+                    22
                 );
-                const emailLabel = this.truncate(line.email, 38);
+                const emailLabel = this.truncate(line.email, 34);
 
                 entries.push({ text: memberLabel, x: 40, y, font: "F3", size: 9 });
-                entries.push({ text: emailLabel, x: 250, y, font: "F3", size: 9 });
+                entries.push({ text: emailLabel, x: 185, y, font: "F3", size: 9 });
                 entries.push({
                     text: this.formatNumber(line.pointsBalance),
-                    x: 560,
+                    x: 430,
                     y,
                     font: "F3",
                     size: 9,
                 });
                 entries.push({
                     text: this.formatNumber(line.euroValue),
-                    x: 680,
+                    x: 505,
                     y,
                     font: "F3",
                     size: 9,

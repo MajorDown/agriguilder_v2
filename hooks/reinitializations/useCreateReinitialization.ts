@@ -49,6 +49,14 @@ function getFileNameFromContentDisposition(contentDisposition: string | null): s
         return null;
     }
 
+    const utf8Match = contentDisposition.match(/filename\*\s*=\s*UTF-8''([^;]+)/i);
+    if (utf8Match?.[1]) {
+        try {
+            return decodeURIComponent(utf8Match[1]);
+        } catch {
+        }
+    }
+
     const match = contentDisposition.match(/filename="([^"]+)"/i);
 
     return match?.[1] ?? null;

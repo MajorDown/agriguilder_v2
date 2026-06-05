@@ -18,12 +18,15 @@ export type AppPageProps = PropsWithChildren<{
 
 export default function AppPage(props: AppPageProps) {
     const router = useRouter();
-    const { user, isLoading } = useUserContext();
+    const { user, isLoading, selectedGuild, selectedRole } = useUserContext();
 
     const isConnected = !!user?.id;
 
     const userRoles: Role[] =
-        user?.relations?.map((relation) => relation.role as Role) || [];
+        user?.relations
+            ?.filter((relation) => !selectedGuild || relation.guildName === selectedGuild)
+            .map((relation) => relation.role as Role) || [];
+    const selectedRoleBelongsToGuild = !selectedRole || userRoles.includes(selectedRole as Role);
 
     const isAuthorized = !props.requiredRole
         ? true
@@ -36,18 +39,20 @@ export default function AppPage(props: AppPageProps) {
                   return isConnected;
               }
 
-              return userRoles.includes(required);
+              return selectedRole === required && selectedRoleBelongsToGuild;
           });
+    const isDevAuthorized = !props.forDev || !!user?.isDev;
+    const canAccess = isAuthorized && isDevAuthorized;
 
     useEffect(() => {
-        if (!isLoading && !isAuthorized) {
+        if (!isLoading && !canAccess) {
             const timer = setTimeout(() => {
                 router.push('/');
             }, 5000);
 
             return () => clearTimeout(timer);
         }
-    }, [isLoading, isAuthorized, router]);
+    }, [isLoading, canAccess, router]);
 
     if (isLoading) {
         return (
@@ -62,7 +67,7 @@ export default function AppPage(props: AppPageProps) {
         <>
             {isConnected && <NavBar />}
             <article className={styles.appPage}>
-                {(isAuthorized || (props.forDev && user?.isDev)) ? (
+                {canAccess ? (
                     <>
                         {props.title && <h2>{props.title}</h2>}
                         {props.children}

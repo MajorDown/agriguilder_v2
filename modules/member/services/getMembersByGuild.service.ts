@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/prisma";
 import { PublicMember } from "../member.types";
-import ErrorManager from "@/managers/ErrorManager";
+import ErrorManager, { AppError } from "@/managers/ErrorManager";
 
 /**
  * @description Récupère la liste des membres d'une guilde à partir de son nom.
@@ -9,13 +9,20 @@ import ErrorManager from "@/managers/ErrorManager";
  */
 export async function getMembersByGuild(guildName: string): Promise<PublicMember[]> {
     try {
-        const guildId = await prisma.guild.findFirst({
+        const guild = await prisma.guild.findUnique({
             where: { name: guildName },
             select: { id: true }
         });
+        if (!guild) {
+            throw ErrorManager.create({
+                statusCode: 404,
+                code: "GUILD_NOT_FOUND",
+                message: "Guilde introuvable",
+            });
+        }
         const members = await prisma.member.findMany({
             where: { 
-                guild_id: guildId?.id,
+                guild_id: guild.id,
                 revoked_at: null
             },
             include: {
@@ -43,6 +50,9 @@ export async function getMembersByGuild(guildName: string): Promise<PublicMember
         return publicMembers;
     }
     catch (error) {
+        if (error instanceof AppError) {
+            throw error;
+        }
         throw ErrorManager.create({
             statusCode: 500,
             code: "GET_MEMBERS_BY_GUILD_ERROR",

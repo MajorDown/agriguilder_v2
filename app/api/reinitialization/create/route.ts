@@ -15,6 +15,12 @@ function formatFileDate(value: Date): string {
     return `${day}.${month}.${year}`;
 }
 
+function encodeContentDispositionFileName(value: string): string {
+    return encodeURIComponent(value).replace(/['()*]/g, (character) => {
+        return `%${character.charCodeAt(0).toString(16).toUpperCase()}`;
+    });
+}
+
 export async function POST(request: NextRequest) {
     try {
         const { access_token, dto } = await RequestManager.extract(request, CreateReinitializationDto);
@@ -48,13 +54,14 @@ export async function POST(request: NextRequest) {
 
         const pdfBuffer = PdfManager.buildReinitializationReport(result.report);
         const fileDate = formatFileDate(result.createdAt);
-        const fileName = `guilde ${result.guildName} - réinitialisation du ${fileDate}.pdf`;
+        const asciiFileName = `Agriguilder - Rapport de Pre-reinitialisation de guilde - ${fileDate}.pdf`;
+        const utf8FileName = `Agriguilder - Rapport de Pr\u00E9-r\u00E9initialisation de guilde - ${fileDate}.pdf`;
 
         return new NextResponse(new Uint8Array(pdfBuffer), {
             status: 200,
             headers: {
                 "Content-Type": "application/pdf",
-                "Content-Disposition": `inline; filename="${fileName}"`,
+                "Content-Disposition": `inline; filename="${asciiFileName}"; filename*=UTF-8''${encodeContentDispositionFileName(utf8FileName)}`,
                 "Content-Length": pdfBuffer.byteLength.toString(),
                 "X-Reinitialization-Id": result.reinitializationId,
                 "X-Updated-Guild-Name": result.guildName,
@@ -64,3 +71,4 @@ export async function POST(request: NextRequest) {
         return ResponseManager.error(error);
     }
 }
+

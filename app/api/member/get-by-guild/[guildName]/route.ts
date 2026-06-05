@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
         const { guildName } = await context.params;
         if (!guildName) {
             return ResponseManager.error({
-                status: 400,
+                statusCode: 400,
                 code: "GUILD_NAME_MISSING",
                 message: "Nom de guilde manquant",
             });
@@ -23,13 +23,13 @@ export async function GET(request: NextRequest, context: RouteContext) {
         const { access_token } = await RequestManager.extract(request);
         if (!access_token) {
             return ResponseManager.error({
-                status: 401,
+                statusCode: 401,
                 code: "ACCESS_TOKEN_MISSING",
                 message: "Token d'accès manquant",
             });
         }
         TokenManager.verifyAccessToken(access_token);
-        const members = await getMembersByGuild(guildName);
+        const members = await getMembersByGuild(decodeURIComponent(guildName));
         return ResponseManager.success(members);
     } catch (error) {
         return ResponseManager.error(error);

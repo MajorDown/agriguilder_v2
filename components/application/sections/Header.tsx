@@ -1,6 +1,7 @@
 'use client';
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useMemo } from "react";
 import LoginBtn from "../ui/buttons/LoginBtn";
 import GuildSelect from "../ui/inputs/GuildSelect";
 import useUserContext from "@/contexts/userContext/useUserContext";
@@ -8,21 +9,56 @@ import LogoutBtn from "../ui/buttons/LogoutBtn";
 import RoleSelect from "../ui/inputs/RoleSelect";
 
 export default function Header() {
-    const { user } = useUserContext();
+    const { user, selectedGuild, selectedRole, setSelectedGuild, setSelectedRole } = useUserContext();
 
-    const dataForGuildSelect = user?.relations?.map((relation) => ({
-        value: relation.guildName,
-        label: relation.guildName,
-    })).filter((guild, index, self) =>
-        index === self.findIndex((g) => g.value === guild.value)
-    ) || [];
+    const dataForGuildSelect = useMemo(() => {
+        return user?.relations?.map((relation) => ({
+            value: relation.guildName,
+            label: relation.guildName,
+        })).filter((guild, index, self) =>
+            index === self.findIndex((g) => g.value === guild.value)
+        ) || [];
+    }, [user?.relations]);
 
-    const dataForRoleSelect = user?.relations?.map((relation) => ({
-        value: relation.role,
-        label: relation.role,
-    })).filter((role, index, self) =>
-        index === self.findIndex((r) => r.value === role.value)
-    ) || [];
+    const dataForRoleSelect = useMemo(() => {
+        if (!selectedGuild) {
+            return [];
+        }
+
+        return user?.relations
+            ?.filter((relation) => relation.guildName === selectedGuild)
+            .map((relation) => ({
+                value: relation.role,
+                label: relation.role,
+            })).filter((role, index, self) =>
+                index === self.findIndex((r) => r.value === role.value)
+            ) || [];
+    }, [selectedGuild, user?.relations]);
+
+    useEffect(() => {
+        if (!user?.relations?.length) {
+            return;
+        }
+
+        const currentGuildExists = selectedGuild
+            ? user.relations.some((relation) => relation.guildName === selectedGuild)
+            : false;
+
+        if (!currentGuildExists) {
+            const firstRelation = user.relations[0];
+            setSelectedGuild(firstRelation.guildName);
+            setSelectedRole(firstRelation.role);
+            return;
+        }
+
+        const availableRoles = user.relations
+            .filter((relation) => relation.guildName === selectedGuild)
+            .map((relation) => relation.role);
+
+        if (!selectedRole || !availableRoles.includes(selectedRole)) {
+            setSelectedRole(availableRoles[0] ?? null);
+        }
+    }, [selectedGuild, selectedRole, setSelectedGuild, setSelectedRole, user?.relations]);
 
     return (<header>
         <Link id="appTitle" href={"/"}>

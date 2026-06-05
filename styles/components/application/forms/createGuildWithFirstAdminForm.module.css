@@ -1,0 +1,60 @@
+.wrapper {
+    width: 100%;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    width: 100%;
+}
+
+.steps p {
+    color: var(--color-light);
+    opacity: 0.65;
+    font-weight: 700;
+}
+
+.steps .activeStep {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.form {
+    width: min(520px, 90%);
+}
+
+.form h2,
+.form > p {
+    color: var(--color-dark);
+    text-align: center;
+}
+
+.notice {
+    max-width: 420px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.done {
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+    padding: 2vw;
+    width: min(520px, 90%);
+}
+
+.done h2,
+.done > p {
+    color: var(--color-dark);
+    text-align: center;
+}
